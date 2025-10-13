@@ -1,0 +1,19 @@
+---
+type: technique
+id: T0054
+name: 使用人頭或虛擬帳戶
+tactic_id: TA0009
+description: |
+  詐騙者通過人頭或虛擬帳戶來接收和轉移資金，隱藏自身真實身分。這些帳戶可能由代理人註冊，或使用假身分資訊創建。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

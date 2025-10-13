@@ -1,0 +1,19 @@
+---
+type: technique
+id: T0049.003
+name: 使用加密通訊軟體
+tactic_id: TA0008
+description: |
+  使用加密通訊軟體（例如：Telegram、Signal）保護通訊內容，防止訊息被攔截或洩露，同時增加追蹤的難度。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

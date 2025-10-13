@@ -1,0 +1,27 @@
+type: component
+id: D0001.009
+name: 偽變造聲音
+description: |
+  透過音訊編輯技術改變聲音內容或語調，以營造不實的語音證據。例如：改編名人影片中的語音內容、修改客戶服務錄音以植入誤導性資訊。
+
+  偵測方法：
+
+  - 背景噪音一致性檢測
+
+    例如：突然靜音或環境音切換。
+
+  - 語速與音調統計分析
+
+    例如：比對原始語者的基準線。
+
+external_references:
+  - source_name: FIST
+    description: pyAudioAnalysis. audio-feature-extraction. 檢索日期 2025-03-12.
+    url: /tools/TL0018
+    external_id: TL0018
+  - source_name: FIST
+    description: Praat. speech-analysis-software. 檢索日期 2025-03-12.
+    url: /tools/TL0019
+    external_id: TL0019
+contributors:
+  - NICS

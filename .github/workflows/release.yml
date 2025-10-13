@@ -1,0 +1,74 @@
+---
+name: Release
+
+#
+# For more information, see:
+# https://github.com/googleapis/release-please-action
+#
+
+on:
+  # Runs on pushes targeting the default branch
+  push:
+    branches:
+      - main
+
+permissions: {}
+
+concurrency:
+  group: "${{ github.workflow }}"
+  cancel-in-progress: true
+
+jobs:
+  release:
+    name: Release Please
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Get App Token
+        id: my-app
+        run: bash ./.github/scripts/token.sh
+        env:
+          APP_ID: ${{ secrets.APP_ID }}
+          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Release Please
+        uses: googleapis/release-please-action@v4
+        id: release
+        with:
+          config-file: .github/release-please/release-please-config.json
+          manifest-file: .github/release-please/.release-please-manifest.json
+          token: ${{ steps.my-app.outputs.token }}
+
+      - name: Retag major/minor
+        if: ${{ steps.release.outputs.release_created }}
+        run: |
+          tags=(
+            "latest"
+            "v${{ steps.release.outputs.major }}"
+            "v${{ steps.release.outputs.major }}.${{ steps.release.outputs.minor }}"
+          )
+          template='{{tablerow "Ref" "Node ID" "Commit SHA"}}'
+          template+='{{tablerow .ref .node_id .object.sha}}'
+          for tag in "${tags[@]}"; do
+            if ! gh api "repos/${{ github.repository }}/git/refs" \
+              --method POST \
+              --field ref="refs/tags/${tag}" \
+              --field sha="${{ steps.release.outputs.sha }}" \
+              --silent 2>/dev/null; then
+              gh api "repos/${{ github.repository }}/git/refs/tags/${tag}" \
+                --method PATCH \
+                --field force=true \
+                --field sha="${{ steps.release.outputs.sha }}" \
+                --template "$template"
+            fi
+          done
+        env:
+          GH_TOKEN: ${{ steps.my-app.outputs.token }}

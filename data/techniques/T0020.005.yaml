@@ -1,0 +1,19 @@
+---
+type: technique
+id: T0020.005
+name: 利用宗教信仰
+tactic_id: TA0004
+description: |
+  詐騙者利用受害者對宗教信仰的虔誠，假借宗教活動名義（例如：捐款或儀式費用），進行詐騙活動。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

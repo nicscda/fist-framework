@@ -1,0 +1,19 @@
+---
+type: technique
+id: T0051
+name: 指導脫罪
+tactic_id: TA0008
+description: |
+  詐騙者可能聘請律師或製作教戰守則，為內部成員提供指導，幫助他們在被執法機關調查時掩飾犯罪行為或推脫責任。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

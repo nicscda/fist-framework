@@ -1,0 +1,27 @@
+type: component
+id: D0003.003
+name: 流量
+description: |
+  分析網路流量，辨識異常的訪問模式，例如：短時間內來自相同 IP 的大量請求。
+
+  偵測方法：
+
+  - 流量指紋分析
+
+    例如：辨識使用匿名代理（Tor/Proxy/VPN）等可疑來源的流量特徵。
+
+  - 行為模式閾值警示
+
+    例如：偵測同一裝置或 IP 在一小時內發起多筆不同帳號的登入、驗證、OTP 請求等操作，超過正常使用的範圍。
+
+external_references:
+  - source_name: FIST
+    description: Tor Project. anonymity-network-service. 檢索日期 2025-03-12.
+    url: /tools/TL0039
+    external_id: TL0039
+  - source_name: FIST
+    description: Zeek. network-traffic-analysis. 檢索日期 2025-03-12.
+    url: /tools/TL0040
+    external_id: TL0040
+contributors:
+  - NICS

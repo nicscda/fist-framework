@@ -1,0 +1,19 @@
+---
+type: technique
+id: T0020.003
+name: 冒名知名人物
+tactic_id: TA0004
+description: |
+  詐騙者冒充名人、投資顧問或具有社會影響力等人物，聲稱借錢或提供投資機會，以騙取受害者信任或金錢。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

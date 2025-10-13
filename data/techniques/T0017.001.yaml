@@ -1,0 +1,21 @@
+---
+type: technique
+id: T0017.001
+name: 利用貪婪
+tactic_id: TA0004
+description: |
+  詐騙者會利用人們對高報酬、保證獲利或快速致富的渴望，設計吸引力極強的話術或活動。常見手法包括宣稱「保證高獲利」、「無風險投資」或「小額本金即可翻倍」等，讓受害者在慾望驅使下忽略風險或失去合理判斷能力。
+
+  例如：詐騙者可能發送限量投資名額邀請、股票內線消息、假中獎通知或抽獎連結等，要求受害者提供機敏個人資料、手續費或點擊連結，進而投入大筆資金等。這類手法經常出現在投資詐騙、網路釣魚、網路購物詐騙或假冒抽獎平台等情境，使受害者主動參與並最終損失財物。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

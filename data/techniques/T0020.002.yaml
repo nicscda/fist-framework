@@ -1,0 +1,19 @@
+---
+type: technique
+id: T0020.002
+name: 冒名非政府機構或代表
+tactic_id: TA0004
+description: |
+  詐騙者假扮非政府機關或其代表，例如：銀行、NGO 組織或慈善機構等，誘使受害者捐款或提供機敏資料，並進行詐騙活動。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

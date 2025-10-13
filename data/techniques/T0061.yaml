@@ -1,0 +1,21 @@
+---
+type: technique
+id: T0061
+name: 要求購買通貨商品
+tactic_id: TA0005
+description: |
+  詐騙者會利用「身分驗證」或「保證金」等各種手法，誘導被害者購買具有現金轉換價值的通貨商品（例如：點數卡、禮品卡、加密貨幣或 NFT 等），並要求提供卡號、密碼等資訊。
+
+  常見話術包括「需購買點數卡完成身分確認」、「只有這樣才能性交易」或「需要加密貨幣作為保證」等，利用受害者急於完成交易、證明誠意或解決問題的心理。通貨商品較其他金流更為隱密，詐騙者在取得後可迅速完成轉售、套現或轉移，讓資金難以追查、溯源與追回。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

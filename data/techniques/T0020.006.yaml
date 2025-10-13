@@ -1,0 +1,19 @@
+---
+type: technique
+id: T0020.006
+name: 利用善心捐款
+tactic_id: TA0004
+description: |
+  詐騙者冒充慈善機構或發起假募款活動，並結合時事，聲稱資金將用於救助災民、病患、戰亂或貧困人民，誘導受害者捐款。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

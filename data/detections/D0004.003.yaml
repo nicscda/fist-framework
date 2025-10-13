@@ -1,0 +1,23 @@
+type: component
+id: D0004.003
+name: 資金流向
+description: |
+  透過交易圖譜分析，構建帳戶之間的交易關係，偵測異常資金流動模式。
+
+  偵測方法：
+
+  - 偵測資金扇形分散模式
+
+    如果一筆大額交易迅速被拆分到多個帳戶，可能是「層疊洗錢（Layering）」行為。
+
+  - 偵測資金逆向回流
+
+    若資金經過多層帳戶轉移後回到原始帳戶，可能是詐騙集團透過內部帳戶清洗資金。
+
+external_references:
+  - source_name: FIST
+    description: Chainalysis. cryptocurrency-transaction-monitoring. 檢索日期 2025-03-12.
+    url: /tools/TL0047
+    external_id: TL0047
+contributors:
+  - NICS

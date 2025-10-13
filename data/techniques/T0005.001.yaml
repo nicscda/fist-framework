@@ -1,0 +1,25 @@
+---
+type: technique
+id: T0005.001
+name: 網路釣魚
+tactic_id: TA0001
+description: |
+  網路釣魚是一種常見的社交工程手法，詐騙者透過偽造的電子郵件、網站或訊息，誘導受害者點擊惡意連結或輸入機密資訊。釣魚攻擊的目的是取得機敏資訊，例如：帳號密碼、信用卡資訊或企業機密等。
+
+  網路釣魚的主要特徵如下：
+
+  - 電子郵件或訊息通常聲稱來自知名機構（例如：銀行、電子商務平台）。
+  - 包含緊急措辭，例如：「您的帳戶已被鎖定，請立即驗證」。
+  - 提供看似合法，但實際上惡意的連結或附件。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

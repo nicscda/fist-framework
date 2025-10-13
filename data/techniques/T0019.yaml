@@ -1,0 +1,19 @@
+---
+type: technique
+id: T0019
+name: 運用技術手段
+tactic_id: TA0004
+description: |
+  詐騙者結合技術手段，利用受害者或組織對技術的理解不足、系統弱點或過度自信，執行詐騙活動。例如：使用深度偽造技術模擬受害者熟悉的聲音或影像。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

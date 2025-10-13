@@ -1,0 +1,25 @@
+---
+type: technique
+id: T0053
+name: 現金交付
+tactic_id: TA0009
+description: |
+  詐騙者偏好使用現金進行資金交付，以降低電子交易被追蹤的風險。
+
+  現金交付的方式包括：
+
+  - 面對面交易。
+  - 利用快遞或中間人進行現金轉移。
+  - 藏匿在某處，再告知藏匿地點，俗稱埋包。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

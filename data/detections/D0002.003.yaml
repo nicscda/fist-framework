@@ -1,0 +1,31 @@
+type: component
+id: D0002.003
+name: 群組成員
+description: |
+  監控特定社群群組中的成員結構，辨識可疑或詐騙組織的存在，例如：短時間內湧入大量帳號、核心帳號控制特定話題等。
+
+  偵測方法：
+
+  - 成員加入速率監控
+
+    例如：每秒新增10個帳號。
+
+  - 話題主導度分析
+
+    統計每位成員的發言次數與主題覆蓋率，若某幾個帳號的發言量遠超過平均值，則可能是主導者。
+
+  - 互動模式分析
+
+    檢查某些帳號是否有異常高頻率的點讚、回覆、標註等行為，這可能是內部組織成員。
+
+external_references:
+  - source_name: FIST
+    description: Gephi. network-analysis-visualization. 檢索日期 2025-03-12.
+    url: /tools/TL0028
+    external_id: TL0028
+  - source_name: FIST
+    description: Scientific Reports. fake-news-detection-classification. 檢索日期 2025-03-12.
+    url: /tools/TL0029
+    external_id: TL0029
+contributors:
+  - NICS

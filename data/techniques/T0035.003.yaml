@@ -1,0 +1,19 @@
+---
+type: technique
+id: T0035.003
+name: 取得網路銀行存取權
+tactic_id: TA0006
+description: |
+  詐騙者成功取得受害者的網路銀行的登入帳號、密碼、簡訊驗證碼或其他安全管控機制等存取權限。一旦獲取這些存取權限，詐騙者即可遠端操作受害者帳戶，進行未經授權的資金轉移、線上支付或加密貨幣交易等，造成受害者資產損失，甚至成為後續詐騙或洗錢的跳板。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

@@ -1,0 +1,19 @@
+---
+type: technique
+id: T0034.002
+name: 單方面資金轉移
+tactic_id: TA0006
+description: |
+  詐騙者要求受害者直接轉移資金，例如：轉帳、投資，翻拍點數兌換畫面等。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

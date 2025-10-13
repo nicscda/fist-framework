@@ -1,0 +1,19 @@
+---
+type: technique
+id: T0027
+name: 要求聯繫新的人員
+tactic_id: TA0005
+description: |
+  詐騙者要求受害者聯繫一位「助理」、「新負責人」或「指定專員」，通常假借流程交接或新的聯絡要求，實際是誘導受害者陷入詐騙者設計好的情境。常見的話術，例如：「幫你轉接銀行經理」、「等等會有檢察官打給你」等等。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

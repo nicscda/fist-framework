@@ -1,0 +1,21 @@
+---
+type: technique
+id: T0009.003
+name: 製作假中獎通知文本
+tactic_id: TA0002
+description: |
+  這類手法通常聲稱受害者獲得大獎，誘導受害者提供個人資訊或支付手續費。
+
+  此技術利用心理操弄手法，誘使受害者相信自己獲得大獎（例如：獎金、免費出國機會、汽車等豐厚獎品）。詐騙者通常會製作假通知文本，並聲稱受害者需要提供個人資訊或支付一些手續費，就可以領取獎項。這類騙術可能透過電子郵件、簡訊或社群媒體私訊傳遞，目的是竊取個人資料或直接騙取資產。受害者在沒有警覺的情況下，因而受騙提供機敏資訊或金錢財物。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

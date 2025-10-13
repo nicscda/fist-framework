@@ -1,0 +1,21 @@
+---
+type: technique
+id: T0009.010
+name: 製作假技術支援文本
+tactic_id: TA0002
+description: |
+  這類手法通常假冒技術支援的文案，通常警告受害者的設備或帳戶出現問題，要求他們立即採取行動或支付服務費。
+
+  這項技術利用假冒的技術支援訊息來欺騙受害者，通常會聲稱受害者的設備或帳戶出現了問題，需要立即提供機敏個人資料（例如：身分證號碼、銀行帳戶資料或存簿金融卡等）或支付費用等。透過這種方式，詐騙者可以誘騙受害者提供機敏資訊，甚至可能進一步妥協使用詐騙者的系統，其中帶有惡意程式。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

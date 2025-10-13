@@ -1,0 +1,31 @@
+type: component
+id: D0003.007
+name: 通訊號碼異常行為
+description: |
+  詐騙者可能使用短期租用號碼、SIM 卡輪替（例如：貓池）、虛擬號碼進行詐騙。
+
+  偵測方法：
+
+  - SIM 卡變更頻率分析
+
+    偵測同一設備 ID 短時間內更換多張 SIM 卡。
+
+  - 虛擬號碼比對
+
+    分析號碼是否來自 Google Voice、TextNow 等 VoIP 服務。
+
+  - 異常區號監控
+
+    檢測是否有來自高風險國家區碼（例如：+44 70代表轉接號碼）。
+
+external_references:
+  - source_name: FIST
+    description: Twilio. cloud-communication-platform. 檢索日期 2025-03-12.
+    url: /tools/TL0042
+    external_id: TL0042
+  - source_name: FIST
+    description: Numverify. phone-number-validation. 檢索日期 2025-03-12.
+    url: /tools/TL0044
+    external_id: TL0044
+contributors:
+  - NICS

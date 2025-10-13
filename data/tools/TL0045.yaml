@@ -1,0 +1,17 @@
+---
+type: tool
+id: TL0045
+name: NICE Actimize
+description: |
+  NICE Actimize 提供交易異常監控與詐欺防護解決方案，能夠監控高頻交易與異常交易模式。
+
+platforms: []
+tool_types: []
+tool_version:
+
+external_references:
+  - source_name: NICE Actimize
+    description: NICE Actimize. financial-fraud-prevention. 檢索日期 2025-03-12.
+    url: https://www.niceactimize.com
+contributors:
+  - NICS

@@ -1,0 +1,28 @@
+---
+type: technique
+id: T0051.002
+name: 利用法律從業人員
+tactic_id: TA0008
+description: |
+  詐騙者可能利用律師或法律顧問，為其提供法律掩護或辯護服務。
+
+  其中可能包括：
+
+  - 編造合理的法律解釋
+
+    例如：將詐騙活動引導為賭博活動
+
+  - 提供如何洗錢的建議
+  - 協助隱藏非法行為的細節
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

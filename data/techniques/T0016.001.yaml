@@ -1,0 +1,21 @@
+---
+type: technique
+id: T0016.001
+name: 寄送實體郵件
+tactic_id: TA0003
+description: |
+  透過寄送實體郵件，使詐騙訊息更具真實性和可信度，以增加受害者的信任。
+
+  詐騙者會利用實體郵件來發送看似官方或可信的信件，以偽裝成合法機構，例如銀行、政府機關或慈善機構等，進一步誘導受害者提供個人機敏資訊或金錢。這些信件可能包含偽造的商標、簽名甚至假造的通訊地址，以增加真實性和可信度，使受害者更容易受騙。詐騙者可能會要求受害者回傳特定文件、電話號碼或登入假網站等，從而進一步進行詐騙活動。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

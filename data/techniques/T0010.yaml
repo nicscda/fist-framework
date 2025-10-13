@@ -1,0 +1,19 @@
+---
+type: technique
+id: T0010
+name: 製作虛擬偽造資料/文件
+tactic_id: TA0002
+description: |
+  詐騙者製造虛擬的假資料或文件，用於誘導受害者相信其假身分、或執行網路釣魚等詐騙活動。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

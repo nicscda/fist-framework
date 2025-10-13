@@ -1,0 +1,19 @@
+---
+type: technique
+id: T0048.001
+name: 變更身分
+tactic_id: TA0008
+description: |
+  詐騙者可能通過偽造護照或申請新的身分證，將其過去的行動痕跡與新身分完全隔絕，進一步增加追查的難度。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

@@ -1,0 +1,21 @@
+---
+type: technique
+id: T0008.003
+name: 製作人工智慧生成的聲音
+tactic_id: TA0002
+description: |
+  利用語音合成技術模仿真實人物的聲音，或創造完全虛構的聲音。這可用於製作假冒的語音訊息或聲音內容。
+
+  製作人工智慧生成的聲音技術利用語音合成和深度學習演算法，能夠模仿真實人物的聲音或創造完全虛構的聲音。這項技術可以應用於創建假冒的語音訊息、音訊內容，甚至進行語音合成來欺騙聽眾。例如：詐騙者可能使用此技術來製作偽造的電話錄音，以誤導目標或達成詐騙目的。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

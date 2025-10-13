@@ -1,0 +1,657 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": ".schema.json",
+    "title": "詐騙框架",
+    "description": "詐騙威脅情資及知識庫模型的結構化模型。",
+    "type": "object",
+    "definitions": {
+        "contributor": {
+            "title": "貢獻者",
+            "allOf": [
+                {
+                    "properties": {
+                        "id": {
+                            "pattern": "^[A-Z0-9_]{1,100}$"
+                        },
+                        "contact": {
+                            "description": "聯絡資訊",
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "maxLength": 1000
+                        },
+                        "reliability": {
+                            "description": "可信度",
+                            "$ref": "#/definitions/vocabularies/reliability_ov"
+                        },
+                        "sectors": {
+                            "description": "產業",
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            },
+                            "maxItems": 100,
+                            "uniqueItems": true
+                        }
+                    }
+                },
+                {
+                    "oneOf": [
+                        {
+                            "title": "個人",
+                            "type": "object",
+                            "properties": {
+                                "type": {
+                                    "const": "individual"
+                                },
+                                "firstname": {
+                                    "description": "名字",
+                                    "type": "string"
+                                },
+                                "lastname": {
+                                    "description": "姓氏",
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        {
+                            "title": "組織",
+                            "type": "object",
+                            "properties": {
+                                "type": {
+                                    "const": "organization"
+                                },
+                                "organization_type": {
+                                    "description": "組織類型",
+                                    "$ref": "#/definitions/vocabularies/organization_types_ov"
+                                }
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        "component": {
+            "title": "偵測元件",
+            "type": "object",
+            "properties": {
+                "type": {
+                    "const": "component"
+                },
+                "id": {
+                    "pattern": "^D[0-9]{4}\\.[0-9]{3}$"
+                }
+            }
+        },
+        "source": {
+            "title": "偵測來源",
+            "type": "object",
+            "properties": {
+                "type": {
+                    "const": "source"
+                },
+                "id": {
+                    "pattern": "^D[0-9]{4}$"
+                },
+                "platforms": {
+                    "description": "平台",
+                    "type": "array",
+                    "items": {
+                        "title": "平台",
+                        "$ref": "#/definitions/vocabularies/platforms_ov"
+                    },
+                    "maxItems": 100,
+                    "uniqueItems": true
+                },
+                "collection_layers": {
+                    "description": "收集層",
+                    "type": "array",
+                    "items": {
+                        "title": "收集層",
+                        "$ref": "#/definitions/vocabularies/collection_layers_ov"
+                    },
+                    "maxItems": 100,
+                    "uniqueItems": true
+                }
+            }
+        },
+        "detection": {
+            "title": "偵測資料",
+            "type": "object",
+            "oneOf": [
+                {
+                    "$ref": "#/definitions/component"
+                },
+                {
+                    "$ref": "#/definitions/source"
+                }
+            ]
+        },
+        "mitigation": {
+            "title": "緩解措施",
+            "type": "object",
+            "properties": {
+                "type": {
+                    "const": "mitigation"
+                },
+                "id": {
+                    "pattern": "^M[0-9]{4}$"
+                }
+            }
+        },
+        "note": {
+            "title": "筆記",
+            "type": "object",
+            "patternProperties": {
+                "^related_(entitie|id)s?$": {
+                    "description": "相關資料編號",
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "pattern": "^[A-Z]{1,2}[0-9]{4}(\\.[0-9]{3})?$"
+                    }
+                }
+            },
+            "properties": {
+                "type": {
+                    "const": "note"
+                },
+                "id": {
+                    "pattern": "^N[0-9]{4}$"
+                }
+            }
+        },
+        "phase": {
+            "title": "階段",
+            "type": "object",
+            "properties": {
+                "type": {
+                    "const": "phase"
+                },
+                "id": {
+                    "pattern": "^P[0-9]{4}$"
+                }
+            }
+        },
+        "tactic": {
+            "title": "戰術",
+            "type": "object",
+            "patternProperties": {
+                "^phase(_id)?$": {
+                    "description": "隸屬階段編號",
+                    "type": "string",
+                    "$ref": "#/definitions/phase/properties/id"
+                }
+            },
+            "properties": {
+                "type": {
+                    "const": "tactic"
+                },
+                "id": {
+                    "pattern": "^TA[0-9]{4}$"
+                }
+            },
+            "oneOf": [
+                {
+                    "required": [
+                        "phase_id"
+                    ]
+                },
+                {
+                    "required": [
+                        "phase"
+                    ]
+                }
+            ]
+        },
+        "technique": {
+            "title": "技術",
+            "type": "object",
+            "patternProperties": {
+                "^tactic(_id)?$": {
+                    "description": "隸屬戰術編號",
+                    "type": "string",
+                    "$ref": "#/definitions/tactic/properties/id"
+                }
+            },
+            "properties": {
+                "type": {
+                    "const": "technique"
+                },
+                "id": {
+                    "pattern": "^T[0-9]{4}(\\.[0-9]{3})?$"
+                },
+                "permissions": {
+                    "description": "權限",
+                    "type": "array",
+                    "items": {
+                        "title": "收集層",
+                        "$ref": "#/definitions/vocabularies/permissions_ov"
+                    },
+                    "maxItems": 100,
+                    "uniqueItems": true
+                },
+                "platforms": {
+                    "description": "平台",
+                    "type": "array",
+                    "items": {
+                        "title": "平台",
+                        "$ref": "#/definitions/vocabularies/platforms_ov"
+                    },
+                    "maxItems": 100,
+                    "uniqueItems": true
+                },
+                "tools": {
+                    "description": "工具資訊",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/utils/tool"
+                    },
+                    "maxItems": 100,
+                    "uniqueItems": true
+                },
+                "mitigations": {
+                    "description": "緩解資訊",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/utils/mitigation"
+                    },
+                    "maxItems": 100,
+                    "uniqueItems": true
+                },
+                "detection": {
+                    "description": "偵測資訊",
+                    "type": "object",
+                    "properties": {
+                        "description": {
+                            "description": "偵測說明",
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "maxLength": 1000
+                        },
+                        "components": {
+                            "description": "偵測元件",
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/utils/component"
+                            },
+                            "maxItems": 100,
+                            "uniqueItems": true
+                        }
+                    }
+                }
+            },
+            "oneOf": [
+                {
+                    "required": [
+                        "tactic_id"
+                    ]
+                },
+                {
+                    "required": [
+                        "tactic"
+                    ]
+                }
+            ]
+        },
+        "tool": {
+            "title": "工具",
+            "type": "object",
+            "properties": {
+                "type": {
+                    "const": "tool"
+                },
+                "id": {
+                    "pattern": "^TL[0-9]{4}$"
+                },
+                "platforms": {
+                    "description": "平台",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/vocabularies/platforms_ov"
+                    },
+                    "maxItems": 100,
+                    "uniqueItems": true
+                },
+                "tool_types": {
+                    "description": "工具類型",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/vocabularies/tool_types_ov"
+                    },
+                    "maxItems": 100,
+                    "uniqueItems": true
+                },
+                "tool_version": {
+                    "description": "工具版本",
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "minLength": 1,
+                    "maxLength": 100
+                }
+            }
+        },
+        "vocabularies": {
+            "collection_layers_ov": {
+                "type": "string",
+                "enum": [
+                    "cloud-control-plane",
+                    "container",
+                    "host",
+                    "network",
+                    "OSINT"
+                ]
+            },
+            "organization_types_ov": {
+                "type": "string",
+                "enum": [
+                    "constituent",
+                    "csirt",
+                    "other",
+                    "partner",
+                    "vendor"
+                ]
+            },
+            "permissions_ov": {
+                "type": "string",
+                "enum": [
+                    "Administrator",
+                    "root",
+                    "User"
+                ]
+            },
+            "platforms_ov": {
+                "type": "string",
+                "enum": [
+                    "android",
+                    "linux",
+                    "macos",
+                    "windows"
+                ]
+            },
+            "tool_types_ov": {
+                "type": "string",
+                "enum": [
+                    "denial-of-service",
+                    "exploitation",
+                    "information-gathering",
+                    "network-capture",
+                    "credential-exploitation",
+                    "remote-access",
+                    "vulnerability-scanning",
+                    "unknown"
+                ]
+            },
+            "reliability_ov": {
+                "type": "string",
+                "enum": [
+                    "A",
+                    "B",
+                    "C",
+                    "D",
+                    "E",
+                    "F"
+                ]
+            }
+        },
+        "utils": {
+            "base": {
+                "title": "基本資訊",
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "description": "資料類型",
+                        "type": "string"
+                    },
+                    "id": {
+                        "description": "編號",
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 100
+                    },
+                    "name": {
+                        "description": "名稱",
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 100
+                    },
+                    "description": {
+                        "description": "說明",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "maxLength": 1000
+                    },
+                    "external_references": {
+                        "description": "外部參考",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/definitions/utils/external_reference"
+                        },
+                        "maxItems": 100,
+                        "uniqueItems": true
+                    },
+                    "contributors": {
+                        "description": "貢獻者\n首位將作為資料的創建者記錄，請記得在貢獻者清單新增創建者的資訊以完善身分關聯。",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "maxItems": 100,
+                        "uniqueItems": true
+                    }
+                },
+                "required": [
+                    "type",
+                    "id",
+                    "name"
+                ]
+            },
+            "external_reference": {
+                "title": "外部參考",
+                "type": "object",
+                "properties": {
+                    "source_name": {
+                        "description": "來源名稱",
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 100
+                    },
+                    "description": {
+                        "description": "說明",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "minLength": 1,
+                        "maxLength": 1000
+                    },
+                    "url": {
+                        "description": "網址\n關於URL定義請參考：RFC 2396",
+                        "type": "string"
+                    },
+                    "external_id": {
+                        "description": "外部編號",
+                        "type": "string",
+                        "pattern": "^[a-zA-Z0-9._-]{1,100}$"
+                    }
+                },
+                "required": [
+                    "source_name"
+                ],
+                "oneOf": [
+                    {
+                        "allOf": [
+                            {
+                                "properties": {
+                                    "url": {
+                                        "format": "uri",
+                                        "pattern": "^https?://[a-zA-Z0-9].+"
+                                    }
+                                }
+                            },
+                            {
+                                "anyOf": [
+                                    {
+                                        "allOf": [
+                                            {
+                                                "properties": {
+                                                    "description": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            },
+                                            {
+                                                "required": [
+                                                    "description"
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "required": [
+                                            "url"
+                                        ]
+                                    },
+                                    {
+                                        "required": [
+                                            "external_id"
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "allOf": [
+                            {
+                                "properties": {
+                                    "source_name": {
+                                        "const": "FIST"
+                                    },
+                                    "url": {
+                                        "pattern": "^/[a-z_-]+/[a-zA-Z0-9._-]{1,100}$"
+                                    }
+                                }
+                            },
+                            {
+                                "required": [
+                                    "url",
+                                    "external_id"
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            "component": {
+                "title": "偵測元件",
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "description": "編號",
+                        "type": "string",
+                        "$ref": "#/definitions/component/properties/id"
+                    },
+                    "description": {
+                        "description": "說明",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "minLength": 1,
+                        "maxLength": 1000
+                    }
+                },
+                "required": [
+                    "id"
+                ]
+            },
+            "mitigation": {
+                "title": "緩解措施",
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "description": "編號",
+                        "type": "string",
+                        "$ref": "#/definitions/mitigation/properties/id"
+                    },
+                    "description": {
+                        "description": "說明",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "minLength": 1,
+                        "maxLength": 1000
+                    }
+                },
+                "required": [
+                    "id"
+                ]
+            },
+            "tool": {
+                "title": "工具",
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "description": "編號",
+                        "type": "string",
+                        "$ref": "#/definitions/tool/properties/id"
+                    },
+                    "description": {
+                        "description": "說明",
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "minLength": 1,
+                        "maxLength": 1000
+                    }
+                },
+                "required": [
+                    "id"
+                ]
+            }
+        }
+    },
+    "allOf": [
+        {
+            "oneOf": [
+                {
+                    "$ref": "#/definitions/contributor"
+                },
+                {
+                    "$ref": "#/definitions/detection"
+                },
+                {
+                    "$ref": "#/definitions/mitigation"
+                },
+                {
+                    "$ref": "#/definitions/note"
+                },
+                {
+                    "$ref": "#/definitions/phase"
+                },
+                {
+                    "$ref": "#/definitions/tactic"
+                },
+                {
+                    "$ref": "#/definitions/technique"
+                },
+                {
+                    "$ref": "#/definitions/tool"
+                }
+            ]
+        },
+        {
+            "$ref": "#/definitions/utils/base"
+        }
+    ]
+}

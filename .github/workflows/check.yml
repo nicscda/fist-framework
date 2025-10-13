@@ -1,0 +1,101 @@
+---
+name: PR Check
+
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - opened
+      - edited
+      - reopened
+      - ready_for_review
+      - synchronize
+
+permissions: {}
+
+concurrency:
+  group: "${{ github.workflow }}: ${{ github.event.number }}"
+  cancel-in-progress: true
+
+jobs:
+  check:
+    name: Review Body
+    runs-on: ubuntu-latest
+    if: ${{ github.event.pull_request.draft == false }}
+
+    permissions:
+      contents: write
+      pull-requests: write
+      statuses: write
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Enforce Title Format
+        id: title
+        if: >-
+          ${{
+            contains(
+              fromJson('["opened", "reopened", "ready_for_review"]'),
+              github.event.action
+            ) || (
+              github.event.action == 'edited' &&
+              github.event.changes.title
+            )
+          }}
+        run: |
+          bash ./.github/scripts/check.sh "title" \
+            --pr-number "${{ github.event.number }}" \
+            --repository "${{ github.repository }}"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TITLE: ${{ github.event.pull_request.title }}
+
+      - name: Get App Token
+        id: my-app
+        if: ${{ steps.title.outputs.mode }}
+        run: bash ./.github/scripts/token.sh
+        env:
+          APP_ID: ${{ secrets.APP_ID }}
+          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Enable auto-merge (default)
+        if: ${{ steps.title.outputs.mode == 'default' }}
+        run: |
+          subject='chore: :twisted_rightwards_arrows: merge pull request #${{ github.event.number }} from '
+          subject+="$GITHUB_HEAD_REF"
+          gh pr merge "${{ github.event.number }}" \
+            --repo "${{ github.repository }}" \
+            --auto \
+            --merge \
+            --subject "$subject"
+        env:
+          GH_TOKEN: ${{ steps.my-app.outputs.token }}
+
+      - name: Enable auto-merge (squash)
+        if: ${{ steps.title.outputs.mode == 'squash' }}
+        run: |
+          gh pr merge "${{ github.event.number }}" \
+            --repo "${{ github.repository }}" \
+            --auto \
+            --squash
+        env:
+          GH_TOKEN: ${{ steps.my-app.outputs.token }}
+
+      - name: Validation
+        run: |
+          if [[ "$GITHUB_HEAD_REF" =~ ^(release-please|dependabot).* ]]; then
+            echo "::notice::[${BASH_REMATCH[1]}] branch detected. Skipping check."
+            exit 0
+          else
+            bash ./.github/scripts/check.sh "body" \
+              --pr-number "${{ github.event.number }}" \
+              --repository "${{ github.repository }}" \
+              --run-id "${{ github.run_id }}" \
+              --sha "${{ github.event.pull_request.head.sha }}"
+          fi
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

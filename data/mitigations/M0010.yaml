@@ -1,0 +1,20 @@
+---
+type: mitigation
+id: M0010
+name: 攔截廣告
+description: |
+  使用廣告攔截工具過濾網頁中的詐騙廣告，避免誤點進入詐騙網站或不安全連結。
+
+  1. 安裝並使用可信賴的廣告攔截軟體或瀏覽器擴充套件，並確保其定期更新以防範最新詐騙手法。
+  2. 定期檢查瀏覽器安全設定，防止自動跳轉至不明廣告連結。
+  3. 當網頁出現不明廣告或彈出視窗時，請立即關閉瀏覽器，避免點擊任何連結。
+
+external_references:
+  - source_name: 新加坡科技局發布「攔截廣告、攔截威脅–廣告攔截如何保護網路安全」
+    description: 國家通訊傳播委員會. (2023-06-07). 新加坡科技局發布「攔截廣告、攔截威脅–廣告攔截如何保護網路安全」. 檢索日期 2025-02-19.
+    url: https://intlfocus.ncc.gov.tw/xcdoc/cont?xsmsid=0J210565885111070723&sid=0N158517772653501476&sq=AI
+  - source_name: Ad_blocking
+    description: Wikipedia. Ad blocking. 檢索日期 2025-02-14.
+    url: https://en.wikipedia.org/wiki/Ad_blocking
+contributors:
+  - NICS

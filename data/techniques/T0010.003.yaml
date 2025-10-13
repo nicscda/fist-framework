@@ -1,0 +1,21 @@
+---
+type: technique
+id: T0010.003
+name: 製作假簡訊
+tactic_id: TA0002
+description: |
+  詐騙者偽造看似來自可信來源的簡訊內容，用以誘使受害者相信並回應訊息。詐騙者會透過簡訊發送平台、通訊協定或特殊設備（例如：偽基站），偽造寄件者號碼或名稱，使簡訊看似來自銀行、政府機關或知名企業等可信機構。
+
+  詐騙者會利用工具（例如：貓池、偽基站等）等方式，批量發送偽造的簡訊。這些假簡訊通常會模仿官方通知的格式與用語，並搭配釣魚網址、LINE 帳號或回撥號碼等，引導受害者進行進一步互動。詐騙者也會根據不同的詐騙情境，調整簡訊內容的緊急程度及互動方式，以提高詐騙成功率。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

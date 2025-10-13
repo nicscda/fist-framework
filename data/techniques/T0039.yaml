@@ -1,0 +1,21 @@
+---
+type: technique
+id: T0039
+name: 利用被害者人際網路
+tactic_id: TA0007
+description: |
+  透過鼓勵現有受害者推薦親友參與詐騙活動，藉以擴大受眾範圍，實現多層次的擴散效果。
+
+  這種方式通常出現在老鼠會（多層次傳銷）或龐氏騙局中，透過營造快速致富的假象來吸引更多參與者。受害者在不知情的情況下成為騙局的「推廣者」，將詐騙進一步擴散至他們的交友圈。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

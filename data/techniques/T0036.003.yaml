@@ -1,0 +1,19 @@
+---
+type: technique
+id: T0036.003
+name: 取得資通設備或帳號存取權
+tactic_id: TA0006
+description: |
+  詐騙者騙取受害者的設備帳號或存取權，可實施非法操作或資料竊取，或執行詐騙活動。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

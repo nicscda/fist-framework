@@ -1,0 +1,35 @@
+type: component
+id: D0001.005
+name: 盜用影片（移花接木、斷章取義）
+description: |
+  詐騙者將現有影片重新剪輯或拼接，以誤導受害者。例如：截取名人的演講片段並重新排列，製造假言論，或拼接不同來源的影片，製造假場景。
+
+  偵測方法：
+
+  - 影片指紋比對
+    
+    例如：YouTube Content ID 系統。
+
+  - 語意一致性分析
+
+    檢測剪輯前後語意斷層。
+
+external_references:
+  - source_name: FIST
+    description: Microsoft. video-content-analysis. 檢索日期 2025-03-12.
+    url: /tools/TL0011
+    external_id: TL0011
+  - source_name: FIST
+    description: InVID-WeVerify. video-verification-plugin. 檢索日期 2025-03-12.
+    url: /tools/TL0012
+    external_id: TL0012
+  - source_name: FIST
+    description: Amber Video. video-authentication. 檢索日期 2025-03-12.
+    url: /tools/TL0013
+    external_id: TL0013
+  - source_name: FIST
+    description: Truepic. media-authenticity-verification. 檢索日期 2025-03-12.
+    url: /tools/TL0014
+    external_id: TL0014
+contributors:
+  - NICS

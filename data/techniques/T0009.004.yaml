@@ -1,0 +1,21 @@
+---
+type: technique
+id: T0009.004
+name: 製作假慈善募款文本
+tactic_id: TA0002
+description: |
+  這類手法通常假借慈善機構的名義，並聲稱有大型災難或緊急事件，誘騙受害者捐款或提供個人資料。
+
+  詐騙者利用受害者的愛心，詐騙其將金錢匯款至假冒的慈善組織或個人帳戶。詐騙者可能會偽裝成知名慈善機構的代表，甚至建立假網站或社群媒體帳號，以增加其可信度。這類手法通常聲稱有緊急事件或大型災難發生，需要大量資金支援，並承諾捐款者將獲得榮譽或其他福利。受害者在被誘導捐款後，造成金錢損失，或因此提供機敏資訊。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

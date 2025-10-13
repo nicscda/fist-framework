@@ -1,0 +1,21 @@
+---
+type: technique
+id: T0009.001
+name: 製作假交友文本
+tactic_id: TA0002
+description: |
+  這類手法通常透過偽造的個人資料、照片和吸引人的描述來與潛在受害者建立聯繫。並透過感情操控或假承諾，進行金錢詐騙或個人資訊竊取，常見於交友軟體、網路聊天室或社群媒體。
+
+  詐騙者通常精心設計接觸情境，並長期關心問候，以建立情感連結，藉此逐漸獲得受害者的信任。一旦受害者陷入情網中，詐騙者便會要求金錢、個人資訊或其他資源。這種手法的成功很大程度上取決於詐騙者的社交工程技巧及受害者的心理狀態，因此易於忽視及防備。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

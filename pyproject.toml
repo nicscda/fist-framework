@@ -1,0 +1,30 @@
+[build-system]
+requires = ["hatchling>=1.14", "hatch-requirements-txt"]
+build-backend = "hatchling.build"
+
+[project]
+name = "fist"
+description = "STIX2 bundle & WIKI documentation Generator"
+dynamic = ["dependencies"]
+requires-python = ">= 3.12"
+version = "0.0.12"  # x-release-please-version
+
+[project.scripts]
+fist = "fist.cli.__main__:main"
+
+[tool.hatch.metadata.hooks.requirements_txt]
+files = ["src/requirements.txt"]
+
+[tool.hatch.build.targets.wheel]
+only-include = ["src"]
+only-packages = true
+
+[tool.hatch.build.targets.wheel.sources]
+"src" = "fist"
+
+[tool.hatch.build]
+dev-mode-dirs = ["."]
+dev-mode-exact = true
+
+[tool.hatch.envs.default.scripts]
+fist = "python -m src.cli {args}"

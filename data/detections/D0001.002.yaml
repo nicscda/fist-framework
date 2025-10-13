@@ -1,0 +1,31 @@
+type: component
+id: D0001.002
+name: 盜用圖片
+description: |
+  詐騙者從網路上或合法來源竊取圖片，並對其未經修改直接冒用，以建立假身分或證明其不實敘述等應用。例如：盜用社群媒體上的個人照片冒充身分，或使用企業標誌偽裝成官方等。
+
+  偵測方法：
+
+  - 反向圖片搜尋
+
+    例如：使用 Google、TinEye 等工具進行**以圖搜圖**追查來源。
+
+  - 圖像相似度比對
+
+    例如：透過感知雜湊演算法（Perceptual Hash Algorithm, pHash）辨識重複圖像。
+
+external_references:
+  - source_name: FIST
+    description: Google. reverse-image-search. 檢索日期 2025-03-12.
+    url: /tools/TL0003
+    external_id: TL0003
+  - source_name: FIST
+    description: TinEye. reverse-image-search. 檢索日期 2025-03-12.
+    url: /tools/TL0004
+    external_id: TL0004
+  - source_name: FIST
+    description: pHash. perceptual-hash-algorithm. 檢索日期 2025-03-12.
+    url: /tools/TL0005
+    external_id: TL0005
+contributors:
+  - NICS

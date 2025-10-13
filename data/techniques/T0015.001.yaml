@@ -1,0 +1,21 @@
+---
+type: technique
+id: T0015.001
+name: 進行隨機撥號
+tactic_id: TA0003
+description: |
+  使用隨機撥號的方式觸及大眾，以建立受害者資料庫、或尋找可能上當的目標，並可能結合自動化技術進行號碼篩選。
+
+  隨機撥號是一種利用自動化系統，隨機撥打電話號碼的詐騙手法，目的是擴大觸及範圍、建立受害者資料庫，以便找到潛在的詐騙受害者，進一步篩選出有效的號碼，集中資源進行進一步詐騙活動。此技術包括高頻率的連續撥號、錄音訊息引導或詐騙話術等。一旦受害者接聽，詐騙者會進一步使用話術，誘導受害者提供個人資訊或受詐騙的引導操作。此技術可能導致受害者洩露個人資料，進而遭受金錢或財務等損失。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

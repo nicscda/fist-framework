@@ -1,0 +1,19 @@
+---
+type: technique
+id: T0049
+name: 隱藏資通流
+tactic_id: TA0008
+description: |
+  詐騙者利用各種技術和策略隱藏其資訊、通訊的流動痕跡，確保自身行動無法被追查發現。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

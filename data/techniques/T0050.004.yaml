@@ -1,0 +1,19 @@
+---
+type: technique
+id: T0050.004
+name: 移除網路主機
+tactic_id: TA0008
+description: |
+  詐騙者可能通過移除伺服器或停用相關網路主機，徹底清除網路上的詐騙痕跡。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

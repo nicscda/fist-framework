@@ -1,0 +1,21 @@
+---
+type: technique
+id: T0009.008
+name: 製作假帳戶凍結通知文本
+tactic_id: TA0002
+description: |
+  這類手法通常聲稱受害者的銀行帳戶或線上帳戶被凍結，要求他們立即提供驗證資訊以恢復正常使用。
+
+  詐騙者通常透過電子郵件、簡訊等形式發送假帳戶凍結通知。以政府、合法的公司或銀行商標外觀來增加可信度，並提供一個看似合法的連結或聯絡方式。當受害者點擊連結或聯絡詐騙者時，他們會被要求提供機敏個人資料（例如：身分證號碼、銀行帳戶資料或存簿金融卡等）或支付費用等。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

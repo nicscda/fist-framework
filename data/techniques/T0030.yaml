@@ -1,0 +1,19 @@
+---
+type: technique
+id: T0030
+name: 要求提供或開設金融帳戶/工具
+tactic_id: TA0005
+description: |
+  詐騙者要求受害者提供或開設金融帳戶或工具（例如：金融卡、信託財產專戶等），通常藉由假借合法程序或利用受害者的信任，誘騙受害者進行指令，以達成竊取財務資產的目的。常見的手法，例如：提供工作機會給受害者、監管受害者財產等。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

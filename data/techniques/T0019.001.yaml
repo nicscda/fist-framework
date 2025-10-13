@@ -1,0 +1,19 @@
+---
+type: technique
+id: T0019.001
+name: 盜取個資
+tactic_id: TA0004
+description: |
+  詐騙者透過技術手段（例如：駭侵攻擊）取得受害者的個人資料，用於後續執行詐騙行動。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

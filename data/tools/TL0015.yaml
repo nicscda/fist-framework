@@ -1,0 +1,17 @@
+---
+type: tool
+id: TL0015
+name: ASVspoof
+description: |
+  ASVspoof 提供資料庫模型及檢測挑戰，提供針對語音合成與深度偽造檢測技術的參考資料。
+
+platforms: []
+tool_types: []
+tool_version:
+
+external_references:
+  - source_name: ASVspoof
+    description: ASVspoof. voice-spoofing-detection. 檢索日期 2025-03-12.
+    url: https://www.asvspoof.org/
+contributors:
+  - NICS

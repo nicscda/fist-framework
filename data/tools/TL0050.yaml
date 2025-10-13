@@ -1,0 +1,17 @@
+---
+type: tool
+id: TL0050
+name: MaxMind GeoIP
+description: |
+  MaxMind GeoIP 可提供地理位置分析，根據交易 IP 地址判斷交易地點，幫助檢測跨區或高風險地區的交易行為。
+
+platforms: []
+tool_types: []
+tool_version:
+
+external_references:
+  - source_name: MaxMind GeoIP
+    description: MaxMind. ip-geolocation-database. 檢索日期 2025-03-12.
+    url: https://www.maxmind.com/
+contributors:
+  - NICS

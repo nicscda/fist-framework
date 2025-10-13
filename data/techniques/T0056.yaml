@@ -1,0 +1,19 @@
+---
+type: technique
+id: T0056
+name: 使用加密貨幣
+tactic_id: TA0009
+description: |
+  詐騙者利用加密貨幣的匿名性進行資金轉移，進一步增加追查的難度。手法可能使用加密貨幣錢包接收贓款，並迅速將其轉移、多層混淆或在境外兌換成法定貨幣。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

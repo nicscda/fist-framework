@@ -1,0 +1,19 @@
+---
+type: technique
+id: T0020.001
+name: 冒名政府機構或代表
+tactic_id: TA0004
+description: |
+  詐騙者冒充政府機關或官員，例如：使用偽造證件或官方語言，宣稱受害者需要繳納稅款、罰款或接受刑事調查，從而進行詐騙活動。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

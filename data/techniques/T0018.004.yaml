@@ -1,0 +1,19 @@
+---
+type: technique
+id: T0018.004
+name: 利用安全疲勞/貪圖方便
+tactic_id: TA0004
+description: |
+  詐騙者利用受害者對安全措施的疲勞感或追求方便，誘使其忽略風險操作，例如：關閉 2FA 認證。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

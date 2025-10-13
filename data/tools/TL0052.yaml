@@ -1,0 +1,17 @@
+---
+type: tool
+id: TL0052
+name: Experian Fraud Solutions
+description: |
+  Experian Fraud Solutions 提供帳戶與身分監控服務，能夠對帳戶壽命週期和關聯性進行監控，協助辨識利用多個帳戶進行資金轉移的詐騙行為。
+
+platforms: []
+tool_types: []
+tool_version:
+
+external_references:
+  - source_name: Experian Fraud Solutions
+    description: Experian. identity-fraud-protection. 檢索日期 2025-03-12.
+    url: https://www.experian.com/business/solutions/fraud-management
+contributors:
+  - NICS

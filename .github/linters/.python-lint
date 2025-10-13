@@ -1,0 +1,15 @@
+[MAIN]
+source-roots=src
+
+# Use multiple processes to speed up Pylint.
+jobs=0
+
+[FORMAT]
+max-line-length=120
+
+[MESSAGES CONTROL]
+
+# Ignoring Import Errors is desired as super-linter
+# does not support installing dependencies as it runs
+disable=C,R,W
+ignored-classes=Exception

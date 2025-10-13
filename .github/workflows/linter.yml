@@ -1,0 +1,60 @@
+---
+name: Lint Code
+
+#
+# For more information, see:
+# https://github.com/super-linter/super-linter
+#
+
+on:
+  push:
+
+permissions: {}
+
+concurrency:
+  group: "${{ github.workflow }}: ${{ github.ref_name }}"
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    name: Lint Code
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: read
+      statuses: write
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          # Full git history is needed to get a proper list of changed files within `super-linter`
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.12
+          cache: pip
+      - run: |
+          python -m venv .venv
+          .venv/bin/pip install --quiet --upgrade pip
+          .venv/bin/pip install --quiet --editable .
+          mv .venv /home/runner/work/_temp/_github_workflow
+
+      - name: Run Super Linter
+        uses: super-linter/super-linter@v6
+        env:
+          VALIDATE_ALL_CODEBASE: false
+          DEFAULT_BRANCH: main
+          # Since the new volume cannot be declared, rebind it for use in a separate container.
+          PYTHONPATH: "/github/workspace/:/github/workflow/.venv/lib/python3.12/site-packages"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # It returns too many failed checks at the moment
+          VALIDATE_CHECKOV: false
+          # It takes DRY to the extreme and annoys, people tend to just ignore it
+          VALIDATE_JSCPD: false
+          # Textlint just discourages documentation
+          VALIDATE_NATURAL_LANGUAGE: false
+          FIX_SHELL_SHFMT: true

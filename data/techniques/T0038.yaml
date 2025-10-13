@@ -1,0 +1,21 @@
+---
+type: technique
+id: T0038
+name: 持續互動
+tactic_id: TA0007
+description: |
+  保持與受害者的長期聯繫，增強信任並逐步榨取受害者的資源。
+
+  這種技術通常出現在投資顧問詐騙、愛情交友詐騙等手法中，詐騙者會透過精心設計的話術與情境，使受害者產生依賴感或情感上的投入，因而達到最大化犯罪所得的目的。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

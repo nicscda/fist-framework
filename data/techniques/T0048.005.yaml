@@ -1,0 +1,19 @@
+---
+type: technique
+id: T0048.005
+name: 變更駐地場所
+tactic_id: TA0008
+description: |
+  詐騙者在犯罪後會迅速搬遷到新的地點，避免被追蹤或定位，例如：機房、水房或據點等。也可能選擇跨國搬遷，進一步增加執法機關追查的困難度。或者以狡兔三窟的手法，固定一段時間在不同地點更換。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

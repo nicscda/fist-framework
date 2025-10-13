@@ -1,0 +1,19 @@
+---
+type: technique
+id: T0019.003
+name: 偽冒外表/聲音
+tactic_id: TA0004
+description: |
+  利用技術手段偽造或模仿他人的外貌或聲音（例如：Deepfake），以欺騙受害者或進一步達成詐騙目的。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

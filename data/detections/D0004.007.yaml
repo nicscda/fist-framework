@@ -1,0 +1,23 @@
+type: component
+id: D0004.007
+name: 帳戶
+description: |
+  偵測涉及詐騙的銀行或支付帳戶，辨識可疑的多層資金流動。
+
+  偵測方法：
+
+  - 帳戶壽命週期監控
+
+    例如：新開戶即有大額進出
+
+  - 關聯帳戶網路偵測
+
+    例如：10個帳戶共用同一個手機號碼
+
+external_references:
+  - source_name: FIST
+    description: Experian. identity-fraud-protection. 檢索日期 2025-03-12.
+    url: /tools/TL0052
+    external_id: TL0052
+contributors:
+  - NICS

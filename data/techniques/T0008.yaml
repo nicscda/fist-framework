@@ -1,0 +1,21 @@
+---
+type: technique
+id: T0008
+name: 多媒體素材製作
+tactic_id: TA0002
+description: |
+  詐騙者透過製作高質量的影片、圖片或聲音內容，提升詐騙劇本的可信度與說服力。偽造內容主要包含靜態圖像如官方證件、企業商標、通知文件，以及動態內容如宣傳影片、廣告素材，並輔以各類音訊內容。
+
+  在技術層面，詐騙者廣泛運用 Deepfake 影像合成、生成式 AI 模型、專業影像處理及音訊編輯等工具，結合網路上豐富的開源素材與現成模板，大幅降低了多媒體偽造的技術門檻。這些工具的整合應用使詐騙者得以低成本、高效率地產出具有高度真實感的偽造內容，從而提升詐騙活動的整體成功率。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

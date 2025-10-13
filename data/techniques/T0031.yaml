@@ -1,0 +1,19 @@
+---
+type: technique
+id: T0031
+name: 要求提供身分證件或機敏資料
+tactic_id: TA0005
+description: |
+  詐騙者要求受害者提供個人識別文件（例如：身分證、駕照或健保卡等），常聲稱用於核實身分或完成必要的程序，實際目的是進行身分盜用或進一步的詐騙活動。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

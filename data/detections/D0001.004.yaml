@@ -1,0 +1,27 @@
+type: component
+id: D0001.004
+name: 以人工智慧技術生成影片
+description: |
+  詐騙者利用深度偽造技術（Deepfake）生成高度擬真的假影片，模仿特定人物的外貌和行為。例如：製作政治人物的假影片，發布誤導性資訊，或創建偽造的產品演示影片吸引投資。
+
+  偵測方法：
+
+  - 檢測眨眼頻率異常（Deepfake 常見缺陷）
+  - 分析影片光流（Optical Flow）一致性
+  - 使用深度偽造檢測技術（例如：Microsoft Video Authenticator）
+
+external_references:
+  - source_name: FIST
+    description: Deepware. deepfake-detection. 檢索日期 2025-03-12.
+    url: /tools/TL0008
+    external_id: TL0008
+  - source_name: FIST
+    description: FaceForensics. facial-manipulation-detection. 檢索日期 2025-03-12.
+    url: /tools/TL0009
+    external_id: TL0009
+  - source_name: FIST
+    description: Face X-Ray. face-forgery-detection. 檢索日期 2025-03-12.
+    url: /tools/TL0010
+    external_id: TL0010
+contributors:
+  - NICS

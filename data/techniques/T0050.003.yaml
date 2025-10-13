@@ -1,0 +1,25 @@
+---
+type: technique
+id: T0050.003
+name: 更改網頁內容
+tactic_id: TA0008
+description: |
+  詐騙者在完成行動後，通過刪除或修改詐騙網站的內容，清除任何能夠指向其犯罪行為的痕跡。
+
+  常見方式包括：
+
+  - 將詐騙網站重定向到合法網站。
+  - 修改網站上的聯絡資訊或交易記錄。
+  - 刪除伺服器內的數據或詐騙活動痕跡。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

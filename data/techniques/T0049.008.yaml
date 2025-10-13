@@ -1,0 +1,30 @@
+---
+type: technique
+id: T0049.008
+name: 合法掩護
+tactic_id: TA0008
+description: |
+  詐騙者利用合法公司或組織架構作為掩護，將非法行為隱藏在合法行動的背後，降低被偵查的風險。
+
+  常見的合法掩護方式包括：
+
+  - 空殼公司
+
+    註冊合法但無實際業務的公司，作為資金流動或活動的中介。
+  - 合法交易掩護
+
+    將非法所得資金混入合法的營業收入中，通過偽造交易記錄來隱藏詐騙行為。
+
+  此技術使詐騙行動更加難以被追蹤，並提供法律上的掩護，增加執法機構調查的挑戰。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

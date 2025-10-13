@@ -1,0 +1,19 @@
+---
+type: technique
+id: T0048.004
+name: 停用或移除社交媒體帳號
+tactic_id: TA0008
+description: |
+  詐騙者在行動結束後完全刪除或停用相關社群媒體帳號，以避免留下任何可供調查的線索。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

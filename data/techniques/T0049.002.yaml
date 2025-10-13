@@ -1,0 +1,19 @@
+---
+type: technique
+id: T0049.002
+name: 使用假電話號碼
+tactic_id: TA0008
+description: |
+  詐騙者可能使用技術手段生成假的來電號碼，以掩蓋實際的通訊來源。這些假號碼常常冒充合法機構（例如：銀行或政府單位），從而提升詐騙的可信度。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

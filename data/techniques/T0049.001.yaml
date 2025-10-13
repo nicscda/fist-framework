@@ -1,0 +1,19 @@
+---
+type: technique
+id: T0049.001
+name: 使用人頭電話號碼
+tactic_id: TA0008
+description: |
+  詐騙者通過購買或冒用他人的電話號碼來進行聯絡，俗稱人頭電話，減少被追查及定位的風險。這些電話號碼通常來自身分盜竊的受害者、外籍勞工或遊民，或以現金購買的臨時 SIM 卡等，從而難以追查。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

@@ -1,0 +1,27 @@
+type: component
+id: D0001.006
+name: 偽變造影片
+description: |
+  透過後製技術篡改影片內容或字幕，例如：替換臉部、修改字幕或變造背景。
+
+  例如：將原始影片中的人物換成詐騙者，或竄改商品測試影片來誤導消費者。
+
+  偵測方法：
+
+  - 臉部邊緣檢測
+
+    例如：Adobe Photoshop 偽造工具痕跡。
+
+  - 字幕與口型同步分析
+
+external_references:
+  - source_name: FIST
+    description: 29a-ch. photo-forensics. 檢索日期 2025-03-12.
+    url: /tools/TL0006
+    external_id: TL0006
+  - source_name: FIST
+    description: Truepic. media-authenticity-verification. 檢索日期 2025-03-12.
+    url: /tools/TL0014
+    external_id: TL0014
+contributors:
+  - NICS

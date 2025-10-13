@@ -1,0 +1,19 @@
+---
+type: technique
+id: T0057
+name: 轉換資產種類
+tactic_id: TA0009
+description: |
+  詐騙者通過將資金從一種類型轉換為另一種類型（例如：從現金轉換為古董），隱藏資金的來源和流向。這種行為通常發生在多層洗錢過程中，旨在模糊資金的真正來源。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

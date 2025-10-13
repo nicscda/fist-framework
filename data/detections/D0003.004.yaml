@@ -1,0 +1,23 @@
+type: component
+id: D0003.004
+name: 高頻短時通話
+description: |
+  詐騙者透過「一響即掛」（Wangiri Scam）的方式，試探是否可撥通、受害者是否會接聽、回撥等。
+
+  偵測方法：
+
+  - 短時通話頻率分析
+
+    偵測是否有大量異常通話頻率，例如：同一號碼日撥千通且通話時長小於5秒。
+
+  - 比對已知 Wangiri 號碼
+
+    整合 Whoscall、FCC、ScamCall、AbuseIPDB 等資料庫，偵測是否為已知詐騙號碼。
+
+external_references:
+  - source_name: FIST
+    description: Whoscall. caller-identification-service. 檢索日期 2025-03-12.
+    url: /tools/TL0041
+    external_id: TL0041
+contributors:
+  - NICS

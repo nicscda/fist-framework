@@ -1,0 +1,19 @@
+---
+type: technique
+id: T0042
+name: 升級詐騙技術手法
+tactic_id: TA0007
+description: |
+  不斷更新與改進詐騙技術和工具，以緊跟時事並應對新的防範手段，從而提高詐騙成功率。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

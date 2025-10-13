@@ -1,0 +1,21 @@
+---
+type: technique
+id: T0014.001
+name: 投放社群媒體廣告
+tactic_id: TA0003
+description: |
+  詐騙者利用社群媒體平台上的廣告，透過精準投放，並迅速、大量觸及潛在受害者。
+
+  詐騙者可以精準鎖定預定的目標，例如：年齡層、地域、興趣等條件，投放具有高引誘性的廣告，吸引受害者點擊。這些廣告可能會引導受害者加入詐騙者的通訊軟體或群組，或引導至惡意網站，執行進一步詐騙活動。詐騙者透過這種方式能夠廣泛地觸及並影響大量潛在受害者。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

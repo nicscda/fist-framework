@@ -1,0 +1,21 @@
+---
+type: technique
+id: T0012.002
+name: 租借雲端主機
+tactic_id: TA0002
+description: |
+  詐騙者利用雲端主機服務來隱藏其來源，以進行後續的詐騙活動。雲端主機提供匿名性及容易擴展的特性，使詐騙者能夠快速部署和管理多個伺服器，以進行各種詐騙活動（例如：架設詐騙網站）。
+
+  詐騙者會租用不同的雲端服務提供商（例如：AWS、Google Cloud、Azure 等）的主機，隱匿其詐騙活動，並藉此規避追查及溯源。由於雲端平台提供的資源非常靈活，詐騙者可以輕鬆地部署虛擬機器、設立伺服器，並使用動態 IP 地址來隱匿真實位置。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

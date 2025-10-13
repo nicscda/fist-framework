@@ -1,0 +1,21 @@
+---
+type: technique
+id: T0060
+name: 詐騙知識庫更新
+tactic_id: TA0009
+description: |
+  除了騙取資金、資產以外，成功詐騙的手法技術也具有價值。
+
+  詐騙集團常會根據成功案例，分析並提取有效的操作方式，並對失敗案例進行檢討改進，建立內部的詐騙知識庫。這些知識庫記錄從心理操縱、技術漏洞利用，到語言與文化差異應對等各種實戰經驗。隨著社會環境和技術的變化，詐騙者也會不斷更新知識庫內容，確保詐騙手法能夠緊跟潮流，具備更高的欺騙性與針對性。這種動態更新的知識庫，不僅是詐騙集團內部訓練的重要工具，也是其維持競爭力和實現規模化行動的關鍵資源。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

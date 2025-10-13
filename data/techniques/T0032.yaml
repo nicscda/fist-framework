@@ -1,0 +1,19 @@
+---
+type: technique
+id: T0032
+name: 要求簽立合約或文件
+tactic_id: TA0005
+description: |
+  詐騙者假借買賣、商業合作、貸款申請或法律程序等理由，誘導受害者簽署合約或文件，以達成詐騙目的。這些合約或文件表面看似合法，但實際上不存在（例如：靈骨塔位），也可能包含對受害者不利的條款（例如：不動產移轉），最終導致受害者陷入財務或法律困境。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

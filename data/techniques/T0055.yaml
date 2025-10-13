@@ -1,0 +1,19 @@
+---
+type: technique
+id: T0055
+name: 使用公司或國外帳戶
+tactic_id: TA0009
+description: |
+  詐騙者利用公司帳戶或國外銀行帳戶進行資金操作，以規避當地監管和追查。此行為使資金流動更加隱匿，特別是在跨國犯罪活動中。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

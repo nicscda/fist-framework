@@ -1,0 +1,21 @@
+---
+type: technique
+id: T0009.002
+name: 製作假投資文本
+tactic_id: TA0002
+description: |
+  這類手法通常提供高報酬、低風險的投資項目，也會用「限量」、「VIP 會員」等有限的投資機會，並使用專業術語或偽造的業績數據來增強可信度，目的是吸引受害者進行投資。
+
+  為了讓受害者被誘導進行大筆投資，受害者可能會先獲取些許利益，但最終仍導致資金損失。這種手法經常出現在網路廣告、社群媒體或專門的投資論壇或群組中，並利用受害者對財務增長的渴望來實施詐騙。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

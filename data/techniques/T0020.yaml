@@ -1,0 +1,19 @@
+---
+type: technique
+id: T0020
+name: 利用社會環境或規範
+tactic_id: TA0004
+description: |
+  詐騙者利用社會文化、環境、政策或法規對受害者的影響力，誘使受害者相信詐騙訊息，並錯誤判斷進行不當操作。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

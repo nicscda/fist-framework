@@ -1,0 +1,17 @@
+---
+type: tool
+id: TL0033
+name: Akismet
+description: |
+  Akismet 是由 Automattic 開發的垃圾訊息過濾服務，專門用於辨識並過濾大量重複或相似的留言內容。
+
+platforms: []
+tool_types: []
+tool_version:
+
+external_references:
+  - source_name: Akismet
+    description: Akismet. spam-filtering-service. 檢索日期 2025-03-12.
+    url: https://akismet.com/
+contributors:
+  - NICS

@@ -1,0 +1,10 @@
+type: source
+id: D0003
+name: 資通流
+description: |
+  資通流的偵測主要針對詐騙者在詐騙過程中使用的網路、通訊資源，透過監控和分析資通流，可發現潛在的詐欺活動。偵測的組件包含域名、IP、網路流量、通訊模式、通訊號碼等多個面向。
+
+platforms: []
+external_references: []
+contributors:
+  - NICS

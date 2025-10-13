@@ -1,0 +1,17 @@
+---
+type: tool
+id: TL0025
+name: Social Engineering Attacks
+description: |
+  這篇論文全面分析社交工程攻擊類型、分類方法及防禦策略，探討釣魚、偽裝和勒索軟體等攻擊技術，並評估基於人類和技術的防禦機制有效性，可作為辨識詐騙的理論基礎。
+
+platforms: []
+tool_types: []
+tool_version:
+
+external_references:
+  - source_name: Social Engineering Attacks
+    description: Future Internet. social-engineering-attack-research. 檢索日期 2025-03-12.
+    url: https://doi.org/10.3390/fi11040089
+contributors:
+  - NICS

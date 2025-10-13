@@ -1,0 +1,21 @@
+---
+type: technique
+id: T0048.002
+name: 銷毀身分文件或證據
+tactic_id: TA0008
+description: |
+  詐騙者會徹底銷毀涉及詐騙行動的文件或物證，以避免這些證據落入執法機關手中。
+
+  手法包括焚燒、粉碎或丟棄在難以尋找的位置等方式，確保所有證據無法被復原。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

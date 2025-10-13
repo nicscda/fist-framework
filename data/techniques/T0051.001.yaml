@@ -1,0 +1,26 @@
+---
+type: technique
+id: T0051.001
+name: 利用教戰守則
+tactic_id: TA0008
+description: |
+  詐騙組織制定詳細的教戰守則，教導成員如何詐騙受害者或如何應對執法機關的調查。
+
+  教戰守則可能包含：
+
+  - 如何執行詐騙話術。
+  - 如何回應執法機關的提問。
+  - 如何篡改或隱藏證據。
+  - 如何利用法律漏洞進行辯解。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

@@ -1,0 +1,19 @@
+---
+type: technique
+id: T0011.002
+name: 製作假公文
+tactic_id: TA0002
+description: |
+  偽造政府機關、企業或合法組織的正式文件來實施詐騙行為。這些假公文通常包括通知書、稅務單、罰款通知、法律文件或其他形式的官方文件，目的是詐騙目標受害者，讓其誤以為收到合法且具有權威性的指示。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

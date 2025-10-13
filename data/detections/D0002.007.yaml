@@ -1,0 +1,18 @@
+type: component
+id: D0002.007
+name: 大量重複相似
+description: |
+  詐騙者可能透過不同帳號在貼文下方留言大量重複相似內容，例如：「+1」、「好棒」，營造假人氣或推廣詐騙活動。
+
+  偵測方法：
+
+  - 偵測留言內容是否大量重複或相似
+  - 檢測短時間內是否有大量帳號進行相似操作（例如：按讚、分享）
+
+external_references:
+  - source_name: FIST
+    description: Akismet. spam-filtering-service. 檢索日期 2025-03-12.
+    url: /tools/TL0033
+    external_id: TL0033
+contributors:
+  - NICS

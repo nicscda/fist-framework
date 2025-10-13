@@ -1,0 +1,21 @@
+---
+type: technique
+id: T0014.002
+name: 群發電子郵件
+tactic_id: TA0003
+description: |
+  透過大量發送電子郵件來接觸更多潛在受害者，增加詐騙成功的機會。
+
+  詐騙者會利用電子郵件群發工具，一次性發送大量的釣魚或詐騙郵件給潛在受害者，通常內容包含惡意連結或附件，試圖誘騙受害者點擊或下載，取得機敏資訊或植入惡意軟體，進而達成其詐騙目的。這種方法取決於郵件系統的漏洞和受害者的疏忽，增大了詐騙成功的機會。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

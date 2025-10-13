@@ -1,0 +1,17 @@
+---
+type: mitigation
+id: M0005
+name: 確認是否為合法的金融服務
+description: |
+  在進行投資或接受投資建議前，應先確認該投資顧問公司是否具備合法登記。
+
+  1. 確認投資顧問公司是否具備「H304011 證券投資顧問業」登記
+  2. 比對官方聯絡方式、地址與實際狀況是否相符
+  3. 致電金融監督管理委員會（金管會）或撥打 165 反詐騙專線進一步詢問
+
+external_references:
+  - source_name: 非金管會核准之證券期貨業者及商品警示專區
+    description: 金融監督管理委員會. 非金管會核准之證券期貨業者及商品警示專區. 檢索日期 2025-02-13.
+    url: https://3434.twsa.org.tw/index.php
+contributors:
+  - NICS

@@ -1,0 +1,26 @@
+---
+type: technique
+id: T0005.002
+name: 電話測試
+tactic_id: TA0001
+description: |
+  詐騙者利用人工或機器人撥打測試電話，目的是確認某個電話號碼是否有效並有人使用，或紀錄接聽時間等資訊，也可能會錄製接聽者的聲音。詐騙者通常利用緊急或合法的理由，使受害者放鬆警惕，洩漏資訊。
+
+  電話測試的主要特徵如下：
+
+  - 受害者接聽後，詐騙者隨即掛斷電話。
+  - 詐騙者聲稱代表政府機關或銀行等知名機構。
+  - 以確認或驗證資料為由，要求提供機敏資訊，例如：密碼、帳號或身分資訊。
+  - 使用模糊的技術術語或緊急性語氣，壓迫受害者做出快速反應。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

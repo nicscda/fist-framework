@@ -1,0 +1,23 @@
+---
+type: technique
+id: T0024
+name: 邀請進入群組
+tactic_id: TA0005
+description: |
+  詐騙者發送群組邀請，吸引受害者加入。在這些群組中，詐騙者會預先安排多個暗樁，扮演不同角色和身分，形成一個看似真實且自然的社群網路。
+
+  這些暗樁通常分為幾種典型類型：可信賴的前輩、熱心的協助者、看似中立的觀察者，以及扮演目標感興趣領域專家的角色。他們會製造看似真實的互動，共同營造一個值得信任的群組氛圍。
+
+  暗樁的主要目的是逐步降低受害者的戒心，製造一種被群體接納和信任的錯覺。他們會精心編排對話，製造社交壓力和歸屬感，引導受害者逐步洩露更多個人資訊或執行特定指令，最終達成詐騙目的。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

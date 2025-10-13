@@ -1,0 +1,39 @@
+<footer class="site-footer h-card">
+    <data class="u-url" href="{{ '/' | relative_url }}"></data>
+
+    <div class="wrapper">
+
+        <h2 class="footer-heading">{{ site.title | escape }}</h2>
+
+        <div class="footer-col-wrapper">
+            <div class="footer-col footer-col-1">
+                <ul class="contact-list">
+                    <li class="p-name">
+                        版權所有&nbsp;&copy;&nbsp;{{ "now" | date: "%Y" }}&nbsp;{{ site.author | escape }}
+                    </li>
+                    {%- if site.email -%}
+                    <li>
+                        <a class="u-email" href="mailto:{{ site.email }}">聯絡我們</a>
+                    </li>
+                    {%- endif -%}
+                </ul>
+            </div>
+
+            <div class="footer-col footer-col-2">
+                開發團隊&nbsp;
+                {%- include social.html -%}
+            </div>
+
+            <div class="footer-col footer-col-3">
+                <p>{{- site.description | escape -}}</p>
+            </div>
+
+            <div class="footer-col">
+                {% capture license %}
+                {%- include license.md -%}
+                {% endcapture %}
+                {{ license | markdownify }}
+            </div>
+        </div>
+    </div>
+</footer>

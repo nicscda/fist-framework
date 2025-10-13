@@ -1,0 +1,17 @@
+{
+    "recommendations": [
+        "davidanson.vscode-markdownlint",
+        "eamodio.gitlens",
+        "github.vscode-github-actions",
+        "ms-python.black-formatter",
+        "ms-python.debugpy",
+        "ms-python.flake8",
+        "ms-python.isort",
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "redhat.vscode-yaml",
+        "vivaxy.vscode-conventional-commits",
+        "visualstudioexptteam.vscodeintellicode",
+        "vscode-icons-team.vscode-icons"
+    ]
+}

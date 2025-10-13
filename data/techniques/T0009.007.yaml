@@ -1,0 +1,21 @@
+---
+type: technique
+id: T0009.007
+name: 製作假貸款/信用卡申請文本
+tactic_id: TA0002
+description: |
+  這類手法通常由詐騙者提供貸款或申請信用卡等機會，誘騙受害者提交機敏資訊、金融工具或支付手續費等。
+
+  此手法通常以民間借貸、小額放款或申辦信用卡可抽獎等名義，設計出專業團隊的外觀且具有吸引力的廣告，強調申請流程簡單、快速審核、即時放款、不需抵押等優點，以降低受害者的戒心。詐騙者可能在文案中使用銀行商標、名人推薦等元素來增加可信度，甚至模仿真實銀行或金融機構的風格。受害者可能因此誤信而提供機敏個人資料（例如：身分證號碼、銀行帳戶資料或存簿金融卡等）或支付手續費。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

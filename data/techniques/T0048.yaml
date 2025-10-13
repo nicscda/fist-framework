@@ -1,0 +1,21 @@
+---
+type: technique
+id: T0048
+name: 移除人流痕跡
+tactic_id: TA0008
+description: |
+  詐騙活動結束後，詐騙者會主動清除一切可能暴露行蹤的痕跡，確保執法機關無法溯源其行動。
+
+  手法包括清除身分痕跡及物理證據，並採取措施減少後續調查的可能性。例如：詐騙者可能切斷與其他共犯及受害者的聯繫，並迅速改變行動據點，以避免被定位。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

@@ -1,0 +1,19 @@
+---
+type: technique
+id: T0034
+name: 騙取金錢
+tactic_id: TA0006
+description: |
+  詐騙者已成功執行具體行動，通過各種手段實現資金轉移，完成詐騙目的。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

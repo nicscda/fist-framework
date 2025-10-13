@@ -1,0 +1,19 @@
+---
+type: technique
+id: T0036
+name: 騙取機敏資訊
+tactic_id: TA0006
+description: |
+  詐騙者透過各種技術或社交工程手段，非法騙取受害者的機敏資訊，可能包括個人資料（例如：姓名、地址、身分證號碼等）、財務資料（例如：銀行帳號、信用卡資料等）、商業機密或其他具有價值的資訊。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

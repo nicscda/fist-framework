@@ -1,0 +1,6 @@
+# Global Assignment
+* @nicscda/fist-team
+
+# Without an owner, `data/*` can be made with the approval of
+# any user who has write access to the repository
+data/*

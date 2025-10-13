@@ -1,0 +1,17 @@
+---
+type: tool
+id: TL0034
+name: BotSentinel
+description: |
+  BotSentinel 利用機器學習技術分析社群平台上帳號的行為模式，包括固定間隔發文與重複留言等，進而辨識機器人和自動化行為。
+
+platforms: []
+tool_types: []
+tool_version:
+
+external_references:
+  - source_name: BotSentinel
+    description: BotSentinel. automated-account-detection. 檢索日期 2025-03-12.
+    url: https://botsentinel.com/
+contributors:
+  - NICS

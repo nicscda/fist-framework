@@ -1,0 +1,27 @@
+type: component
+id: D0004.002
+name: 交易金額
+description: |
+  透過統計分析與機器學習模型，檢測交易金額是否異常。
+
+  偵測方法：
+
+  - 偵測異常大額交易
+
+    若帳戶交易金額明顯高於該帳戶或行業的歷史基準，可能是詐騙資金轉移。
+
+  - 偵測異常小額高頻交易
+
+    若帳戶連續發生小額交易，總額卻高於正常範圍，可能是規避監控的洗錢行為。例如：短時間內多筆新臺幣49萬元的交易，可能是規避銀行大額通貨通報的策略。
+
+  - 比對行業標準
+
+    企業帳戶交易金額應符合行業基準，若發現零售業帳戶出現頻繁大額匯款，可能是詐騙或非法資金流動。
+
+external_references:
+  - source_name: FIST
+    description: SAS. transaction-fraud-detection. 檢索日期 2025-03-12.
+    url: /tools/TL0046
+    external_id: TL0046
+contributors:
+  - NICS

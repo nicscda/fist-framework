@@ -1,0 +1,21 @@
+---
+type: technique
+id: T0023
+name: 邀請至其他通訊軟體
+tactic_id: TA0005
+description: |
+  詐騙者通過各種管道，主動邀請受害者轉移至另一個通訊平台。這種技術的目的是將互動從較為公開或受監管的平台，轉移到更容易控制、難以追蹤的通訊環境。
+
+  詐騙者會使用話術邀請受害者，例如：「這裡更方便交流」、「有更好的群組功能」或「可以獲得獨家資訊」等。詐騙者會製造一種誘惑性、緊迫感或獎勵等誘因，誘導受害者主動接受邀請。這個過程是詐騙者建立私密通訊管道，也可以過濾出較可能受騙的受害者，逐步達成詐騙目的。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

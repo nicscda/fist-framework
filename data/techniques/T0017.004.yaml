@@ -1,0 +1,21 @@
+---
+type: technique
+id: T0017.004
+name: 利用信任
+tactic_id: TA0004
+description: |
+  詐騙者假冒權威或知名機構、人物，營造高度可信度，使受害者失去警覺而信任。手法例如：假冒銀行、政府、慈善團體或知名藝人等，以官方通知、緊急處理、名人背書等話術降低受害者的防備，話術例如「這是法院通知」、「我是銀行專員」、「官方客服通知」等。
+
+  實際情境可能包括假冒官方網站、發送帶有標誌的電子郵件或證件、錄製名人影片甚至利用 AI 深度偽造的影片或語音來增加真實感。詐騙者會要求受害者提供機敏資料，例如：帳號密碼、身分證明、匯款或下載惡意程式等，使受害者在信任的前提下輕易受騙。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

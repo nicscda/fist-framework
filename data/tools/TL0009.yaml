@@ -1,0 +1,17 @@
+---
+type: tool
+id: TL0009
+name: FaceForensics
+description: |
+  FaceForensics 是一款開源工具，可用於檢測影片中經過深度偽造處理的異常特徵。
+
+platforms: []
+tool_types: []
+tool_version:
+
+external_references:
+  - source_name: FaceForensics
+    description: FaceForensics. facial-manipulation-detection. 檢索日期 2025-03-12.
+    url: https://github.com/ondyari/FaceForensics
+contributors:
+  - NICS

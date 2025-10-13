@@ -1,0 +1,17 @@
+---
+type: mitigation
+id: M0007
+name: 查詢是否為詐騙 Line ID
+description: |
+  若接獲疑似詐騙電話、假投資廣告或陌生簡訊要求加入 LINE，可至 165 反詐騙網站輸入關鍵字，查詢是否曾被通報。
+
+  1. 前往 165 反詐騙網站查詢涉詐資訊，檢視是否有被通報記錄
+  2. 立即封鎖或停止聯繫高風險帳號，並通報親友避免同樣受騙
+  3. 若已受害或匯款，立即蒐集相關證據並報案
+
+external_references:
+  - source_name: 詐騙 LINE ID 公告頁面
+    description: 內政部警政署. 涉詐資訊公告-詐騙LINE ID. 檢索日期 2025-02-13.
+    url: https://165.npa.gov.tw/#/lineId
+contributors:
+  - NICS

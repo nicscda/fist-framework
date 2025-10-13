@@ -1,0 +1,19 @@
+---
+type: technique
+id: T0035.001
+name: 取得存摺印章
+tactic_id: TA0006
+description: |
+  詐騙者會以各種理由誘導受害者交出存摺與印章。一旦取得，詐騙者即可冒用受害者名義辦理資金移轉、開設銀行帳戶或用於洗錢活動。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

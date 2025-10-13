@@ -1,0 +1,19 @@
+---
+type: technique
+id: T0035.002
+name: 取得金融卡及密碼
+tactic_id: TA0006
+description: |
+  詐騙者成功取得受害者提款卡、信用卡等金融卡片及其密碼等，一旦取得，詐騙者可直接前往 ATM 提款、進行帳戶間轉帳或盜刷交易，迅速將受害者資金轉移到其他帳戶，甚至進一步用於洗錢，造成受害者損失，或涉入洗錢活動中。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

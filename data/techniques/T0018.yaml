@@ -1,0 +1,19 @@
+---
+type: technique
+id: T0018
+name: 利用被害人行為習慣
+tactic_id: TA0004
+description: |
+  詐騙者針對受害者的日常行為模式、習慣性操作及安全疲勞進行詐騙活動，受害者對此類活動因警覺性較低，更容易受騙。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

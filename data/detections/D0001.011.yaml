@@ -1,0 +1,35 @@
+type: component
+id: D0001.011
+name: 語言結構
+description: |
+  檢測詐騙文本中「語言形式異常性」，透過語法、句法、詞彙組合等結構性分析，辨識非母語者或詐騙腳本的痕跡。例如：非常規語法、語氣矛盾、情感斷層等。
+
+  偵測方法：
+
+  - 非常規語法
+    
+    利用依存句法分析技術，系統會檢查語句中介詞與動詞之間的搭配是否符合母語邏輯。
+
+  - 語氣矛盾
+    
+    採用 N-gram 模型計算口語與正式詞彙的共現概率（co-occurrence）。
+
+  - 情感斷層
+
+    結合依存句法分析與風格遷移辨識技術。標註語句中情緒關鍵詞的位置，並檢查其在句法結構中的分布是否出現突變。
+
+external_references:
+  - source_name: FIST
+    description: spaCy. natural-language-processing. 檢索日期 2025-03-12.
+    url: /tools/TL0021
+    external_id: TL0021
+  - source_name: FIST
+    description: NLTK. language-processing-toolkit. 檢索日期 2025-03-12.
+    url: /tools/TL0022
+    external_id: TL0022
+  - source_name: FIST
+    description: CVPR. text-style-transfer-techniques. 檢索日期 2025-03-12.
+    url: /tools/TL0023
+    external_id: TL0023
+contributors:
+  - NICS

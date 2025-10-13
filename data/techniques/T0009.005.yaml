@@ -1,0 +1,21 @@
+---
+type: technique
+id: T0009.005
+name: 製作假工作招聘文本
+tactic_id: TA0002
+description: |
+  這類手法通常通常承諾高薪或在家工作機會，以吸引被害者主動應徵。
+
+  詐騙者先刊登人才招募的訊息引誘受害者，在應徵過程中，受害者可能會被要求支付課程報名費、提供機敏個人資料（例如：身分證號碼、銀行帳戶資料或存簿金融卡等）等。這些資料可能被詐騙者進行身分盜用、或直接造成金錢損失，甚至被利用至參與詐騙活動中，例如：無意間幫詐騙者洗錢。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

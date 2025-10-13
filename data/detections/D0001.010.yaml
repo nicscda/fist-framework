@@ -1,0 +1,23 @@
+type: component
+id: D0001.010
+name: 關鍵字
+description: |
+  分析文本中是否包含常見的詐騙關鍵字或詞彙模式，進行自動化偵測與篩選。常見的詐騙關鍵字如「快速致富」、「保證獲利」、「限時優惠」等。
+
+  偵測方法：
+
+  - 正規表達式比對
+
+    預定義詐騙關鍵字詞庫。
+
+  - 機器學習分類模型
+
+    例如：BERT 微調詐騙文本分類。
+
+external_references:
+  - source_name: FIST
+    description: Hugging Face. text-classification-models. 檢索日期 2025-03-12.
+    url: /tools/TL0020
+    external_id: TL0020
+contributors:
+  - NICS

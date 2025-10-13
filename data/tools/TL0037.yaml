@@ -1,0 +1,17 @@
+---
+type: tool
+id: TL0037
+name: DomainTools
+description: |
+  DomainTools 提供 WHOIS 資料和域名監控服務，可協助分析域名註冊資訊及檢測可疑的 DGA 生成域名。
+
+platforms: []
+tool_types: []
+tool_version:
+
+external_references:
+  - source_name: DomainTools
+    description: DomainTools. domain-intelligence-service. 檢索日期 2025-03-12.
+    url: https://www.domaintools.com/
+contributors:
+  - NICS

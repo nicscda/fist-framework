@@ -1,0 +1,28 @@
+type: component
+id: D0001.008
+name: 盜用聲音（移花接木、斷章取義）
+description: |
+  詐騙者竊取並重新拼接真實音訊，改變語意以誤導受害者。例如：將名人講話片段裁剪重組，使其看似支持某項假活動。
+
+  偵測方法：
+
+  - 音訊波形拼接點檢測
+
+    例如：Audacity 頻譜視覺化。
+
+  - 上下文語意連貫性分析
+
+    例如：NLP 模型判定突兀轉折。
+
+external_references:
+  - source_name: FIST
+    description: Audacity. audio-editing-analysis. 檢索日期 2025-03-12.
+    url: /tools/TL0016
+    external_id: TL0016
+    external_references:
+  - source_name: FIST
+    description: UKPLab. semantic-coherence-analysis. 檢索日期 2025-03-12.
+    url: /tools/TL0017
+    external_id: TL0017
+contributors:
+  - NICS

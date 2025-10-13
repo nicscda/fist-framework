@@ -1,0 +1,66 @@
+---
+name: "Bug report"
+description: Create a report to help us improve.
+title: ":bug: "
+labels: ["bug"]
+type: Bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ### Thanks for taking the time to fill out this bug report!
+
+        **Before filling out this report**, please check [existing bug reports](/nicscda/fist-framework/issues?q=is:issue+label:bug+sort:created-desc) and see if your feature has already been proposed.
+
+        Please describe your experiencing problem in as many details as possible.
+        > [!TIP]
+        > You can attach images or files by clicking the textarea to highlight it and then dragging files in.
+
+  - type: textarea
+    attributes:
+      label: Description
+      description: A clear and concise description of the problem.
+      placeholder: Some services are not working or displaying incorrect data.
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Minimal Reproduction
+      description: Simple steps to reproduce the behavior.
+      placeholder: |
+        1. Go to '...'
+        2. Click on '...'
+        3. Scroll down to '...'
+        4. See error
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Expected behavior
+      description: A clear and concise description of what you expected to happen.
+      placeholder: Ex. This service should work and display [what user expected].
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Environment
+      description: |
+        Please add details of your runtime environment to help us troubleshoot.
+        Add or remove the bulleted list elements which relevant or not for your runtime environment.
+      value: |
+        - Device: <!--[e.g. iPhone 16]-->
+        - OS: <!--[e.g. iOS 18.2.1]-->
+        - Browser: <!--[e.g. Safari 5.1.7]-->
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional information
+      description: Add any other context about the problem here.
+    validations:
+      required: false

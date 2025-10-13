@@ -1,0 +1,19 @@
+---
+type: technique
+id: T0014
+name: 使用線上網路傳遞
+tactic_id: TA0003
+description: |
+  詐騙者透過網路平台、社群媒體、交友軟體或即時通訊服務，將詐騙訊息或惡意連結傳遞給受害者，藉此達成誘騙或竊取機感資訊的目的。這項技術充分利用網路的即時性、匿名性以及其廣泛的連接性，使詐騙者能夠迅速將偽造的訊息或文件傳播給大量受害者，並誘使其按照詐騙者的預期行動。這些平台也可用於詐騙宣傳，進一步擴大觸及範圍，並加強詐騙活動的影響力。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

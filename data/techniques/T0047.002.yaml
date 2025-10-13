@@ -1,0 +1,35 @@
+---
+type: technique
+id: T0047.002
+name: 使用虛擬身分
+tactic_id: TA0008
+description: |
+  詐騙者創建完全虛假的身分，並使用虛構的個人資料來掩飾行動，以避免在執行詐騙任務時暴露真實資訊。
+
+  詐騙者通常透過以下方式創建虛擬身份：
+
+  - 偽造文件
+
+    製作假的身分證件、護照或銀行帳戶資料。
+
+  - 假名與虛構背景
+
+    在社交媒體或電子郵件中使用假的名字和照片，並編造可信的背景故事來增加可信度。
+
+  - 科技工具
+
+    使用虛擬私人網路（VPN）、匿名電子郵件和加密通訊軟體等工具，或使用人工智慧生成的圖片、影片或聲音。
+
+  虛擬身分的高靈活性讓詐騙者能快速更換身分，並適應不同的詐騙場景，從而提升了行動的隱蔽性和欺騙性。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

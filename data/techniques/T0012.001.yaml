@@ -1,0 +1,21 @@
+---
+type: technique
+id: T0012.001
+name: 註冊網域名稱
+tactic_id: TA0002
+description: |
+  詐騙者通過註冊與政府機關、銀行或知名品牌等迷惑性極強的域名，快速搭建詐騙網站或釣魚平台。
+
+  詐騙者會選擇極其接近真實的域名拼寫，僅通過細微的字母替換或增刪，製造視覺欺騙的效果（例如：gov-tw.com 模仿 .gov.tw 官方域名）。這種技術的目的是誘導使用者誤以為是真實網站並點擊連結，進而洩露個人資訊或受到金錢損失等。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

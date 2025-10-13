@@ -1,0 +1,21 @@
+---
+type: technique
+id: T0009.011
+name: 製作假商品買賣文本
+tactic_id: TA0002
+description: |
+  這類手法通常提供假商品買賣的機會，以誘騙受害者購買不存在或與描述不符的商品，俗稱一頁式廣告購物詐騙。
+
+  此手法通常展示吸引人的商品圖片、詳細的產品描述，以及極具吸引力的價格或優惠，來引誘受害者進行購買。受害者一旦支付金錢後，可能完全收不到商品，或收到與廣告不符的劣質品。受害者往往因為損失金額不大，或害怕正當法律途徑的繁瑣過程，而不去追究損失，造成詐騙犯罪黑數。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

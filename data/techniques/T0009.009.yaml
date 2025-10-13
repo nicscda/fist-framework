@@ -1,0 +1,21 @@
+---
+type: technique
+id: T0009.009
+name: 製作假快遞通知文本
+tactic_id: TA0002
+description: |
+  這類手法通常通常告知受害者有未送達的包裹，要求提供詳細資訊或支付運費以完成送達，也可能恐嚇若受害者，如果不收包裹則會有法律訴訟問題，甚至送假包裹給受害者，當受害者簽收後索討高額費用。
+
+  這項技術透過偽裝成快遞公司或購物網站，並利用受害者對於包裹和快遞通知的信任，以及收受包裹的習慣性行為，進一步造成受害者損失。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

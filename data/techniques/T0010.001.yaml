@@ -1,0 +1,21 @@
+---
+type: technique
+id: T0010.001
+name: 製作假帳號
+tactic_id: TA0002
+description: |
+  詐騙者創建完全虛構的線上身分、人設或角色，包括不實的社群媒體檔案（例如：大頭照、學歷或職業等）及背景故事等，用於詐騙活動。
+
+  詐騙者在網路上建立一個完全虛構的身分、人設或角色，這個身分包括假的社群媒體帳號及偽造的背景故事，並透過不同的假帳號互相建立一段時間聯繫（俗稱養帳號），藉以增加可信度。這些假身分可用於社交工程、網路釣魚攻擊及各種手法的詐騙活動。透過這些假帳號，詐騙者能更容易取得受害者的信任，進而達成他們的詐騙目的。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

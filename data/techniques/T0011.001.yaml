@@ -1,0 +1,21 @@
+---
+type: technique
+id: T0011.001
+name: 製作假證件
+tactic_id: TA0002
+description: |
+  詐騙者會仿造官方或合法組織頒發的文件，以欺騙受害者或相關機構。這些假證件可能包括身分證、護照、駕照、公司證書、學歷證書或銀行對帳單等，並通常用於身分盜竊或詐騙活動。
+
+  詐騙者在製作過程中會精心模擬真實證件的每個細節，例如官方標誌、水印、防偽線條、條碼及特殊字體等，以提高仿真度，使其難以用肉眼辨認真假，甚至能夠通過初步的驗證機制。他們可能使用專業的影像處理軟體、印刷設備，甚至高級的生成式人工智慧技術，進一步降低被識破的可能性。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

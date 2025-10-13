@@ -1,0 +1,21 @@
+---
+type: technique
+id: T0043
+name: 擴展實體地理範圍
+tactic_id: TA0007
+description: |
+  將詐騙活動推展至新的地理區域，擴大詐騙的影響範圍，涵蓋更多不同背景的受害者。
+
+  詐騙集團將其活動範圍擴展至不同的地理區域，讓更多來自不同背景的受害者成為攻擊目標。他們可能會利用地域特性及文化差異來製造可信度更高的詐騙手法，例如：使用不同語言、區域特有的社會事件或習俗作為誘餌，增加受騙的機率。此外，詐騙集團可能會在新的地區設置機房、水房或聯絡據點，提升其在當地的行動能力和滲透力度，使得防範和抓捕更加困難。這種策略的目的是透過地理範圍的擴張來提高詐騙的成功率，並最終獲取更多不義之財。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

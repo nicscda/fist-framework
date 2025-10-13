@@ -1,0 +1,27 @@
+type: component
+id: D0003.006
+name: 國際轉接與異常路由
+description: |
+  詐騙電話可能透過多層 VoIP/SIP 路由轉接，使來電顯示為本地號碼，但實際來自國外。
+
+  偵測方法：
+
+  - 號碼歸屬地檢測
+
+    偵測來電號碼顯示為本地，但來源 IP 來自境外，例如：顯示「+886」開頭的號碼但來自柬埔寨。
+
+  - 國際通話路由分析
+
+    偵測同一號碼短時間內跨國撥打，例如：5分鐘內撥打到臺灣、美國、菲律賓等不同國家。
+
+  - STUN/TURN 伺服器分析
+
+    偵測是否透過 WebRTC 或 STUN/TURN 伺服器進行匿名 VoIP 通話。
+
+external_references:
+  - source_name: FIST
+    description: Coturn. webrtc-turn-server. 檢索日期 2025-03-12.
+    url: /tools/TL0043
+    external_id: TL0043
+contributors:
+  - NICS

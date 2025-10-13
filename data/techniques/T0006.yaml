@@ -1,0 +1,21 @@
+---
+type: technique
+id: T0006
+name: 駭入系統進行情報收集
+tactic_id: TA0001
+description: |
+  此技術涉及未經授權地進入目標系統，以獲取內部資訊、機敏資料或其他有價值的情報。駭入者通常會利用系統或應用程式中的漏洞，繞過安全措施，進入網路、伺服器或終端設備（指可透過行動通信網路接取網路服務之機器型通訊終端設備）。
+
+  駭入系統進行情報收集是一種常見的網路攻擊技術。駭客利用應用程式漏洞、弱密碼或社交工程等方式，未經授權地訪問目標系統。一旦成功入侵，詐騙者即可提取機敏資料、企業機密及其他有價值的資訊，這些資料可能會被用於後續詐騙活動，或出售給詐騙集團牟利。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

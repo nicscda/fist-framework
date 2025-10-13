@@ -1,0 +1,17 @@
+---
+type: mitigation
+id: M0006
+name: 提升詐騙手法識別能力與防範教育
+description: |
+  持續關注最新的詐騙手法與案例分析，透過官方或民間機構的宣導活動與教材提高辨識能力。
+
+  1. 參加政府機關、警政單位或金融機構舉辦的反詐騙講座
+  2. 定期瀏覽 165 反詐騙網站、金融監督管理委員會等平台，追蹤最新詐騙案例與手法
+  3. 與親友分享學習成果，擴大防詐知識的傳遞與互相提醒
+
+external_references:
+  - source_name: 識詐36計走為上策
+    description: 內政部警政署. (2023-12). 識詐36計走為上策. 檢索日期 2025-02-17.
+    url: https://online.fliphtml5.com/pcal/zofq/?_trms=eef7d1cab16951f9.1739783617718
+contributors:
+  - NICS

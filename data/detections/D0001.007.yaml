@@ -1,0 +1,23 @@
+type: component
+id: D0001.007
+name: 以人工智慧技術生成聲音
+description: |
+  詐騙者運用 AI 語音合成技術模仿特定個體的聲音，進行詐騙或冒充身份，增加欺騙的可信度。例如：冒充公司高層下達假指令，或偽造親友的聲音進行詐騙。
+
+  偵測方法：
+
+  - 音檔頻譜圖分析
+
+    例如：檢測合成語音的高頻噪音。
+
+  - 語音生物特徵比對
+
+    例如：ASVspoof 資料庫模型。
+
+external_references:
+  - source_name: FIST
+    description: ASVspoof. voice-spoofing-detection. 檢索日期 2025-03-12.
+    url: /tools/TL0015
+    external_id: TL0015
+contributors:
+  - NICS

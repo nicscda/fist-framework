@@ -1,0 +1,19 @@
+---
+type: technique
+id: T0011.003
+name: 製作假地契
+tactic_id: TA0002
+description: |
+  偽造土地交易相關的文件，來詐騙受害者的財務或資產。這些假地契通常包括土地買賣契約、產權證明、土地登記文件等，目的在於讓受害者相信某塊土地或不動產已經完成合法交易或轉讓。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

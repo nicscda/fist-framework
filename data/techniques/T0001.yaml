@@ -1,0 +1,21 @@
+---
+type: technique
+id: T0001
+name: 搜尋封閉資源
+tactic_id: TA0001
+description: |
+  從暗網、私密群組或論壇等黑市購買個人資料。
+
+  「搜尋封閉資源」是指詐騙者透過非公開或難以進入的平台（例如：暗網、私密群組或論壇等，俗稱黑市）取得個人資料、帳號資訊及機敏資訊等資源的技術。這類資料通常透過購買或交換方式獲得，成為後續執行詐騙活動的事前準備。取得這些資料後，詐騙者可能進行身分竊取、詐欺或其他惡意行為。由於這些平台及交易方式極具隱蔽性，難以被傳統的偵查手法溯源。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

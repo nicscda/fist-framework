@@ -1,0 +1,44 @@
+---
+# Topic: Phase Template
+# Author: NICS
+#
+# Refer to MITRE ATT&CK® and OpenCTI data model:
+# - [MITRE ATT&CK®](https://attack.mitre.org/)
+# - [OpenCTI Data Model](https://docs.opencti.io/latest/usage/data-model/)
+#
+# Note:
+# Some fields are used solely for generating STIX bundles or Markdown files.
+# Please distinguish between fields intended for data export versus for docs.
+# 
+# YAML syntax assistance:
+# - https://learntheweb.courses/topics/yaml/
+# - https://learnxinyminutes.com/docs/yaml/
+#
+# Full requirements and validation details will appear when running the module.
+# yaml-language-server: $schema=
+
+# Basic Information (Required)
+# Core identifiers and names essential for data processing.
+type: phase            # Fixed, immutable field
+id: "changeme"         # Recommended to match the file name
+name: "changeme"       # Human-readable, no wrap
+
+# Supplementary Information (Optional)
+# Additional context for documentation purposes.
+#
+# Note:
+# Please remove unused fields or set arrays to `[]` if empty.
+description: |
+  changeme
+
+external_references:
+  # Add details using the following example:
+  - source_name: "changeme"
+    description: |
+      changeme
+    url: "https://changeme"
+    external_id: "changeme"
+  # Use `[]` if is empty array
+contributors:
+  # All content contributors, only the first author will be displayed.
+  - changeme

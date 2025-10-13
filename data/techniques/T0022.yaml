@@ -1,0 +1,23 @@
+---
+type: technique
+id: T0022
+name: 邀請瀏覽網站
+tactic_id: TA0005
+description: |
+  詐騙者誘導受害者瀏覽特定網站，網站通常模仿正常的金融、投資或交易平台，以高度擬真的介面和內容吸引使用者，並誘導其進行進一步的互動。
+
+  這類網站的設計目的是建立初步的信任，通常會展示虛構的投資成功案例、客戶見證，以及看似專業的市場分析。詐騙者會透過各種管道引導目標訪問這些網站，例如：在社群媒體平台刊登廣告、使用即時通訊軟體發送、廣發電子郵件或簡訊轟炸等。
+
+  網站本身可能設置多層次的詐騙機制，包括要求使用者註冊、提供個人資訊，或直接誘導進行假的金融交易。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

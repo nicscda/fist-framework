@@ -1,0 +1,19 @@
+---
+type: technique
+id: T0036.002
+name: 取得個人資料
+tactic_id: TA0006
+description: |
+  詐騙者騙取受害者的個人資料，例如：住址、電話號碼或購物資訊等。用於執行詐騙活動。常見的手法包括偽造表單、釣魚網站或假借電話調查等，逐步蒐集受害者的詳細資訊。這些資料可能被用於身分盜用、詐騙活動，或出售給其他犯罪組織以進一步利用。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

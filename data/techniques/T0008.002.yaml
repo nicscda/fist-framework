@@ -1,0 +1,21 @@
+---
+type: technique
+id: T0008.002
+name: 製作人工智慧生成的圖片
+tactic_id: TA0002
+description: |
+  使用 AI 工具（例如：GAN）創建逼真但完全虛構的圖片。這些圖片可能是不存在的人、地點或事物。
+
+  製作人工智慧生成的圖片技術是利用生成對抗網路（GAN）等 AI 工具創建逼真且完全虛構的圖片。這些圖片可以描繪不存在的人物、地點或事物，並可能被用於誤導、詐騙或其他不法用途。隨著 AI 技術的進步，這種技術的可用性和易用性大幅提高，進而可能加劇虛假訊息的氾濫。例如：生成的圖片可以用於社群媒體上散佈不實資訊，或用於網路詐騙行為，對個人及組織造成損害。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

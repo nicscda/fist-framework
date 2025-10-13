@@ -1,0 +1,23 @@
+---
+type: technique
+id: T0014.004
+name: 發布社群媒體文章
+tactic_id: TA0003
+description: |
+  詐騙者在社群媒體平台上發布文章、圖片、影片或其他內容，以誘騙潛在受害者。
+
+  這類內容通常包含虛假投資機會、假冒官方公告、釣魚連結、或交友、色情等引誘性內容，目的是藉由社群媒體的廣泛傳播力來接觸潛在受害者，以進行後續的詐騙活動。
+
+  這類手法能有效傳播詐騙訊息，誘導受害者進入詐騙網站、提供個人資料或進行交易等。受害者可能因此遭受個人資料外洩或金錢、財務等損失。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

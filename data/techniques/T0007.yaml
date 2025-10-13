@@ -1,0 +1,25 @@
+---
+type: technique
+id: T0007
+name: 勾結內部人員進行情報收集
+tactic_id: TA0001
+description: |
+  詐騙者透過利益誘惑、威脅或其他手段，勾結政府官員或銀行員工等人員建立合作關係，以非法獲取機密資訊或內部資料，用於後續的詐騙活動。
+
+  常見情境如下：
+
+  - 詐騙者向內部人員提供金錢或其他利益，利用內部人員對公司資訊系統的存取權限，誘使其非法洩漏客戶聯絡方式、財務資料或網路購物等機敏資料。
+  - 詐騙者與內部人員合作，偽造合約、報告或其他文件，誤導受害者錯誤判斷，從而實現詐騙活動。
+  - 詐騙者透過內部人員建立信任橋樑，向受害人傳遞或篡改假消息，製造「官方背書」的錯覺，從而提升詐騙的可信度。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

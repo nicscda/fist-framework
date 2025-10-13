@@ -1,0 +1,19 @@
+type: component
+id: D0002.006
+name: 快速轉移至其他平台
+description: |
+  詐騙者經常誘導受害者從原平台轉移至其他平台，例如：由交友軟體、Instagram 轉移至LINE、Telegram，以規避監控與溯源。
+
+  偵測方法：
+
+  - 對話外部連結分析
+
+    檢測 URL 或 QR Code 風險評分（整合 PhishTank 資料庫）。
+
+external_references:
+  - source_name: FIST
+    description: PhishTank. phishing-site-database. 檢索日期 2025-03-12.
+    url: /tools/TL0032
+    external_id: TL0032
+contributors:
+  - NICS

@@ -1,0 +1,23 @@
+type: component
+id: D0003.002
+name: IP
+description: |
+  偵測詐騙活動所涉及的 IP 地址，分析其地理位置、異常行為及是否涉及詐騙事件。
+
+  偵測方法：
+
+  - IP 信譽評分系統
+
+    例如：AbuseIPDB 整合查詢。
+
+  - 建立及監控地理圍欄
+
+    即時捕捉異常資訊，例如：頻繁連線至緬甸、柬埔寨、泰國 IP。
+
+external_references:
+  - source_name: FIST
+    description: AbuseIPDB. ip-reputation-database. 檢索日期 2025-03-12.
+    url: /tools/TL0038
+    external_id: TL0038
+contributors:
+  - NICS

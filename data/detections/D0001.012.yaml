@@ -1,0 +1,27 @@
+type: component
+id: D0001.012
+name: 話術
+description: |
+  辨識詐騙行為中常見的心理操縱手法，透過模式比對預設話術框架，偵測社交工程攻擊的內部邏輯。
+
+  偵測方法：
+
+  - 意圖辨識
+
+    利用預訓練模型及上下文解析技術，區分正常請求與詐騙劇本，捕捉語言中隱含的異常心理操縱意圖。例如：假冒權威、緊急施壓、誘惑承諾等。
+
+  - 話術情節圖譜比對
+
+    將詐騙話術流程以圖譜方式呈現，並與已知詐騙腳本進行比對，辨識潛在的詐騙邏輯。例如：緊急情境等。
+
+external_references:
+  - source_name: FIST
+    description: Rasa. conversational-ai-framework. 檢索日期 2025-03-12.
+    url: /tools/TL0024
+    external_id: TL0024
+  - source_name: FIST
+    description: Future Internet. social-engineering-attack-research. 檢索日期 2025-03-12.
+    url: /tools/TL0025
+    external_id: TL0025
+contributors:
+  - NICS

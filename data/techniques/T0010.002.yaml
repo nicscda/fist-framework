@@ -1,0 +1,21 @@
+---
+type: technique
+id: T0010.002
+name: 製作假電子郵件
+tactic_id: TA0002
+description: |
+  詐騙者偽造看似來自可信來源的電子郵件，用以誘使受害者相信郵件內容並執行特定行為。詐騙者通常會偽造寄件者地址、郵件標頭（Email Header）等資訊，並模仿特定組織或個人的郵件格式、署名及內容風格，以增加郵件的可信度。
+
+  製作假電子郵件時，詐騙者會運用郵件伺服器設定、網域註冊及郵件協定等技術，打造近似於正常商業郵件或官方通知的外觀。透過精心設計的版面配置、企業標誌、文字格式以及附件檔案，增加假郵件的可信度，提高受害者開啟郵件並回應的機率。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

@@ -1,0 +1,21 @@
+---
+type: technique
+id: T0050.001
+name: 下架廣告
+tactic_id: TA0008
+description: |
+  迅速移除廣發給潛在受害者的詐騙廣告。
+
+  詐騙者利用自動化工具或腳本實現廣告的快速上架和下架操作，迅速移除廣告，並通過反覆實施短期上架和下架的行為，不斷更換廣告內容或地址，降低被偵測的風險。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

@@ -1,0 +1,21 @@
+---
+type: technique
+id: T0047.006
+name: 更改外貌或使用偽裝
+tactic_id: TA0008
+description: |
+  詐騙者可能透過更改外貌或使用偽裝來躲避執法機關的追蹤，特別是在需要直接接觸受害者或暴露於公共場所的情況下。
+
+  詐騙者可能使用假髮、化妝、特殊服飾或其他物理手段來改變自己的外觀。他們甚至可能通過醫療整形外科手術等手段改變面部特徵，從而更有效地隱藏身分。此外，偽裝行為也可能包括使用模仿他人聲音的技術，在電話或網路通話中避免被認出，例如：DeepFake 技術。這種行為使得詐騙者在監視器畫面或受害者的記憶中更加難以辨識。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

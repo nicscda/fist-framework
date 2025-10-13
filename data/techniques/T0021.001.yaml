@@ -1,0 +1,19 @@
+---
+type: technique
+id: T0021.001
+name: 下載投資看盤軟體
+tactic_id: TA0005
+description: |
+  詐騙者透過精心設計的話術，誘使受害者下載股票或加密貨幣交易所的軟體，或自行開發的假投資軟體，聲稱只有透過這些專屬軟體，才能購買特定的高報酬商品或參與特殊投資計劃。詐騙者藉此騙取受害者信任，最終目的在於誘導受害者投入資金（俗稱入金）。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

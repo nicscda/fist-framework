@@ -1,0 +1,19 @@
+---
+type: technique
+id: T0015
+name: 使用通訊設備傳遞
+tactic_id: TA0003
+description: |
+  詐騙者透過各種通訊設備，例如：手機、市話、無線電或廣播等，將詐騙訊息傳遞給受害者。他們可能假冒他人身分，或冒充親友的求救電話，藉此引起受害者的警覺與同情心，進而達成詐騙目的。此外，詐騙者也可能利用這些設備進行測試，確認某支電話是否有人在使用，建立資料庫後提高詐騙的效率及成功率。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

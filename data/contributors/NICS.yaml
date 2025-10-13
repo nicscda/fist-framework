@@ -1,0 +1,25 @@
+---
+type: organization
+id: NICS
+name: "National Institute of Cyber Security"
+description: >
+  An organization which under the Ministry of Digital Affairs (moda)
+  established by the Republic of China (ROC), to advance the application,
+  competence and R&D of Taiwan’s cyber security technology,
+  development and application of information security technology.
+
+contact: |
+  📍 [4th Floor, No. 143, Yanping South Road, Zhongzheng District, Taipei City 100057, Taiwan](https://www.google.com.tw/maps/place/No.%20143,%20Yanping%20South%20Road,%20Zhongzheng%20District,%20Taipei%20City,%20Taiwan)
+
+  ✉️ [nicscda@nics.nat.gov.tw](mailto:nicscda@nics.nat.gov.tw)
+
+  📞 [(02) 2739-1000](tel:+886-2-2739-1000)
+
+  🌐 [nics.nat.gov.tw](https://www.nics.nat.gov.tw)
+
+organization_type: constituent
+reliability: A
+sectors:
+  - government-national
+
+external_references: []

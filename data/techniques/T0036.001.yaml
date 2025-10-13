@@ -1,0 +1,19 @@
+---
+type: technique
+id: T0036.001
+name: 取得身分證件
+tactic_id: TA0006
+description: |
+  取得身分證件是騙取機敏資訊的基礎手法，詐騙者透過各種理由騙取受害者的身分證明文件，包括身分證、駕照、護照等官方證件的實體或影本。詐騙者通常會以身分驗證、開戶申請或協助調查等名義，要求受害者提供證件資料。這些證件可能被用於申辦人頭帳戶、假冒身分或其他犯罪用途。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

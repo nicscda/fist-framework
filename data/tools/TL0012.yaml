@@ -1,0 +1,17 @@
+---
+type: tool
+id: TL0012
+name: InVID-WeVerify
+description: |
+  InVID-WeVerify 瀏覽器附加元件是免費的開源工具，專為幫助記者和事實查核人員驗證影片真實性而設計。提供關鍵幀分析、元數據提取和反向影像搜尋等功能。
+
+platforms: []
+tool_types: []
+tool_version:
+
+external_references:
+  - source_name: InVID-WeVerify
+    description: InVID-WeVerify. video-verification-plugin. 檢索日期 2025-03-12.
+    url: https://www.invid-project.eu/tools-and-services/invid-verification-plugin/
+contributors:
+  - NICS

@@ -1,0 +1,27 @@
+type: component
+id: D0004.005
+name: 交易地點
+description: |
+  透過地理位置分析，比對帳戶交易的發生地，偵測異常交易。
+
+  偵測方法：
+
+  - 偵測短時間跨區交易
+    
+    若同一帳戶1小時內在兩個不同國家進行交易，可能是帳戶被盜用或詐騙組織操控。
+
+  - 偵測高風險地區交易
+    
+    若資金流向已知詐騙活躍地區（例如：柬埔寨、緬甸等），可能是詐騙組織利用這些地區洗錢。
+
+  - 偵測交易地點與帳戶持有人不符
+
+    若帳戶長期在臺灣交易，但突然在東南亞頻繁交易，可能是帳戶被盜用或人頭帳戶。
+
+external_references:
+  - source_name: FIST
+    description: MaxMind. ip-geolocation-database. 檢索日期 2025-03-12.
+    external_id: TL0050
+    url: /tools/TL0050
+contributors:
+  - NICS

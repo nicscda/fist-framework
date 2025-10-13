@@ -1,0 +1,21 @@
+---
+type: technique
+id: T0049.004
+name: 多層邀請
+tactic_id: TA0008
+description: |
+  詐騙集團透過多層的邀請鏈，引導目標進入不同的通訊軟體或平台，每一層邀請都製造出斷點，讓外部難以追蹤到最終的詐騙源頭。
+
+  詐騙集團運用這種技術，會首先透過某個渠道（例如：社群媒體、電子郵件或簡訊）發出初始邀請，吸引受害者進行互動。受害者回應後，詐騙者會隨即引導其進入另一個通訊軟體或平台，例如：從 Facebook 轉到 Line，再從 Line 轉到其他加密通訊軟體。在每一層轉換途中，詐騙者故意製造出通訊斷點，讓執法機關難以追蹤溯源，進而掩蓋其真實身分與位置。這種手法不僅增加了追蹤難度，也增加受害者的判斷難度，逐步降低其防備心。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

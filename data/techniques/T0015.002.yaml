@@ -1,0 +1,21 @@
+---
+type: technique
+id: T0015.002
+name: 進行簡訊轟炸
+tactic_id: TA0003
+description: |
+  詐騙者利用大量發送簡訊的方式，迅速並大量的觸及潛在受害者，吸引其注意後誘導其採取行動。
+
+  詐騙者通常利用偽裝成政府機關、銀行或其他權威性的機構發送簡訊，目的是誘導受害者點擊惡意連結、提供機敏資訊或進一步執行詐騙者指示的行動。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

@@ -1,0 +1,21 @@
+---
+type: technique
+id: T0059
+name: 構建受害者資料庫
+tactic_id: TA0009
+description: |
+  除了騙取資金、資產以外，受騙上當的受害者資料名單也具有價值。
+
+  這些名單可能包含受害者的個人資訊（例如：姓名、地址、聯絡方式、財務資訊），以及他們對不同詐騙手段的反應特徵。詐騙者將這些資料進一步整理、分類，甚至分析出受害者的行為模式，以便用於後續的詐騙行動。此外，這些資料庫也能以高價出售給其他詐騙集團，形成地下市場中的重要資產。透過資料庫的構建與分享，詐騙者能夠提高其行動效率，並在不同地區、不同族群中快速複製成功的詐騙模式。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

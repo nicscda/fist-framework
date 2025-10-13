@@ -1,0 +1,19 @@
+---
+type: technique
+id: T0029
+name: 要求開設帳號/加入會員
+tactic_id: TA0005
+description: |
+  詐騙者要求受害者開設平台帳號或加入會員，例如：加入投資平台、滿足交易需求或私密的應用程式等等。詐騙者可能會提供連結，引導受害者進入假冒的網站進行帳號開設，藉此竊取受害者的機敏個人資訊，或是進行詐騙活動。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

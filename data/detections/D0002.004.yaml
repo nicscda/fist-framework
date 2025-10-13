@@ -1,0 +1,19 @@
+type: component
+id: D0002.004
+name: 互動頻率
+description: |
+  偵測是否存在異常的互動頻率，例如：短時間內異常頻繁的互動，發佈貼文、留言、私訊或好友邀請等。
+
+  偵測方法：
+
+  - 時間序列異常檢測
+
+    使用 Z-score 判定異常突增時段（例如：短時間內連續發送大量私訊）。
+
+external_references:
+  - source_name: FIST
+    description: Twitter. time-series-anomaly-detection. 檢索日期 2025-03-12.
+    url: /tools/TL0030
+    external_id: TL0030
+contributors:
+  - NICS

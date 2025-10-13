@@ -1,0 +1,19 @@
+---
+type: technique
+id: T0018.001
+name: 利用缺乏安全意識
+tactic_id: TA0004
+description: |
+  詐騙者針對未採取安全措施的受害者（例如：未啟用雙重驗證），進行詐騙活動或竊取機敏資料。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

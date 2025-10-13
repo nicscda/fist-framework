@@ -1,0 +1,25 @@
+---
+type: technique
+id: T0005.003
+name: 問卷調查
+tactic_id: TA0001
+description: |
+  詐騙者以市場調查、問卷調查或優惠活動為名義，誘導受害者提供個人資訊，例如：姓名、地址、電話號碼等。這些資訊可能被用於後續的詐騙行動。
+
+  問卷調查的主要特徵如下：
+
+  - 要求輸入或填寫包含個人身分資訊的資料，例如：出生日期、地址、帳戶詳情等。
+  - 提供極具吸引力的獎勵，例如：現金或禮品卡。
+  - 採取緊迫感策略，例如：「限時」、「限量」。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

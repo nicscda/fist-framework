@@ -1,0 +1,86 @@
+---
+name: Auto Assign Issues and PRs
+
+#
+# This workflow automatically assigns issues and pull requests to team members.
+#
+# Inspired by:
+# https://github.com/getsentry/action-github-app-token
+# https://github.com/kentaro-m/auto-assign-action
+# https://github.com/pozil/auto-assign-issue
+#
+
+on:
+  issues:
+    types:
+      - opened
+      - reopened
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - ready_for_review
+
+permissions: {}
+
+jobs:
+  issues:
+    name: Assign Issues
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'issues' }}
+
+    permissions:
+      issues: write
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Get App Token
+        id: my-app
+        run: bash ./.github/scripts/token.sh
+        env:
+          APP_ID: ${{ secrets.APP_ID }}
+          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Assign Issue
+        run: |
+          while IFS= read -r -u 9; do
+            while IFS= read -r -u 9; do
+              gh issue edit ${{ github.event.number }} \
+                --repo "${{ github.repository }}" \
+                --add-assignee "$REPLY"
+            done 9< <(
+              gh api "$REPLY" \
+                --jq '.[].login // empty'
+            )
+          done 9< <(
+            gh api "repos/${{ github.repository }}/teams" \
+              --jq '.[] | select(.permissions.triage) | .url | split("github.com/")[-1] + "/members"'
+          )
+        env:
+          GH_TOKEN: ${{ steps.my-app.outputs.token }}
+
+  pr:
+    name: Assign PR
+    runs-on: ubuntu-latest
+    if: >-
+      ${{
+        github.event_name == 'pull_request' &&
+        github.event.pull_request.draft == false
+      }}
+
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Assign PR
+        if: ${{ !endsWith(github.actor, '[bot]') }}
+        run: |
+          gh pr edit ${{ github.event.number }} \
+            --repo "${{ github.repository }}" \
+            --add-assignee ${{ github.actor }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

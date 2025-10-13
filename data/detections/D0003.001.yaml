@@ -1,0 +1,23 @@
+type: component
+id: D0003.001
+name: 域名
+description: |
+  偵測詐騙者使用的網域名稱，分析其註冊資訊、使用情境及是否與已知惡意活動相關。
+
+  偵測方法：
+
+  - WHOIS 資料分析
+
+    尋找可疑特徵，例如：註冊後1-7天即啟用、缺少註冊人資訊、DNS 解析時間接近註冊日等。
+
+  - DNS 流量分析
+
+    識別異常的網域生成模式，例如：透過網域生成演算法（Domain Generation Algorithm, DGA）產生隨機網域名稱。
+
+external_references:
+  - source_name: FIST
+    description: DomainTools. domain-intelligence-service. 檢索日期 2025-03-12.
+    url: /tools/TL0037
+    external_id: TL0037
+contributors:
+  - NICS

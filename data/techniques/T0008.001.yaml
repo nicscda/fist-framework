@@ -1,0 +1,21 @@
+---
+type: technique
+id: T0008.001
+name: 製作人工智慧生成的影片
+tactic_id: TA0002
+description: |
+  利用 AI 技術（例如：深度偽造）創建看似真實但實際上是假的影片內容。這可能包括偽造真實人物從未有過的言論或行為。
+
+  製作人工智慧生成的影片是一種利用深度學習和生成對抗網路（GAN）等 AI 技術來創建假內容的技術。這種影片可以讓真實人物在虛構的情境中出現，並表達他們實際上從未說過的話或做過的事。這類技術的發展使得辨別影片真偽變得更加困難，可能導致對個人、企業或社會的信任危機。詐騙者可以利用這些影片進行詐騙、名譽損害或其他惡意行為。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

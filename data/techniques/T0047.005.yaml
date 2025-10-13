@@ -1,0 +1,24 @@
+---
+type: technique
+id: T0047.005
+name: 利用代理人進行活動
+tactic_id: TA0008
+description: |
+  詐騙者招募或威脅代理人，讓他們充當行動的執行者，從而將自己的風險降到最低並分散法律追究的目標。
+
+  特徵或指標：
+
+  - 代理人可能是無意中被捲入的普通人，也可能是受到金錢利誘的共犯，甚至是受害者。主要角色包括協助註冊帳戶、進行資金轉移、或直接聯絡受害者。
+  - 詐騙者選擇代理人的標準通常包括容易操控或難以追查的特徵，例如：經濟困難人士或外國移民。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

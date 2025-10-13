@@ -1,0 +1,21 @@
+---
+type: technique
+id: T0017.003
+name: 利用生理需求
+tactic_id: TA0004
+description: |
+  詐騙者會針對人類的生理需求，例如：性慾、健康等，設計相關誘因與話術。手法例如：「性交易」、「專屬健康計畫」等，滿足受害者對慾望、自我改善或社會認同的渴望，而失去警覺。
+
+  這類情境常見於情色廣告、虛假醫療諮詢等案例。詐騙者會誘導受害者付費、傳送機敏個人資料，藉此牟利或進一步引導受害者進行後續行為。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

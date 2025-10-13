@@ -1,0 +1,64 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "func: mkdir out",
+            "type": "shell",
+            "command": "mkdir -p ${workspaceFolder}/out",
+            "windows": {
+                "command": "mkdir -Force ${workspaceFolder}/out"
+            },
+            "presentation": {
+                "reveal": "silent",
+                "revealProblems": "onProblem",
+                "close": true
+            }
+        },
+        {
+            "label": "func: pip install",
+            "type": "shell",
+            "command": "${command:python.interpreterPath}",
+            "args": [
+                "-m",
+                "pip",
+                "install",
+                "--editable",
+                "${workspaceFolder}/."
+            ],
+            "presentation": {
+                "reveal": "silent",
+                "revealProblems": "onProblem",
+                "close": true
+            },
+            "dependsOn": [
+                "func: mkdir out"
+            ]
+        },
+        {
+            "label": "func: refresh site",
+            "type": "shell",
+            "command": "mkdir -p ${workspaceFolder}/site; rm -Rf ${workspaceFolder}/site/*; for i in docs out; do cp -Rf ${workspaceFolder}/${i}/* site; done",
+            "windows": {
+                "command": "mkdir -Force ${workspaceFolder}/site; rm -Recurse -Force ${workspaceFolder}/site/*; foreach ($i in 'docs', 'out') { cp -Force -Recurse $i/* site }"
+            },
+            "dependsOn": [
+                "func: mkdir out"
+            ],
+            "presentation": {
+                "reveal": "silent",
+                "revealProblems": "onProblem",
+                "close": true
+            }
+        },
+        {
+            "label": "func: build site",
+            "type": "shell",
+            "command": "bundle exec jekyll serve --source site --incremental --livereload",
+            "dependsOn": [
+                "func: refresh site"
+            ]
+        }
+    ]
+}

@@ -1,0 +1,29 @@
+---
+type: technique
+id: T0025
+name: 邀約實體見面
+tactic_id: TA0005
+description: |
+  詐騙者邀約受害者實體見面，其中可能是假的邀約，詐騙者會要求受害者先支付金額，實際上卻無法實體見面；也可能是真的邀約，目的是建立更直接、更具說服力的互動，或收取受害者的現金等。  
+
+  邀約實體見面的話術包括：
+
+  - 假交友
+
+    詐騙者與受害者培養了親密關係後，詐騙者表示能實體見面，但需支付機票錢等費用。
+
+  - 假交易
+
+    詐騙者向受害者兜售假的商品（例如：靈骨塔位），並邀實體見面簽立合約。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

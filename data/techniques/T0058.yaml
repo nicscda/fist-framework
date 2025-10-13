@@ -1,0 +1,24 @@
+---
+type: technique
+id: T0058
+name: 黑吃黑
+tactic_id: TA0009
+description: |
+  詐騙者之間可能發生內部掠奪行為，目標包括資金或資源，此行為反映了詐騙集團內部的不穩定性，可能提供執法機關更多的調查線索。
+
+  黑吃黑通常發生於詐騙網路的不同層級之間，可能包括：
+
+  - 竊取同伴的詐騙收益。例如：車手領取款項之後，並未分給其他成員。
+  - 暴露對方的身分、地點或線索，以減少競爭。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

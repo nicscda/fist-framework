@@ -1,0 +1,21 @@
+---
+type: technique
+id: T0040
+name: 擴展不同平台活動
+tactic_id: TA0007
+description: |
+  詐騙者將詐騙活動拓展至新的社群平台或通訊管道，以擴大觸及範圍並增加潛在受害者的數量。
+
+  為了觸及更多的受害者，詐騙者會將原本集中於某一社群平台的詐騙活動擴展到其他平台或聯絡管道，利用平台之間的差異和龐大的使用者人數來擴大其影響力。這種方式可能包括利用不同平台的特色功能，例如：即時通訊、社群活動、影片分享等，以吸引各類型的使用者。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

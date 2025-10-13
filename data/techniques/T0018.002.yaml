@@ -1,0 +1,19 @@
+---
+type: technique
+id: T0018.002
+name: 利用日常行為
+tactic_id: TA0004
+description: |
+  利用受害者的日常活動或習慣性行為（例如：固定繳費方式、常用的App 等），因無警覺性而受騙。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

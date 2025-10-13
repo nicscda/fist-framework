@@ -1,0 +1,19 @@
+---
+type: technique
+id: T0028
+name: 要求保密
+tactic_id: TA0005
+description: |
+  詐騙者以「機密性」為由要求受害者不得向第三者透露內容，通常聲稱涉及高度機密或有危險等等，藉此降低受害者徵詢專業意見或驗證的可能性。常見的話術，例如：「此為偵查不公開」、「你若跟其他人說將失去這個機會」等等。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

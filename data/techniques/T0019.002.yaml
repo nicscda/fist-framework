@@ -1,0 +1,19 @@
+---
+type: technique
+id: T0019.002
+name: 盜取密碼
+tactic_id: TA0004
+description: |
+  詐騙者透過技術手段獲取受害者密碼，進而控制其帳號。例如：釣魚網站、鍵盤記錄器或社交工程等手法。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

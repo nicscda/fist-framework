@@ -1,0 +1,19 @@
+---
+type: technique
+id: T0013
+name: 製作詐騙應用程式
+tactic_id: TA0002
+description: |
+  模仿合法軟體外觀和功能的惡意程式。這些應用程式看似與合法的軟體相同，但其實背後隱藏著各種惡意行為，例如：竊取個人資訊、植入木馬程式、鎖定裝置勒索金錢，或者利用受害者的裝置進行詐騙活動。詐騙者會將這些假冒的應用程式偽裝成熱門的遊戲、金融、社交或生產力工具，並透過釣魚網站、刊登廣告、社群媒體宣傳等方式引導受害者下載。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

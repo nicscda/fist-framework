@@ -1,0 +1,21 @@
+---
+type: technique
+id: T0012
+name: 製作詐騙網站
+tactic_id: TA0002
+description: |
+  詐騙者創建與合法網站極為相似的假冒網站，誘使受害者提供機敏資訊（例如：身分證號碼或銀行帳戶資料等），達到詐騙或竊取資料等目的。
+
+  假冒網站通常會仿製目標網站的外觀、域名、商標等元素，以降低受害者的戒心，並且可能以優惠活動、帳號異常提醒或幫忙投票等方式吸引受害者點擊並輸入資訊。詐騙者可以使用工具生成相似的域名，並利用社群媒體、釣魚郵件或假廣告推廣這些網站。受害者一旦輸入資料，便可能面臨財務損失、個資外洩或進一步的詐騙活動。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

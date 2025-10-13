@@ -1,0 +1,31 @@
+type: component
+id: D0002.008
+name: 自動化行為
+description: |
+  偵測使用機器人帳號的行為，例如：自動回覆、批量發佈詐騙廣告、釣魚連結等，以迅速、大量觸及潛在受害者，並誘導其上當。
+
+  偵測方法：
+
+  - 機器學習行為模式分析
+
+    偵測固定間隔發文、留言模式。
+
+  - 帳號活動時間分析
+    
+    分析帳號活動時間是否過於規律或異常集中。
+
+  - 內容重複性檢測
+    
+    識別大量發佈相同或高度相似內容的帳號。
+
+  - 互動模式分析
+    
+    檢測缺乏真實互動、只進行單向發佈的帳號特徵。
+
+external_references:
+  - source_name: FIST
+    description: BotSentinel. automated-account-detection. 檢索日期 2025-03-12.
+    url: /tools/TL0034
+    external_id: TL0034
+contributors:
+  - NICS

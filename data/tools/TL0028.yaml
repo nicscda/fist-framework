@@ -1,0 +1,17 @@
+---
+type: tool
+id: TL0028
+name: Gephi
+description: |
+  Gephi 是一款開源的網路分析與視覺化工具，可用於監控社群群組動態、成員互動模式及檢測異常成員湧入或主題集中控制等情形。
+
+platforms: []
+tool_types: []
+tool_version:
+
+external_references:
+  - source_name: Gephi
+    description: Gephi. network-analysis-visualization. 檢索日期 2025-03-12.
+    url: https://gephi.org/
+contributors:
+  - NICS

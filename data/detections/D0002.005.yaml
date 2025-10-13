@@ -1,0 +1,19 @@
+type: component
+id: D0002.005
+name: 過度親密
+description: |
+  詐騙者常在對話初期即使用親暱稱謂，例如：「寶貝」、「老公」、「老婆」等，快速建立情感聯繫，試圖讓受害者陷於虛假的親密關係中，失去防備心。
+
+  偵測方法：
+
+  - NLP 模型情感識別
+
+    分析過度親密詞彙與話題變化模式。
+
+external_references:
+  - source_name: FIST
+    description: IBM. sentiment-tone-analysis. 檢索日期 2025-03-12.
+    url: /tools/TL0031
+    external_id: TL0031
+contributors:
+  - NICS

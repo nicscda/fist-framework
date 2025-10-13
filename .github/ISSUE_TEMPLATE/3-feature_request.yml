@@ -1,0 +1,53 @@
+---
+name: "Feature request"
+description: Suggest an idea for this project.
+title: ":sparkles: "
+labels: ["enhancement"]
+type: Feature
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ### Thanks for taking the time to fill out a feature request!
+
+        **Before filling out this request**, please check [existing feature requests](/nicscda/fist-framework/issues?q=is:issue+label:enhancement+sort:created-desc) and see if your feature has already been proposed.
+
+        Please describe your feature request with as many details as possible.
+        > [!TIP]
+        > You can attach images or files by clicking the textarea to highlight it and then dragging files in.
+
+  - type: textarea
+    attributes:
+      label: Related Problem
+      description: |
+        Is your feature request related to a problem? Please describe.
+        A clear and concise description of what the problem is.
+      placeholder: Ex. I'm always frustrated when [...]
+    validations:
+      required: false
+
+  - type: textarea
+    attributes:
+      label: Solution
+      description: |
+        Describe the solution you'd like.
+        A clear and concise description of what you want to happen.
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Alternative
+      description: |
+        Describe alternatives you've considered.
+        A clear and concise description of any alternative solutions or features you've considered.
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Additional information
+      description: |
+        Add any other context or screenshots about the feature here.
+    validations:
+      required: false

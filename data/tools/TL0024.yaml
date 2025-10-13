@@ -1,0 +1,17 @@
+---
+type: tool
+id: TL0024
+name: Rasa
+description: |
+  Rasa 是一款開源的對話式 AI 框架，提供意圖辨識和實體抽取功能，可用於微調以檢測詐騙文本中的異常操縱意圖。
+
+platforms: []
+tool_types: []
+tool_version:
+
+external_references:
+  - source_name: Rasa
+    description: Rasa. conversational-ai-framework. 檢索日期 2025-03-12.
+    url: https://github.com/RasaHQ/rasa
+contributors:
+  - NICS

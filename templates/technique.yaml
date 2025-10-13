@@ -1,0 +1,69 @@
+---
+# Topic: Technique Template
+# Author: NICS
+#
+# Refer to MITRE ATT&CK® and OpenCTI data model:
+# - [MITRE ATT&CK®](https://attack.mitre.org/)
+# - [OpenCTI Data Model](https://docs.opencti.io/latest/usage/data-model/)
+#
+# Note:
+# Some fields are used solely for generating STIX bundles or Markdown files.
+# Please distinguish between fields intended for data export versus for docs.
+# 
+# YAML syntax assistance:
+# - https://learntheweb.courses/topics/yaml/
+# - https://learnxinyminutes.com/docs/yaml/
+#
+# Full requirements and validation details will appear when running the module.
+# yaml-language-server: $schema=
+
+# Basic Information (Required)
+# Core identifiers and names essential for data processing.
+type: technique        # Fixed, immutable field
+id: "changeme"         # Align with root ID for sub-techniques, e.g., T0001.001
+name: "changeme"       # Human-readable, no wrap
+tactic_id: "changeme"  # Belongs to which tactic by ID
+
+# Supplementary Information (Optional)
+# Additional context for documentation purposes.
+#
+# Note:
+# Please remove unused fields or set arrays to `[]` if empty.
+description: |
+  changeme
+
+permissions:
+  # Add tags for relevant permissions:
+  - changeme
+platforms:
+  # Add tags for relevant platforms:
+  - changeme
+tools:
+  # Add IDs and description for relevant tools:
+  - id: changeme
+    description: |
+      changeme
+mitigations:
+  # Add IDs and description for relevant mitigations:
+  - id: changeme
+    description: |
+      changeme
+detection:
+  description: |
+    changeme
+  components:
+    # Add IDs and description for relevant data components:
+    - id: changeme
+      description: |
+        changeme
+
+external_references:
+  # Add details using the following example:
+  - source_name: "changeme"
+    description: |
+      changeme
+    url: "https://changeme"
+    external_id: "changeme"
+contributors:
+  # All content contributors, only the first author will be displayed.
+  - changeme

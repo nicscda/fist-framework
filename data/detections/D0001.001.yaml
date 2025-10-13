@@ -1,0 +1,31 @@
+type: component
+id: D0001.001
+name: 以人工智慧技術生成圖片
+description: |
+  詐騙者運用人工智慧學習技術，例如：深度學習、生成對抗網路（GANs）、擴散模型（Diffusion Models）等，製作高度擬真的假圖片，誘導受害者信以為真。例如：生成假的帥哥美女圖片用於戀愛交友、使用偽造的明星合照來宣傳假投資計畫，或生成假身分證件照片以騙取信任等。
+
+  偵測方法：
+
+  - 元數據分析
+
+    檢查 EXIF 資訊缺失或矛盾。
+    
+  - 頻譜噪音分析
+    
+    辨識 GAN 生成圖的低頻異常。
+
+  - 使用 AI 檢測工具
+
+    例如：Hive、DeepWare Scanner、Sensity AI。
+
+external_references:
+  - source_name: FIST
+    description: Hive. ai-generated-content-detection. 檢索日期 2025-03-12.
+    url: /tools/TL0001
+    external_id: TL0001
+  - source_name: FIST
+    description: Sensity. deepfake-detection. 檢索日期 2025-03-12.
+    url: /tools/TL0002
+    external_id: TL0002
+contributors:
+  - NICS

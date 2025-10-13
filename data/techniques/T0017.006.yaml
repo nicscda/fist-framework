@@ -1,0 +1,21 @@
+---
+type: technique
+id: T0017.006
+name: 利用恐懼
+tactic_id: TA0004
+description: |
+  詐騙者會刻意營造威脅或恐慌的情境，讓受害者在強烈壓力下失去理性判斷。常見話術例如：「你已涉及刑案」、「帳戶遭凍結」、「不即時處理將面臨法律責任」等，利用受害者對未知風險或權威壓力的恐懼本能，受詐騙者的操控而受騙。
+
+  這類手法例如：冒充檢察官、法官、警察或調查局、健保單位或公部門等，或假冒官方客服等情境。詐騙者會要求受害者立刻回電、提供身分資料、匯款或配合轉帳流程以監管財產等。受害者在驚慌與壓力下極易誤判，進而完全按照詐騙者的操控行動。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

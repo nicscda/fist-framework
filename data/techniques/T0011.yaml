@@ -1,0 +1,21 @@
+---
+type: technique
+id: T0011
+name: 製作實體偽造文件
+tactic_id: TA0002
+description: |
+  製作看似真實但實際上是偽造的實體文件，是詐騙活動中的一項關鍵技術。這些文件可能包括身分證、公司證書或銀行對帳單等。製作者通常精心模仿真實文件的每一個細節，包括防偽標籤、特殊字體及水印等安全特徵，目的是使這些偽造文件能夠通過檢查，並被視為真實文件。
+
+  此類技術經常被用於身分竊盜或詐騙活動，例如：申辦手機號碼、開設假銀行帳戶、申請貸款或進行土地交易。由於偽造文件的高度仿真性，它可能導致受害者或公司機構蒙受巨大的財務損失，甚至引發嚴重的法律問題。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

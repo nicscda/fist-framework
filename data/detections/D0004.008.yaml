@@ -1,0 +1,23 @@
+type: component
+id: D0004.008
+name: 虛擬貨幣追蹤
+description: |
+  偵測詐騙者利用虛擬貨幣進行資金隱匿的行為，例如：使用多重錢包轉移、混幣服務（例如：Tornado Cash）或跨鏈洗錢等手法。
+
+  偵測方法：
+
+  - 鏈上追蹤工具
+
+    例如：Chainalysis Reactor 追蹤混幣服務。
+
+  - 交易所 KYC 交叉驗證
+
+    例如：同一 IP 綁定多個匿名錢包。
+
+external_references:
+  - source_name: FIST
+    description: Chainalysis. cryptocurrency-transaction-monitoring. 檢索日期 2025-03-12.
+    url: /tools/TL0047
+    external_id: TL0047
+contributors:
+  - NICS

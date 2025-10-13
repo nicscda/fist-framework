@@ -1,0 +1,23 @@
+type: component
+id: D0004.001
+name: 交易頻率
+description: |
+  透過時間序列分析，監測帳戶的交易頻率，找出異常模式。
+
+  偵測方法：
+
+  - 異常高頻交易
+
+    若帳戶在短時間內發生大量交易，可能是洗錢或資金分散的行為。
+
+  - 異常低頻大額交易
+
+  長期未交易的帳戶突然發生大額轉帳，可能是詐騙所得轉移。
+
+external_references:
+  - source_name: FIST
+    description: NICE Actimize. financial-fraud-prevention. 檢索日期 2025-03-12.
+    url: /tools/TL0045
+    external_id: TL0045
+contributors:
+  - NICS

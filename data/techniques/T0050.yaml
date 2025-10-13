@@ -1,0 +1,21 @@
+---
+type: technique
+id: T0050
+name: 移除資通流痕跡
+tactic_id: TA0008
+description: |
+  詐騙者在完成行動後，主動清除所有資訊、通訊流動的痕跡，避免留下任何可追溯的線索。
+
+  具體行動包括刪除網路記錄、通訊紀錄或篡改紀錄數據等，這些行為旨在阻斷執法機關的調查線索。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

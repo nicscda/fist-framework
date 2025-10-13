@@ -1,0 +1,21 @@
+---
+type: technique
+id: T0041
+name: 調整目標群體
+tactic_id: TA0007
+description: |
+  詐騙者透過動態調整其目標受害者群體，以提高詐騙成功率和影響力。
+
+  詐騙者會依據過往的成功案例或獲得的資料，分析受害者的行為模式和特徵，從而精確定位潛在受害者群體，並針對性地進行攻擊。這種技術通常涉及收集並分析大量數據，以了解不同群體的偏好、脆弱點和行為習慣。詐騙者可能會根據受害者的年齡層、職業、興趣愛好、所在地區，或使用的社群平台來量身定制詐騙策略，從而增加成功的機率。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

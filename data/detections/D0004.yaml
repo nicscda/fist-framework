@@ -1,0 +1,15 @@
+type: source
+id: D0004
+name: 金流
+description: |
+  詐騙相關的金流往往與正常交易存在差異，例如：異常的交易頻率、金額變動、資金流向、支付管道、交易地點與設備等特徵。另詐騙者也可能透過多層帳戶轉移、虛擬貨幣洗錢等方式來隱藏資金流向，而這些行為仍會在交易數據中留下異常痕跡。因此，透過綜合交易行為分析、帳戶關聯性檢測與虛擬貨幣追蹤等技術，可以有效辨識出潛在的詐騙金流。
+
+platforms: []
+
+external_references:
+  - source_name: FIST
+    description: IBM Trusteer Fraud Detection 提供金融詐騙行為的全面監控解決方案，包含從交易異常檢測到多層帳戶關聯性分析等功能。檢索日期 2025-02-25.
+    url: /tools/TL0053
+    external_id: TL0053
+contributors:
+  - NICS

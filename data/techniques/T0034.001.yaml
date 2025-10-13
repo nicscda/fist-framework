@@ -1,0 +1,19 @@
+---
+type: technique
+id: T0034.001
+name: 有交易行為
+tactic_id: TA0006
+description: |
+  詐騙者設計看似合法的交易過程，以誤導或欺騙受害者，藉以騙取金錢。這些假交易可能涉及偽造的購物網站、假交易契約等。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

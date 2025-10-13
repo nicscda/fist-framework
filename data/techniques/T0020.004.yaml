@@ -1,0 +1,19 @@
+---
+type: technique
+id: T0020.004
+name: 利用遵守法律
+tactic_id: TA0004
+description: |
+  詐騙者利用受害者對法律的敬畏，聲稱其涉及違法行為（例如：涉及金融詐騙、洗錢犯罪等），威脅受害者採取行動或接受金錢帳戶監管以避免法律後果。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

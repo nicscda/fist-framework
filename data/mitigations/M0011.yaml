@@ -1,0 +1,17 @@
+---
+type: mitigation
+id: M0011
+name: 防毒軟體
+description: |
+  透過防毒軟體偵測並阻擋惡意程式、病毒與網路釣魚攻擊，確保系統安全。
+
+  1. 定期更新防毒軟體病毒資料庫，確保能偵測最新威脅
+  2. 執行全系統掃描，找出所有疑似惡意程式或病毒
+  3. 依防毒軟體指示隔離或清除檢測到的威脅，並重新啟動系統確認安全
+
+external_references:
+  - source_name: Antivirus_software
+    description: Wikipedia. Antivirus_software. 檢索日期 2025-02-14.
+    url: https://en.wikipedia.org/wiki/Antivirus_software
+contributors:
+  - NICS

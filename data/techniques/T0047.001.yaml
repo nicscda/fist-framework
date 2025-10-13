@@ -1,0 +1,21 @@
+---
+type: technique
+id: T0047.001
+name: 冒用他人身分
+tactic_id: TA0008
+description: |
+  詐騙者竊取或偽造他人身分資料，將其用於隱藏自己的行蹤，甚至直接將詐騙活動的責任轉嫁給無辜者。身分冒用通常發生在受害者的個人資料被盜取後，詐騙者利用這些資料進行不法行為，例如：註冊新帳戶、申請貸款或執行詐騙活動。
+
+  常見冒用方式包括盜取受害者的個人資料（例如：身分證、健保卡、護照或駕照等），或直接利用個資洩漏事件中取得的大量的身分資訊（例如：在暗網購買）。詐騙者可能使用這些身分執行高風險交易，並在行動結束後迅速切換到其他身分，進一步減少被追查的風險。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

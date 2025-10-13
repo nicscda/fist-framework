@@ -1,0 +1,23 @@
+type: component
+id: D0004.006
+name: 交易設備
+description: |
+  透過設備唯一識別碼與帳戶關聯性分析，監測交易設備是否異常。
+
+  偵測方法：
+
+  - 偵測異常設備共享
+
+    如果多個帳戶共用相同設備、IP、或瀏覽器指紋（Browser Fingerprinting），可能是詐騙組織控制的帳戶。
+
+  - 偵測異常裝置變更
+
+    若同一帳戶短時間內登入不同設備或不同 IP 地區，可能是跨國詐騙行為。
+
+external_references:
+  - source_name: FIST
+    description: FingerprintJS. device-fingerprinting-technology. 檢索日期 2025-03-12.
+    url: /tools/TL0051
+    external_id: TL0051
+contributors:
+  - NICS

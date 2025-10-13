@@ -1,0 +1,19 @@
+---
+type: technique
+id: T0035
+name: 騙取金融工具
+tactic_id: TA0006
+description: |
+  詐騙者已成功騙取受害者各類金融工具，例如：存摺、印章、金融卡、密碼或網路銀行存取權限等，藉以達成資金轉移、洗錢、取款或製造金流斷點等目的。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

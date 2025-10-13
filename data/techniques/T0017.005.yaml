@@ -1,0 +1,21 @@
+---
+type: technique
+id: T0017.005
+name: 利用緊張
+tactic_id: TA0004
+description: |
+  利用人們的緊張心理，透過設置時間限制或者聲稱某個機會稀少來製造緊迫感，讓受害者感覺自己必須倉促做出決定。
+
+  詐騙者可能會說「只剩最後一個名額」或「再不快就來不及了」等話術，藉此逼迫受害者在壓力下做出未深思熟慮的行動。例如：詐騙者可能透過簡訊、電子郵件或電話等，通知受害者如果不立即回應、採取行動或提供所需的資訊，會因此損失、失去某個重要機會或財務上的優惠。這種手法主要加強受害者的心理壓力，造成受害者誤判，並提高詐騙成功的機率。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

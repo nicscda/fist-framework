@@ -1,0 +1,23 @@
+type: component
+id: D0003.005
+name: VoIP 詐騙與異常 SIP 呼叫
+description: |
+  詐騙集團經常透過 VoIP（網路電話）與SIP（Session Initiation Protocol）進行詐騙，使用假號碼或短期租用號碼，以躲避監控。
+
+  偵測方法：
+
+  - 異常 SIP 訊號檢測
+    
+    比對 SIP 來源的User-Agent，分析是否來自已知的詐騙 VoIP 供應商。
+
+  - VoIP 服務供應商比對
+
+    比對號碼是否來自 Twilio、Plivo、TextNow 等短期租用的 VoIP 供應商。
+
+external_references:
+  - source_name: FIST
+    description: Twilio. cloud-communication-platform. 檢索日期 2025-03-12.
+    url: /tools/TL0042
+    external_id: TL0042
+contributors:
+  - NICS

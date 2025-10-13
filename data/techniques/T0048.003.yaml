@@ -1,0 +1,19 @@
+---
+type: technique
+id: T0048.003
+name: 更改社交媒體帳號
+tactic_id: TA0008
+description: |
+  詐騙者可能通過更改社群媒體的個人資料或變更假名，減少身分對應，或自己的真實身分被發現的可能性。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

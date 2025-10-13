@@ -1,0 +1,27 @@
+type: component
+id: D0001.003
+name: 偽變造圖片
+description: |
+  透過影像編輯工具修改真實圖片，例如：拼接、變造細節，製造錯誤資訊以誤導受害者。例如：篡改交易紀錄以製造虛假的投資獲利。
+
+  偵測方法：
+
+  - 影像取證工具
+
+    例如：Forensically 檢測複製痕跡。
+
+  - EXIF 標籤元數據與內容矛盾分析
+
+    例如：修改時間與光源方向衝突。
+
+external_references:
+  - source_name: FIST
+    description: 29a-ch. photo-forensics. 檢索日期 2025-03-12.
+    url: /tools/TL0006
+    external_id: TL0006
+  - source_name: FIST
+    description: ExifTool. metadata-extraction. 檢索日期 2025-03-12.
+    url: /tools/TL0007
+    external_id: TL0007
+contributors:
+  - NICS

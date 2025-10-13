@@ -1,0 +1,19 @@
+---
+type: technique
+id: T0018.003
+name: 利用服從性
+tactic_id: TA0004
+description: |
+  假冒權威或可信的角色（例如：公司主管或司法機關），利用受害者的服從性命令其行動。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

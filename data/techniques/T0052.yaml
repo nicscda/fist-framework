@@ -1,0 +1,21 @@
+---
+type: technique
+id: T0052
+name: 薪資發放
+tactic_id: TA0009
+description: |
+  詐騙組織為內部成員提供固定底薪或業績獎勵，以吸引更多人參與並穩定團體內部結構。
+
+  底薪的存在讓成員感到財務上的保障，進一步提升其對詐騙活動的忠誠度。業績獎勵則是引誘成員更加賣力從事詐騙活動。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

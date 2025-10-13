@@ -1,0 +1,1 @@
+./../../i18n/zh_TW/PULL_REQUEST_TEMPLATE.md

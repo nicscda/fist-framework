@@ -1,0 +1,67 @@
+---
+name: "內容貢獻"
+description: 協助我們強化框架並豐富知識庫。
+title: ":memo: "
+labels: ["documentation"]
+type: Task
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ### 感謝您抽出寶貴的時間提供建議與回饋！
+
+        **填寫表單前**，請先搜尋[已建立的議題](/nicscda/fist-framework/issues?q=is:issue+label:documentation+sort:created-desc)，確認是否已有協作者提交過相同內容。
+
+        撰寫新議題時，請注意以下幾點：
+
+        - 主旨**明確**且一目瞭然，除了讓我們能快速分配議題，也方便日後其他人尋找類似資訊。
+        - 內容應**詳述細節**，幫助其他人明白您提交的申請將牽涉到框架中那些階層或影響範圍。
+
+        > [!TIP]
+        > 您可以透過點擊文字區以新增圖片或附加檔案，或將它們直接拖放到編輯區。
+
+  - type: dropdown
+    attributes:
+      label: 議題類型
+      description: |
+        請只少選擇一個最接近的議題類型，如果是要[回報問題](/nicscda/fist-framework/issues/new?template=2-bug_report.yml)或[提出功能要求](/nicscda/fist-framework/issues/new?template=3-feature_request.yml)，請切換至相應的表單後再進行填寫。
+      multiple: true
+      options:
+        - 內容修訂
+        - 資源分享
+        - 其他意見
+
+  - type: textarea
+    attributes:
+      label: 說明
+      description: |
+        我們歡迎您參加本專案協作計畫，與我們一起完善和維護框架內的技術、子技術以及檢測和緩解等相關內容。如果您擁有相關領域的知識或可以提供的情資，請於此段落描述您想做出的變更與貢獻資訊。
+
+        - 如果您願意提供資料模型，請參考我們的資料[架構](/nicscda/fist-framework/tree/main/.schema.json)和[範例](/nicscda/fist-framework/tree/main/templates)來編寫後上傳，並附加簡要說明資料關聯性。
+        - 如果資料量龐大，請考慮使用雲端共享或透過其他加密方式傳送。
+        - 如果涉及第三方供應商，請務必附上授權資訊註明來源合法可信。
+        - 如果您在[網站](https://nicscda.github.io/fist-framework)上發現與內容相關的錯誤或拼字錯誤，請透過連結您發現錯誤的網址和簡短說明來告知我們。
+      placeholder: "請在此處說明貢獻資料的關聯、出處及影響範圍。"
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: 案例分享
+      description: |
+        對於框架內容的更新，特別是出現**興新手法**或戰略技術，我們希望您能根據實務經驗或時事來說明異動的資料模型，能更好地幫助其他人理解與使用新的術語並建置符合真實情境的資料關聯模型。
+
+        - 分享內容中請勿包含敏感訊息，請適度遮蔽，避免洩露他人的個人資訊。
+        - 如果有相關的真實案例報導，請附上新聞連結或截圖、影片等參考來源。
+        - 如果您是要報告拼字錯誤或類似內容更正，請跳過此部分。
+      placeholder: "請在此處描述案例細節及上傳佐證資料與圖片。"
+    validations:
+      required: false
+
+  - type: textarea
+    attributes:
+      label: 其他資訊
+      description: |
+        您可以在此處新增有關此議題的其他補充內容或截圖。
+    validations:
+      required: false

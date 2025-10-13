@@ -1,0 +1,19 @@
+---
+type: technique
+id: T0014.005
+name: 發布於網拍平台
+tactic_id: TA0003
+description: |
+  詐騙者利用網拍平台發布假商品或服務，誘使受害者進行交易。詐騙者可能會在網拍平台上發布假商品或服務，例如：假冒品牌商品、虛構的投資機會等，誘使受害者進行交易。這種技術取決於受害者對網拍平台的信任，認為平台上的商品或服務都是合法的。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

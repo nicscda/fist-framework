@@ -1,0 +1,31 @@
+---
+type: technique
+id: T0047.007
+name: 躲避監視器
+tactic_id: TA0008
+description: |
+  詐騙者在執行行動時會刻意避開監控設備，例如：街道監視器攝像頭、銀行 ATM 監控系統等，以減少行蹤被記錄的可能性。
+
+  躲避監視的常見手法包括：
+
+  - 遮掩臉部
+
+    使用帽子、口罩或其他物品遮擋面部特徵。
+
+  - 利用盲點
+
+    通過事先勘察，選擇監控範圍外的路線行動。
+
+  此外，詐騙者可能還會採取技術手段干擾監控設備的運行，例如：屏蔽監視器攝像頭、阻斷訊號或篡改錄影畫面。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

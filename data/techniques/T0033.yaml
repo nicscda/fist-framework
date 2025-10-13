@@ -1,0 +1,23 @@
+---
+type: technique
+id: T0033
+name: 要求資金轉移
+tactic_id: TA0005
+description: |
+  透過多種手段引導受害者將資金轉入指定帳戶，以達成詐騙的目的。
+
+  為了隱藏資金的真實來源或去向。詐騙者可能會利用人頭帳戶、加密貨幣，或利用他人領取現金（俗稱車手）等，進行資金轉移，再進一步將資金轉移至其他詐騙集團同夥。
+
+  資金轉移的方式多樣，例如：現金、轉帳、點數卡、第三方支付或加密貨幣等。其中轉移的過程通常會刻意隱藏，使得資金的流向難以追蹤，增加詐騙者追查與資金的追回難度。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

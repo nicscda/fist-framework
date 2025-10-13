@@ -1,0 +1,27 @@
+type: component
+id: D0004.004
+name: 交易管道與支付方式
+description: |
+  透過支付方式監控，分析資金進出管道，辨識可疑交易行為。
+
+  偵測方法：
+
+  - 偵測異常 ATM 提領
+
+    短時間內大量 ATM 提領現金，可能是詐騙者透過現金方式提領贓款（俗稱車手）。
+
+  - 偵測異常電子支付交易
+
+    若帳戶透過數位支付平台（例如：PayPal、LinePay）進行高額轉帳，且對象為不明帳戶，可能是非法資金清洗。
+
+external_references:
+  - source_name: FIST
+    description: PayPal. payment-risk-management. 檢索日期 2025-03-12.
+    url: /tools/TL0048
+    external_id: TL0048
+  - source_name: FIST
+    description: Alipay. digital-payment-security. 檢索日期 2025-03-12.
+    url: /tools/TL0049
+    external_id: TL0049
+contributors:
+  - NICS

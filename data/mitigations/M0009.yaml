@@ -1,0 +1,51 @@
+---
+type: mitigation
+id: M0009
+name: 申請退款
+description: |
+  若遇社群平台一頁式廣告詐騙，可依物流方式向物流業者或超商申請退款，以保障消費權益。
+
+  1. 物流業者宅配到府
+
+     直接聯繫物流業者，依其退款機制申請退款。
+
+  2. 超商取貨付款
+
+     透過超商提供的申訴管道，請求協助處理退款。
+
+     - 統一超商（7-11）
+     
+        - [交貨便服務內容](https://www.7-11.com.tw/service/accept.aspx)
+        - [安心取申訴平台](https://help.shopmore.com.tw)
+        - [客服專線(02)6636-6637](tel:+886-2-6636-6637)
+     
+     - 全家便利商店（FamilyMart）
+
+       - [全家Fun心取爭議包裹退貨申請平台](https://returns.com.tw)
+       - [線上客服](https://www.family.com.tw/Marketing/ContactUs)
+       - [客服專線(03)255-0119](tel:+886-3-255-0119)
+
+     - 萊爾富（Hi-Life）
+
+       - [跨境包裹疑似詐騙處理流程](https://www.hilife.com.tw/HI_Shipping/hilife/01_home.aspx)
+       - [詐騙案件申訴平台](https://www.hilife.com.tw/echelp/HomePage.aspx)
+       - [客服專線(03)2866-020](tel:+886-3-2866-020)
+     
+     - OK便利商店（OK mart）
+
+       - [跨境包裹疑似詐騙處理流程](https://www.okmart.com.tw/okGo_payment?ID=84)
+       - [線上客服](https://www.okmart.com.tw/information_contactUsForm_ec)
+       - [客服專線(03)263-1082](tel:+886-3-263-1082)
+
+external_references:
+  - source_name: 一頁式廣告詐騙申請退款流程說明
+    description: 內政部警政署. (2023-07-09). 遇到社群平臺一頁式廣告詐騙? 申請退款流程說明!. 檢索日期 2025-02-13.
+    url: https://165.npa.gov.tw/#/article/A/1017
+  - source_name: 收到詐騙包裹怎麼辦
+    description: 臺北市政府法務局. (2024-12-18). 收到詐騙包裹怎麼辦？. 檢索日期 2025-02-19.
+    url: https://dlacp.gov.taipei/cp.aspx?n=2DE8CDCF6C2A7528
+  - source_name: 網路購物問題處理
+    description: 經濟部商業發展署. (2023-09-26). 網路購物問題處理. 檢索日期 2025-02-19.
+    url: https://www.aoc.gov.tw/subclass/cont/121
+contributors:
+  - NICS

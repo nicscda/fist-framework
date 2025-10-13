@@ -1,0 +1,21 @@
+---
+type: technique
+id: T0009
+name: 製作詐騙文本
+tactic_id: TA0002
+description: |
+  這類手法是由詐騙者編寫具有吸引力或聳動性的文本內容，並利用精心設計的話術來誘騙受害者，其中可能結合社會熱門議題，誘使受害者在虛構的情境中透露機敏資訊或支付金錢等。製作詐騙文本往往採用模板化方式製作，再藉由各種技術工具快速產出變化版本，以觸及更潛在的受害者。
+
+  詐騙者會依據不同目標族群打造專屬內容，手法包括：假愛情交友、高額報酬的投資機會、營造緊急或威脅狀況，或是編造令人同情的故事情節。透過多樣化的劇本，詐騙集團得以在各種情境下進行詐騙。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []
+contributors:
+  - NICS

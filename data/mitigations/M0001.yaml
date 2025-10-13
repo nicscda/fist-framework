@@ -1,0 +1,22 @@
+---
+type: mitigation
+id: M0001
+name: 訊息內容真實性驗證
+description: |
+  驗證訊息內容與來源的真實性和可靠性，確保該資訊來源與是受信任的且內容沒有被竄改。
+
+  1. 查證發送者身份、資訊平台的合法性與可信度
+  2. 交叉比對訊息內容是否與其他可靠來源一致
+  3. 檢查訊息是否有不自然或可疑的急迫性要求
+  4. 利用資訊查核平台進行驗證
+  5. 對於重大決策相關的訊息，尋求專業機構或專家確認
+
+external_references:
+  - source_name: 165全民防詐網
+    description: 內政部警政署. 165全民防詐網. 檢索日期 2025-02-18.
+    url: https://165.npa.gov.tw
+  - source_name: 反詐騙專區
+    description: 台灣事實查核中心. 反詐騙專區. 檢索日期 2025-02-18.
+    url: https://tfc-taiwan.org.tw/anti-fraud-resource-center
+contributors:
+  - NICS
