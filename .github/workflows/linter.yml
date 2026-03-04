@@ -44,7 +44,7 @@ jobs:
           mv .venv /home/runner/work/_temp/_github_workflow
 
       - name: Run Super Linter
-        uses: super-linter/super-linter@v6
+        uses: super-linter/super-linter@v8.3.1
         env:
           VALIDATE_ALL_CODEBASE: false
           DEFAULT_BRANCH: main
