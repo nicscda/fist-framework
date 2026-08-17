@@ -51,7 +51,7 @@ jobs:
           TAG_NAME: ${{ github.event.release.tag_name }}
           FIST_BASE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}
           FIST_OUTPUT_DIR: docs/_data/pages
-          FIST_ARTIFACT: ${{ vars.FIST_ARTIFACT }}
+          FIST_ARTIFACT: ${{ vars.FIST_ARTIFACT || 'bundle.json' }}
           LANGUAGE: ${{ vars.LANGUAGE }}
 
       - name: Upload Release Artifact
@@ -74,7 +74,7 @@ jobs:
           bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}" --source "$source"
         env:
           JEKYLL_ENV: production
-          FIST_ARTIFACT: ${{ vars.FIST_ARTIFACT }}
+          FIST_ARTIFACT: ${{ vars.FIST_ARTIFACT || 'bundle.json' }}
           LANGUAGE: ${{ vars.LANGUAGE }}
 
       - name: Upload artifact
