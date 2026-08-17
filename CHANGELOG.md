@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.4](https://github.com/nicscda/fist-framework/compare/v1.0.3...v1.0.4) (2026-08-17)
+
+
+### Features
+
+* :rocket: sync framework assets to production ([d9700bb](https://github.com/nicscda/fist-framework/commit/d9700bb1572373585f42ad9ab2e74ba146478b95))
+
 ## [1.0.3](https://github.com/nicscda/fist-framework/compare/v1.0.2...v1.0.3) (2026-08-17)
 
 
