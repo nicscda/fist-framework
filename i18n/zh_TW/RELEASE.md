@@ -123,7 +123,7 @@ push 到 `main` 之後，`release.yml` 會跑 release-please。若自上次 tag 
 `deploy.yml` 的觸發條件是 **release published**，不是每一次 push。Release 一出現就會：
 
 1. 用 **該 tag**（不是最新 main 的未標記 commit）checkout
-2. 建 STIX bundle 並上傳到 Release（public 腳本是 `docs/bundle.json`）
+2. `make locale build assemble` 後，把 `docs/_data/pages/bundle.json` 上傳到 Release
 3. 建 Jekyll 並部署 GitHub Pages
 
 **檢查點**

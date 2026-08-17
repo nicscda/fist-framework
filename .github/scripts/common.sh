@@ -86,7 +86,7 @@ generate_files() {
 			echo "![${label}](https://img.shields.io/badge/${label}-red?logo=pypi&logoColor=FFFFFF)"
 		fi
 		echo "\`\`\`"
-		make ENV=prod locale build | sed $'s/\033\\[[0-9;]*m//g'
+		make ENV=prod locale build assemble | sed $'s/\033\\[[0-9;]*m//g'
 		echo "\`\`\`"
 	} >> "${GITHUB_STEP_SUMMARY:-/dev/null}"
 }

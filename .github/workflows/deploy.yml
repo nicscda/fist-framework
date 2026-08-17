@@ -44,13 +44,13 @@ jobs:
       - name: Build and Run
         run: |
           bash ./.github/scripts/build.sh
-          echo "artifact=${FIST_OUTPUT_DIR}/${FIST_ARTIFACT}#STIX Bundle" >> "$GITHUB_ENV"
-          echo "source=${FIST_OUTPUT_DIR%%/*}" >> "$GITHUB_ENV"
+          echo "artifact=docs/_data/pages/${FIST_ARTIFACT}#STIX Bundle" >> "$GITHUB_ENV"
+          echo "source=docs" >> "$GITHUB_ENV"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TAG_NAME: ${{ github.event.release.tag_name }}
           FIST_BASE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}
-          FIST_OUTPUT_DIR: docs/_data/pages
+          FIST_OUTPUT_DIR: out
           FIST_ARTIFACT: ${{ vars.FIST_ARTIFACT || 'bundle.json' }}
           LANGUAGE: ${{ vars.LANGUAGE }}
 

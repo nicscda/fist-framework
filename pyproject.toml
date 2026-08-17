@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "fist"
-version = "1.0.3"  # x-release-please-version
+version = "0.0.13"  # x-release-please-version
 description = "FIST framework tool for generating STIX2 bundle and customizable documentation"
 authors = [
     {name = "FIST team", email = "nicscda@nics.nat.gov.tw"},

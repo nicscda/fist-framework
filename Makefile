@@ -244,6 +244,7 @@ endif
 	@uv run --with mypy mypy .
 
 locale: ## Compile translations and link locale files.
+# transl writes PO/MO under locale_dir (i18n), not FIST_OUTPUT_DIR.
 	@uv run $(FIST) transl
 	@echo "$(CYAN)[INFO]$(RESET) Refreshing locale links..."
 	@uv run python -c "\
@@ -259,7 +260,7 @@ locale: ## Compile translations and link locale files.
 
 build: ## Generate STIX bundle and documentation.
 	@echo "$(CYAN)[INFO]$(RESET) Building artifacts..."
-	@uv run $(FIST) build -R data --clean
+	@uv run $(FIST) build -R data --clean --output-dir $(FIST_OUTPUT_DIR)
 
 assemble: ## Merge docs and build output into site directory.
 ifeq ($(SITE),$(FIST_OUTPUT_DIR))
