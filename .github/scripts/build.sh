@@ -2,7 +2,7 @@
 source "$(dirname "${BASH_SOURCE[0]}")/common.sh"
 
 fn() {
-	generate_files "${TARGET_DIRECTORY:?}"
+	generate_files
 }
 
 fn

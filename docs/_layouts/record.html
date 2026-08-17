@@ -1,0 +1,534 @@
+---
+layout: page
+group:
+---
+
+{%- comment -%}
+Base template for all record types
+Provides common fields: id, name, description, external_references, contributors, revoked
+{%- endcomment -%}
+
+{%- assign newline = "
+" -%}
+{%- assign source = page.source -%}
+
+<article class="container">
+  {%- if source.revoked -%}
+  <div class="alert alert-danger d-flex align-items-center" role="alert">
+    <strong>{{- "deprecation warning" | translate | capitalize -}}</strong>
+  </div>
+  {%- endif -%}
+  <div class="row">
+    <aside class="col-12 col-lg-4 col-xl-3 mb-4">
+      <div class="border-light px-8">
+        <div>&nbsp;</div>
+        {%- unless source.type == "individual" or source.type == "organization" -%}
+        </div>
+          {{- "id" | translate | upcase -}}:&nbsp;
+          {{- source.id -}}
+        </div>
+        {%- endunless -%}
+        {%- if source.phase -%}
+        <div>
+          {{- "belongs to phase" | translate | capitalize -}}:&nbsp;
+          <a href="{{- page.dir | append: '../phases/' | append: source.phase.id | relative_url -}}">
+            {{- source.phase.name -}}
+          </a>
+        <div>
+        {%- endif -%}
+        {%- if source.tactic -%}
+        <div>
+          {{- "tactic" | translate | capitalize -}}:&nbsp;
+          <a href="{{- page.dir | append: '../tactics/' | append: source.tactic.id | relative_url -}}">
+            {{- source.tactic.name -}}
+            <br>
+          </a>
+        </div>
+        {%- endif -%}
+        {%- if source.parent -%}
+        <div>
+          {{- "parent technique" | translate | titleize -}}:&nbsp;
+          <a href="{{- page.dir | append: '../techniques/' | append: source.parent.id | relative_url -}}">
+            {{- source.parent.name -}}
+          </a>
+        </div>
+        {%- endif -%}
+        {%- if source.source -%}
+        <div>
+          {{- "source" | translate | capitalize -}}:&nbsp;
+          <a href="{{- page.dir | append: '../detections/' | append: source.source.id | relative_url -}}">
+            {{- source.source.name -}}
+          </a>
+        </div>
+        {%- endif -%}
+        {%- if source.identity_class -%}
+        <div>
+          {{- "identity class" | translate | titleize -}}:&nbsp;
+          {{- source.identity_class | translate | capitalize -}}
+        </div>
+        {%- endif -%}
+        {%- if source.firstname -%}
+        <div>
+          {{- "firstname" | translate | capitalize -}}:&nbsp;
+          {{- source.firstname | titleize -}}
+        </div>
+        {%- endif -%}
+        {%- if source.lastname -%}
+        <div>
+          {{- "lastname" | translate | capitalize -}}:&nbsp;
+          {{- source.lastname | titleize -}}
+        </div>
+        {%- endif -%}
+        {%- if source.roles.size > 0 -%}
+        <div>
+          {{- "roles" | translate | capitalize -}}:&nbsp;
+          {{- source.roles | smart_join -}}
+        </div>
+        {%- endif -%}
+        {%- if source.sectors.size > 0 -%}
+        <div>
+          {{- "sectors" | translate | titleize -}}:&nbsp;
+          {{- source.sectors | smart_join -}}
+        </div>
+        {%- endif -%}
+        {%- if source.reliability-%}
+        <div>
+          {{- "reliability" | translate | capitalize -}}:&nbsp;
+          {{- source.reliability | reliability_grade | titleize -}}
+        </div>
+        {%- endif -%}
+        {%- if source.organization_type -%}
+        <div>
+          {{- "types" | translate | capitalize -}}:&nbsp;
+          {{- source.organization_type | translate | capitalize -}}
+        </div>
+        {%- endif -%}
+        {%- if source.platforms.size > 0 -%}
+        <div>
+          {{- "platforms" | translate | capitalize -}}:&nbsp;
+          {{- source.platforms | smart_join -}}
+        </div>
+        {%- endif -%}
+        {%- if source.permissions.size > 0 -%}
+        <div>
+          {{- "permissions" | translate | capitalize -}}:&nbsp;
+          {{- source.permissions | smart_join -}}
+        </div>
+        {%- endif -%}
+        {%- if source.collection_layers.size > 0 -%}
+        <div>
+          {{- "collection layers" | translate | titleize -}}:&nbsp;
+          {{- source.collection_layers | smart_join -}}
+        </div>
+        {%- endif -%}
+        {%- if source.tool_version -%}
+        <div>
+          {{- "version" | translate | capitalize -}}:&nbsp;
+          {{- source.tool_version -}}
+        </div>
+        {%- endif -%}
+        {%- if source.tool_types.size > 0 -%}
+        <div>
+          {{- "types" | translate | capitalize -}}:&nbsp;
+          {{- source.tool_types | smart_join -}}
+        </div>
+        {%- endif -%}
+        {%- if source.note_types.size > 0 -%}
+        <div>
+          {{- "types" | translate | capitalize -}}:&nbsp;
+          {{- source.note_types | smart_join -}}
+        </div>
+        {%- endif -%}
+        {%- if source.contributors.size > 0 -%}
+        <div>
+          {{- "contributor" | translate | capitalize -}}:&nbsp;
+          {{- source.contributors | smart_join: null, true -}}
+        </div>
+        {%- endif -%}
+        {%- if source.created -%}
+        <div>
+          {{- "created" | translate | capitalize -}}:&nbsp;
+          <time datetime="{{- source.created | date_to_xmlschema -}}">{{- source.created | date: "%Y-%m-%d" -}}</time>
+        </div>
+        {%- endif -%}
+        {%- if source.modified -%}
+        <div>
+          {{- "last modified" | translate | titleize -}}:&nbsp;
+          <time datetime="{{- source.modified | date_to_xmlschema -}}">{{- source.modified | date: "%Y-%m-%d" -}}</time>
+        </div>
+        {%- endif -%}
+        <div>&nbsp;</div>
+      </div>
+    </aside>
+    <div class="col-12 col-lg-8 col-xl-9 mb-4 order-lg-first">
+      {{- source.description | markdownify -}}
+    </div>
+    <div class="col-12 mb-4">
+      {%- if source.contact_information -%}
+      <section class="mb-4">
+        <h4>{{- "contact information" | translate | titleize -}}</h4>
+        <div>{{- source.contact_information | markdownify -}}</div>
+      </section>
+      {%- endif -%}
+      {%- if source.tactics.size > 0 -%}
+      <section class="mb-4">
+        <h4>{{- "associated tactics" | translate | titleize -}}</h4>
+        <table class="table">
+          <thead>
+            <tr>
+              <th width="24%" scope="col">{{- "name" | translate | capitalize -}}</th>
+              <th width="75%" scope="col">{{- "summary" | translate | capitalize -}}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {%- for tactic in source.tactics -%}
+            <tr>
+              <td>
+                <a title="{{- tactic.id -}}" href="{{- page.dir | append: '../tactics/' | append: tactic.id | relative_url -}}">
+                  {{- tactic.name -}}
+                </a>
+              </td>
+              <td>{{- tactic.description | split: newline | first | markdownify -}}</td>
+            </tr>
+            {%- endfor -%}
+          </tbody>
+        </table>
+      </section>
+      {%- endif -%}
+      {%- if source.techniques.size > 0 -%}
+      <section class="mb-4">
+        <h4>{{- "associated techniques" | translate | titleize -}}</h4>
+        <table class="table">
+          <thead>
+            <tr>
+              <th width="24%" scope="col">{{- "name" | translate | capitalize -}}</th>
+              <th width="75%" scope="col">{{- "summary" | translate | capitalize -}}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {%- for technique in source.techniques -%}
+            <tr>
+              <td>
+                <a title="{{- technique.id -}}" href="{{- page.dir | append: '../techniques/' | append: technique.id | relative_url -}}">
+                  {{- technique.name -}}
+                </a>
+              </td>
+              <td>{{- technique.description | split: newline | first | markdownify -}}</td>
+            </tr>
+            {%- endfor -%}
+          </tbody>
+        </table>
+      </section>
+      {%- endif -%}
+      {%- if source.sub_techniques.size > 0 -%}
+      <section class="mb-4">
+        <h4>{{- "sub-techniques" | translate | capitalize -}}</h4>
+        <table class="table">
+          <thead>
+            <tr>
+              <th width="24%" scope="col">{{- "name" | translate | capitalize -}}</th>
+              <th width="75%" scope="col">{{- "summary" | translate | capitalize -}}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {%- for technique in source.sub_techniques -%}
+            <tr>
+              <td>
+                <a title="{{- technique.id -}}" href="{{- page.dir | append: '../techniques/' | append: technique.id | relative_url -}}">
+                  {{- technique.name -}}
+                </a>
+              </td>
+              <td>{{- technique.description | split: newline | first | markdownify -}}</td>
+            </tr>
+            {%- endfor -%}
+          </tbody>
+        </table>
+      </section>
+      {%- endif -%}
+      {%- if source.tools.size > 0 -%}
+      <section class="mb-4">
+        <h4>{{- "tools" | translate | capitalize -}}</h4>
+        <table class="table">
+          <thead>
+            <tr>
+              <th width="24%" scope="col">{{- "name" | translate | capitalize -}}</th>
+              <th width="75%" scope="col">{{- "summary" | translate | capitalize -}}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {%- for tool in source.tools -%}
+            <tr>
+              <td>
+                <a title="{{- tool.id -}}" href="{{- page.dir | append: '../tools/' | append: tool.id | relative_url -}}">
+                  {{- tool.name -}}
+                </a>
+              </td>
+              <td>{{- tool.description | markdownify -}}</td>
+            </tr>
+            {%- endfor -%}
+          </tbody>
+        </table>
+      </section>
+      {%- endif -%}
+      {%- if source.mitigations.size > 0 -%}
+      <section class="mb-4">
+        <h4>{{- "mitigations" | translate | capitalize -}}</h4>
+        <table class="table">
+          <thead>
+            <tr>
+              <th width="24%" scope="col">{{- "name" | translate | capitalize -}}</th>
+              <th width="75%" scope="col">{{- "summary" | translate | capitalize -}}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {%- for mitigation in source.mitigations -%}
+            <tr>
+              <td>
+                <a title="{{- mitigation.id -}}" href="{{- page.dir | append: '../mitigations/' | append: mitigation.id | relative_url -}}">
+                  {{- mitigation.name -}}
+                </a>
+              </td>
+              <td>{{- mitigation.description | markdownify -}}</td>
+            </tr>
+            {%- endfor -%}
+          </tbody>
+        </table>
+      </section>
+      {%- endif -%}
+      {%- if source.detection.description or source.detection.components.size > 0 -%}
+      <section class="mb-4">
+        <h4>{{- "detection components" | translate | titleize -}}</h4>
+        {%- if source.detection.components.size > 0 -%}
+        {{- source.detection.description | markdownify -}}
+        <table class="table">
+          <thead>
+            <tr>
+              <th width="24%" scope="col">{{- "name" | translate | capitalize -}}</th>
+              <th width="75%" scope="col">{{- "summary" | translate | capitalize -}}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {%- for component in source.detection.components -%}
+            <tr>
+              <td>
+                <a title="{{- component.id -}}" href="{{- page.dir | append: '../detections/' | append: component.id | relative_url -}}">
+                  {{- component.name -}}
+                </a>
+              </td>
+              <td>{{- component.description | markdownify -}}</td>
+            </tr>
+            {%- endfor -%}
+          </tbody>
+        </table>
+        {%- endif -%}
+      </section>
+      {%- endif -%}
+      {%- if source.components.size > 0 -%}
+      <section class="mb-4">
+        <h4>{{- "detection components" | translate | titleize -}}</h4>
+        <table class="table">
+          <thead>
+            <tr>
+              <th width="24%" scope="col">{{- "name" | translate | capitalize -}}</th>
+              <th width="75%" scope="col">{{- "summary" | translate | capitalize -}}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {%- for component in source.components -%}
+            <tr>
+              <td>
+                <a title="{{- component.id -}}" href="{{- page.dir | append: '../detections/' | append: component.id | relative_url -}}">
+                  {{- component.name -}}
+                </a>
+              </td>
+              <td>{{- component.description | split: newline | first | markdownify -}}</td>
+            </tr>
+            {%- endfor -%}
+          </tbody>
+        </table>
+      </section>
+      {%- endif -%}
+      {%- if source.related.phases.size > 0 -%}
+      <section class="mb-4">
+        <h4>{{- "related phases" | translate | titleize -}}</h4>
+        <table class="table">
+          <thead>
+            <tr>
+              <th width="24%" scope="col">{{- "name" | translate | capitalize -}}</th>
+              <th width="75%" scope="col">{{- "summary" | translate | capitalize -}}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {%- for phase in source.related.phases -%}
+            <tr>
+              <td>
+                <a title="{{- phase.id -}}" href="{{- page.dir | append: '../phases/' | append: phase.id | relative_url -}}">
+                  {{- phase.name -}}
+                </a>
+              </td>
+              <td>{{- phase.description | split: newline | first | markdownify -}}</td>
+            </tr>
+            {%- endfor -%}
+          </tbody>
+        </table>
+      </section>
+      {%- endif -%}
+      {%- if source.related.tactics.size > 0 -%}
+      <section class="mb-4">
+        <h4>{{- "related tactics" | translate | titleize -}}</h4>
+        <table class="table">
+          <thead>
+            <tr>
+              <th width="24%" scope="col">{{- "name" | translate | capitalize -}}</th>
+              <th width="75%" scope="col">{{- "summary" | translate | capitalize -}}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {%- for tactic in source.related.tactics -%}
+            <tr>
+              <td>
+                <a title="{{- tactic.id -}}" href="{{- page.dir | append: '../tactics/' | append: tactic.id | relative_url -}}">
+                  {{- tactic.name -}}
+                </a>
+              </td>
+              <td>{{- tactic.description | split: newline | first | markdownify -}}</td>
+            </tr>
+            {%- endfor -%}
+          </tbody>
+        </table>
+      </section>
+      {%- endif -%}
+      {%- if source.related.techniques.size > 0 -%}
+      <section class="mb-4">
+        <h4>{{- "related techniques" | translate | titleize -}}</h4>
+        <table class="table">
+          <thead>
+            <tr>
+              <th width="24%" scope="col">{{- "name" | translate | capitalize -}}</th>
+              <th width="75%" scope="col">{{- "summary" | translate | capitalize -}}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {%- for technique in source.related.techniques -%}
+            <tr>
+              <td>
+                <a title="{{- technique.id -}}" href="{{- page.dir | append: '../techniques/' | append: technique.id | relative_url -}}">
+                  {{- technique.name -}}
+                </a>
+              </td>
+              <td>{{- technique.description | split: newline | first | markdownify -}}</td>
+            </tr>
+            {%- endfor -%}
+          </tbody>
+        </table>
+      </section>
+      {%- endif -%}
+      {%- if source.related.mitigations.size > 0 -%}
+      <section class="mb-4">
+        <h4>{{- "related mitigations" | translate | titleize -}}</h4>
+        <table class="table">
+          <thead>
+            <tr>
+              <th width="24%" scope="col">{{- "name" | translate | capitalize -}}</th>
+              <th width="75%" scope="col">{{- "summary" | translate | capitalize -}}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {%- for mitigation in source.related.mitigations -%}
+            <tr>
+              <td>
+                <a title="{{- mitigation.id -}}" href="{{- page.dir | append: '../mitigations/' | append: mitigation.id | relative_url -}}">
+                  {{- mitigation.name -}}
+                </a>
+              </td>
+              <td>{{- mitigation.description | split: newline | first | markdownify -}}</td>
+            </tr>
+            {%- endfor -%}
+          </tbody>
+        </table>
+      </section>
+      {%- endif -%}
+      {%- if source.related.detections.size > 0 -%}
+      <section class="mb-4">
+        <h4>{{- "related detections" | translate | titleize -}}</h4>
+        <table class="table">
+          <thead>
+            <tr>
+              <th width="24%" scope="col">{{- "name" | translate | capitalize -}}</th>
+              <th width="75%" scope="col">{{- "summary" | translate | capitalize -}}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {%- for detection in source.related.detections -%}
+            <tr>
+              <td>
+                <a title="{{- detection.id -}}" href="{{- page.dir | append: '../detections/' | append: detection.id | relative_url -}}">
+                  {{- detection.name -}}
+                </a>
+              </td>
+              <td>{{- detection.description | split: newline | first | markdownify -}}</td>
+            </tr>
+            {%- endfor -%}
+          </tbody>
+        </table>
+      </section>
+      {%- endif -%}
+      {%- if source.related.tools.size > 0 -%}
+      <section class="mb-4">
+        <h4>{{- "related tools" | translate | titleize -}}</h4>
+        <table class="table">
+          <thead>
+            <tr>
+              <th width="24%" scope="col">{{- "name" | translate | capitalize -}}</th>
+              <th width="75%" scope="col">{{- "summary" | translate | capitalize -}}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {%- for tool in source.related.tools -%}
+            <tr>
+              <td>
+                <a title="{{- tool.id -}}" href="{{- page.dir | append: '../tools/' | append: tool.id | relative_url -}}">
+                  {{- tool.name -}}
+                </a>
+              </td>
+              <td>{{- tool.description | split: newline | first | markdownify -}}</td>
+            </tr>
+            {%- endfor -%}
+          </tbody>
+        </table>
+      </section>
+      {%- endif -%}
+
+      {{- content -}}
+
+      {%- if source.external_references.size > 0 -%}
+      <section class="mb-4">
+        <h4>{{- "references" | translate | capitalize -}}</h4>
+        <ol>
+          {%- for external_reference in source.external_references -%}
+          {%- assign ref_label = external_reference.external_id | prepend: "&nbsp;(" | append: ")" | remove_first: "&nbsp;()" -%}
+          {%- assign ref_label = ref_label | prepend: external_reference.source_name -%}
+          {%- if external_reference.description -%}
+          {%- assign ref_label = external_reference.description | markdownify -%}
+          {%- endif -%}
+          <li>
+            {%- if external_reference.url -%}
+            <a href="{{- external_reference.url -}}" target="_blank" rel="noopener noreferrer">
+              {{- ref_label -}}
+            </a>
+            {%- else -%}
+            {{- ref_label -}}
+            {%- endif -%}
+          </li>
+          {%- endfor -%}
+        </ol>
+      </section>
+      {%- endif -%}
+    </div>
+    <div class="col-12">
+      <a href="{{- page.dir | append: "index" | relative_url -}}">
+        &larr;&nbsp;{{- "back to list" | translate | capitalize -}}&nbsp;{{- page.group | translate | capitalize -}}
+      </a>
+    </div>
+  </div>
+</article>

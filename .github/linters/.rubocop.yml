@@ -1,0 +1,12 @@
+---
+# Prefer single quotes for simple strings (more idiomatic in Ruby)
+Style/StringLiterals:
+  EnforcedStyle: single_quotes
+
+# Allow both styles for consistency with Jekyll/Liquid syntax
+Style/StringLiteralsInInterpolation:
+  Enabled: false
+
+# Disable rules that conflict with Shopify Ruby LSP formatter
+Layout/MultilineMethodCallIndentation:
+  Enabled: false

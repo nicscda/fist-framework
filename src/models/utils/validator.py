@@ -1,13 +1,21 @@
-from typing import Iterable, OrderedDict
+from typing import OrderedDict
 
 from pydantic import AfterValidator
 from pydantic_core import PydanticCustomError
 
 
-def _duplicate(_):
-    if isinstance(_, Iterable) and len(OrderedDict.fromkeys(_)) != len(_):
-        raise PydanticCustomError("duplicate_entry", "Duplicate entry not allowed")
-    return _
+def _raise(e: Exception):
+    raise e
 
 
-duplicate_validator = AfterValidator(_duplicate)
+entry_duplicate_error = PydanticCustomError(
+    "entry_duplicate",
+    "Duplicate entry not allowed",
+)
+duplicate_validator = AfterValidator(
+    lambda v: (
+        _raise(entry_duplicate_error)
+        if isinstance(v, list) and len(OrderedDict.fromkeys(v)) != len(v)
+        else v
+    )
+)

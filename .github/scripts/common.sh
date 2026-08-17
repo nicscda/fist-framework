@@ -63,29 +63,30 @@ parse_args() {
 }
 
 generate_files() {
-	if ! type -P python >/dev/null 2>&1; then
-		raise "Python is not installed."
+	if ! type -P uv >/dev/null 2>&1; then
+		raise "UV is not installed."
 	else
-		python -m pip install --quiet .
+		sudo apt-get install -y -qq -o=Dpkg::Use-Pty=0 gettext
+		uv sync --frozen --no-dev --no-editable
 	fi
 
-	local -r target_directory="$1"
-	mkdir -p "${target_directory:?}"
 	{
+		local label; label="$(uv run --no-sync python --version | tr ' ' '-')"
 		echo "### :technologist: Logging"
 		echo ""
-		echo "!""[python version](https://img.shields.io/badge/$(
-			python --version | awk '{print $NF}'
-		)-3670A0?logo=python&logoColor=FFDD54)"
+		echo "![${label}](https://img.shields.io/badge/${label}-blue?logo=python&logoColor=FFDD54)"
 		if [[ -n "${TAG_NAME:-}" ]] && url=$(
 			gh release view "${TAG_NAME}" --json url --jq '.url' 2>/dev/null
 		); then
-			echo "> :bookmark: [$TAG_NAME](${url})"
+			label="release-${TAG_NAME#v}"
+			echo "[![${label}](https://img.shields.io/badge/${label}-green?logo=github&logoColor=FFFFFF)]($url)"
 		else
-			echo "> :pushpin: $(python -m src.cli --version | awk '{print $NF}')"
+			label="$(uv version --bump patch --bump beta --dry-run)"
+			label="${label%% *}-${label##* }"
+			echo "![${label}](https://img.shields.io/badge/${label}-red?logo=pypi&logoColor=FFFFFF)"
 		fi
 		echo "\`\`\`"
-		python -m src.cli build -R data -t "$target_directory" -o "${2:-}" --subfolder "${3:-}"
+		make ENV=prod locale build | sed $'s/\033\\[[0-9;]*m//g'
 		echo "\`\`\`"
 	} >> "${GITHUB_STEP_SUMMARY:-/dev/null}"
 }

@@ -8,6 +8,8 @@ name: Lint Code
 
 on:
   push:
+    branches-ignore:
+      - main
 
 permissions: {}
 
@@ -27,34 +29,45 @@ jobs:
 
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           # Full git history is needed to get a proper list of changed files within `super-linter`
           fetch-depth: 0
+          persist-credentials: false
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: 3.12
-          cache: pip
+      - name: Setup uv
+        uses: astral-sh/setup-uv@v7
+      # Since the new volume cannot be declared, rebind it for use in a separate container.
       - run: |
-          python -m venv .venv
-          .venv/bin/pip install --quiet --upgrade pip
-          .venv/bin/pip install --quiet --editable .
+          uv sync
+          version="$(uv run python --version | grep -oEm1 '[0-9]+\.[0-9]+')"
+          echo "PYTHONPATH=/github/workspace/:/github/workflow/.venv/lib/python${version}/site-packages" >> "$GITHUB_ENV"
           mv .venv /home/runner/work/_temp/_github_workflow
 
       - name: Run Super Linter
-        uses: super-linter/super-linter@v6
+        uses: super-linter/super-linter@v8
         env:
           VALIDATE_ALL_CODEBASE: false
           DEFAULT_BRANCH: main
-          # Since the new volume cannot be declared, rebind it for use in a separate container.
-          PYTHONPATH: "/github/workspace/:/github/workflow/.venv/lib/python3.12/site-packages"
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Exclude Jekyll/Liquid template files from HTML/CSS linting (not compatible with Liquid syntax)
+          # Exclude VS Code config files from JSON linting (JSONC with comments not supported by eslint default parser)
+          FILTER_REGEX_EXCLUDE: ".*(docs/.*\\.(html|scss)|\\.vscode/.*\\.json)"
+          FIX_SHELL_SHFMT: true
+          RUBY_CONFIG_FILE: ".rubocop.yml"
           # It returns too many failed checks at the moment
           VALIDATE_CHECKOV: false
+          # Flags trusted outputs (e.g. release.tag_name) as injection risks
+          VALIDATE_GITHUB_ACTIONS_ZIZMOR: false
           # It takes DRY to the extreme and annoys, people tend to just ignore it
           VALIDATE_JSCPD: false
           # Textlint just discourages documentation
           VALIDATE_NATURAL_LANGUAGE: false
-          FIX_SHELL_SHFMT: true
+          # Using Black as the primary Python formatter
+          VALIDATE_PYTHON_RUFF_FORMAT: false
+          # Prettier mangles CJK table alignment
+          VALIDATE_MARKDOWN_PRETTIER: false
+          # Prettier mangles strict mode flag
+          VALIDATE_JAVASCRIPT_PRETTIER: false
+          # Using Biome as the primary JSON formatter
+          VALIDATE_JSON_PRETTIER: false

@@ -37,7 +37,7 @@ body:
       description: |
         我們歡迎您參加本專案協作計畫，與我們一起完善和維護框架內的技術、子技術以及檢測和緩解等相關內容。如果您擁有相關領域的知識或可以提供的情資，請於此段落描述您想做出的變更與貢獻資訊。
 
-        - 如果您願意提供資料模型，請參考我們的資料[架構](/nicscda/fist-framework/tree/main/.schema.json)和[範例](/nicscda/fist-framework/tree/main/templates)來編寫後上傳，並附加簡要說明資料關聯性。
+        - 如果您願意提供資料模型，請參考我們的資料[架構](/nicscda/fist-framework/blob/HEAD/.schema.json)和[範例](/nicscda/fist-framework/blob/HEAD/templates)來編寫後上傳，並附加簡要說明資料關聯性。
         - 如果資料量龐大，請考慮使用雲端共享或透過其他加密方式傳送。
         - 如果涉及第三方供應商，請務必附上授權資訊註明來源合法可信。
         - 如果您在[網站](https://nicscda.github.io/fist-framework)上發現與內容相關的錯誤或拼字錯誤，請透過連結您發現錯誤的網址和簡短說明來告知我們。

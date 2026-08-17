@@ -1,4 +1,5 @@
 from enum import StrEnum, unique
+from gettext import gettext as _
 from types import DynamicClassAttribute
 
 from stix2.v21.vocab import (
@@ -34,7 +35,7 @@ class CustomEnum(StrEnum):
 
 @unique
 class CollectionLayer(StrEnum):
-    """Collection layers vocabulary
+    """Collection layers vocabulary.
 
     .. seealso::
         [Taxonomy - OpenCTI Documentation](https://docs.opencti.io/latest/reference/taxonomy)
@@ -49,27 +50,24 @@ class CollectionLayer(StrEnum):
 
 @unique
 class IdentityClass(CustomEnum):
-    """Identity vocabulary"""
+    """Identity vocabulary."""
 
     locals().update(
-        (_.upper(), (_, __))
-        for (_, __) in (
-            (IDENTITY_CLASS_INDIVIDUAL, "個人"),
-            (IDENTITY_CLASS_ORGANIZATION, "組織"),
-        )
+        (s.upper(), (s, _(s)))
+        for s in (IDENTITY_CLASS_INDIVIDUAL, IDENTITY_CLASS_ORGANIZATION)
     )
 
 
 @unique
 class IndustrySector(StrEnum):
-    """Industry sectors vocabulary"""
+    """Industry sectors vocabulary."""
 
-    locals().update((_.upper(), _) for _ in INDUSTRY_SECTOR)
+    locals().update((s.upper(), s) for s in INDUSTRY_SECTOR)
 
 
 @unique
 class NoteType(StrEnum):
-    """Note types vocabulary
+    """Note types vocabulary.
 
     .. seealso::
         [Taxonomy - OpenCTI Documentation](https://docs.opencti.io/latest/reference/taxonomy)
@@ -84,7 +82,7 @@ class NoteType(StrEnum):
 
 @unique
 class OrganizationType(StrEnum):
-    """Organization types vocabulary
+    """Organization types vocabulary.
 
     .. seealso::
         [Taxonomy - OpenCTI Documentation](https://docs.opencti.io/latest/reference/taxonomy)
@@ -99,7 +97,7 @@ class OrganizationType(StrEnum):
 
 @unique
 class Platform(StrEnum):
-    """Platforms vocabulary
+    """Platforms vocabulary.
 
     .. seealso::
         [Taxonomy - OpenCTI Documentation](https://docs.opencti.io/latest/reference/taxonomy)
@@ -128,7 +126,7 @@ class Platform(StrEnum):
 
 @unique
 class Permission(StrEnum):
-    """Permissions vocabulary
+    """Permissions vocabulary.
 
     .. seealso::
         [Taxonomy - OpenCTI Documentation](https://docs.opencti.io/latest/reference/taxonomy)
@@ -141,22 +139,22 @@ class Permission(StrEnum):
 
 @unique
 class Reliability(CustomEnum):
-    """Reliability vocabulary
+    """Reliability vocabulary.
 
     .. seealso::
         [Taxonomy - OpenCTI Documentation](https://docs.opencti.io/latest/reference/taxonomy)
     """
 
-    COMPLETELY_RELIABLE = "A", "完全可靠"
-    USUALLY_RELIABLE = "B", "通常可靠"
-    FAIRLY_RELIABLE = "C", "相當可靠"
-    NOT_USUALLY_RELIABLE = "D", "不太可靠"
-    UNRELIABLE = "E", "完全不可靠"
-    UNJUDGED = "F", "無法判斷"  # Reliability cannot be judged
+    COMPLETELY_RELIABLE = "A", _("completely reliable")
+    USUALLY_RELIABLE = "B", _("usually reliable")
+    FAIRLY_RELIABLE = "C", _("fairly reliable")
+    NOT_USUALLY_RELIABLE = "D", _("not usually reliable")
+    UNRELIABLE = "E", _("unreliable")
+    UNJUDGED = "F", _("unjudge")  # Reliability cannot be judged
 
 
 @unique
 class ToolType(StrEnum):
-    """Tool types vocabulary"""
+    """Tool types vocabulary."""
 
-    locals().update((_.upper(), _) for _ in TOOL_TYPE)
+    locals().update((s.upper(), s) for s in TOOL_TYPE)

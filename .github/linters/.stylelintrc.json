@@ -1,0 +1,17 @@
+{
+    "extends": [
+        "stylelint-config-standard",
+        "stylelint-config-recommended-scss"
+    ],
+    "customSyntax": "postcss-scss",
+    "overrides": [
+        {
+            "files": [
+                "*.scss",
+                "**/*.scss"
+            ],
+            "customSyntax": "postcss-scss"
+        }
+    ],
+    "allowEmptyInput": true
+}

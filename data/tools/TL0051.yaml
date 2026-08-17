@@ -13,5 +13,3 @@ external_references:
   - source_name: FingerprintJS
     description: FingerprintJS. device-fingerprinting-technology. 檢索日期 2025-03-12.
     url: https://fingerprintjs.com/
-contributors:
-  - NICS

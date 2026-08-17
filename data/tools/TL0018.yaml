@@ -13,5 +13,3 @@ external_references:
   - source_name: pyAudioAnalysis
     description: pyAudioAnalysis. audio-feature-extraction. 檢索日期 2025-03-12.
     url: https://github.com/tyiannak/pyAudioAnalysis
-contributors:
-  - NICS

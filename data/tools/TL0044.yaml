@@ -13,5 +13,3 @@ external_references:
   - source_name: Numverify
     description: Numverify. phone-number-validation. 檢索日期 2025-03-12.
     url: https://numverify.com/
-contributors:
-  - NICS

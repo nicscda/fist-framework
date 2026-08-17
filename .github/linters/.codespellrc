@@ -1,0 +1,4 @@
+[codespell]
+check-hidden =
+skip = */package-lock.json,*/go.mod,*/go.sum,*.log,.git,.gitignore,*/Gemfile*,*/.schema.json
+ignore-words-list = ser

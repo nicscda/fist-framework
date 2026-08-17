@@ -19,51 +19,171 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  check:
-    name: Review Body
+  bot-guard:
+    name: Check Bot PR
     runs-on: ubuntu-latest
-    if: ${{ github.event.pull_request.draft == false }}
+    outputs:
+      is-bot-pr: ${{ steps.check.outputs.is-bot-pr }}
+    steps:
+      - name: Detect Bot PR
+        id: check
+        if: >-
+          ${{
+            startsWith(github.head_ref, 'release-please') ||
+            startsWith(github.head_ref, 'dependabot')
+          }}
+        run: echo "is-bot-pr=true" >> "${GITHUB_OUTPUT:-/dev/null}"
+
+  title:
+    name: Check PR Title
+    needs: [bot-guard]
+    runs-on: ubuntu-latest
+    outputs:
+      merge-mode: >-
+        ${{
+          (needs.bot-guard.outputs.is-bot-pr && 'squash') ||
+          steps.title.outputs.mode
+        }}
+    if: >-
+      ${{
+        github.event.pull_request.draft == false && (
+          contains(
+            fromJson('["opened", "reopened", "ready_for_review"]'),
+            github.event.action
+          ) || (
+            github.event.action == 'edited' &&
+            github.event.changes.title
+          )
+        )
+      }}
 
     permissions:
-      contents: write
+      contents: read
       pull-requests: write
-      statuses: write
 
     steps:
+      - name: Restore Bot PR Title
+        if: >-
+          ${{
+            needs.bot-guard.outputs.is-bot-pr &&
+            !endsWith(github.actor, '[bot]')
+          }}
+        run: |
+          echo "::warning::Do not change the title of PRs created by a bot."
+          gh pr edit "${{ github.event.number }}" \
+            --repo "${{ github.repository }}" \
+            --title "$(
+              gh pr view "${{ github.event.number }}" \
+                --repo "${{ github.repository }}" \
+                --json commits --jq '.commits | first | .messageHeadline'
+            )"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Checkout Code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
+        if: ${{ !(needs.bot-guard.outputs.is-bot-pr) }}
+        with:
+          persist-credentials: false
 
       - name: Enforce Title Format
         id: title
-        if: >-
-          ${{
-            contains(
-              fromJson('["opened", "reopened", "ready_for_review"]'),
-              github.event.action
-            ) || (
-              github.event.action == 'edited' &&
-              github.event.changes.title
-            )
-          }}
+        if: ${{ !(needs.bot-guard.outputs.is-bot-pr) }}
         run: |
           bash ./.github/scripts/check.sh "title" \
             --pr-number "${{ github.event.number }}" \
-            --repository "${{ github.repository }}"
+            --repo "${{ github.repository }}"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TITLE: ${{ github.event.pull_request.title }}
 
+  body:
+    name: Check PR Body
+    needs: [bot-guard]
+    runs-on: ubuntu-latest
+    if: >-
+      ${{
+        !(needs.bot-guard.outputs.is-bot-pr) &&
+        github.event.pull_request.draft == false && (
+          github.event.action == 'synchronize' ||
+          contains(
+            fromJson('["opened", "reopened", "ready_for_review"]'),
+            github.event.action
+          ) || (
+            github.event.action == 'edited' &&
+            github.event.changes.body
+          )
+        )
+      }}
+
+    permissions:
+      contents: read
+      pull-requests: read
+      statuses: write
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Validation
+        run: |
+          bash ./.github/scripts/check.sh "body" \
+            --pr-number "${{ github.event.number }}" \
+            --repo "${{ github.repository }}" \
+            --run-id "${{ github.run_id }}" \
+            --sha "${{ github.event.pull_request.head.sha }}"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  merge:
+    name: Auto Merge
+    needs: [title]
+    runs-on: ubuntu-latest
+    if: >-
+      ${{
+        github.event.pull_request.draft == false &&
+        contains(
+          fromJson('["default", "squash"]'),
+          needs.title.outputs.merge-mode
+        )
+      }}
+
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
       - name: Get App Token
-        id: my-app
-        if: ${{ steps.title.outputs.mode }}
+        id: app
         run: bash ./.github/scripts/token.sh
         env:
           APP_ID: ${{ secrets.APP_ID }}
           PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Disable existing auto-merge
+        run: |
+          if enabled_at=$(
+            gh pr view "${{ github.event.number }}" \
+              --repo "${{ github.repository }}" \
+              --json 'autoMergeRequest' \
+              --jq '.autoMergeRequest.enabledAt // empty'
+            ) && [[ -n "$enabled_at" ]]; then
+              gh pr merge "${{ github.event.number }}" \
+                --repo "${{ github.repository }}" \
+                --disable-auto
+          fi
+        env:
+          GH_TOKEN: ${{ steps.app.outputs.token }}
+
       - name: Enable auto-merge (default)
-        if: ${{ steps.title.outputs.mode == 'default' }}
+        if: ${{ needs.title.outputs.merge-mode == 'default' }}
         run: |
           subject='chore: :twisted_rightwards_arrows: merge pull request #${{ github.event.number }} from '
           subject+="$GITHUB_HEAD_REF"
@@ -73,29 +193,35 @@ jobs:
             --merge \
             --subject "$subject"
         env:
-          GH_TOKEN: ${{ steps.my-app.outputs.token }}
+          GH_TOKEN: ${{ steps.app.outputs.token }}
 
       - name: Enable auto-merge (squash)
-        if: ${{ steps.title.outputs.mode == 'squash' }}
+        if: ${{ needs.title.outputs.merge-mode == 'squash' }}
         run: |
           gh pr merge "${{ github.event.number }}" \
             --repo "${{ github.repository }}" \
             --auto \
             --squash
         env:
-          GH_TOKEN: ${{ steps.my-app.outputs.token }}
+          GH_TOKEN: ${{ steps.app.outputs.token }}
 
-      - name: Validation
-        run: |
-          if [[ "$GITHUB_HEAD_REF" =~ ^(release-please|dependabot).* ]]; then
-            echo "::notice::[${BASH_REMATCH[1]}] branch detected. Skipping check."
-            exit 0
-          else
-            bash ./.github/scripts/check.sh "body" \
-              --pr-number "${{ github.event.number }}" \
-              --repository "${{ github.repository }}" \
-              --run-id "${{ github.run_id }}" \
-              --sha "${{ github.event.pull_request.head.sha }}"
-          fi
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  dependency-review:
+    name: Dependency Review
+    runs-on: ubuntu-latest
+    if: >-
+      ${{
+        github.event.pull_request.draft == false &&
+        github.event.action != 'edited'
+      }}
+
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Dependency Review
+        uses: actions/dependency-review-action@v5

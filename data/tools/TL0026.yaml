@@ -13,5 +13,3 @@ external_references:
   - source_name: Botometer
     description: Botometer. bot-detection-tool. 檢索日期 2025-03-12.
     url: https://botometer.osome.iu.edu/
-contributors:
-  - NICS

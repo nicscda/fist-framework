@@ -1,4 +1,5 @@
 import re
+from gettext import gettext as _
 from typing import Annotated, ClassVar, override
 
 from pydantic import AliasChoices, Field, StringConstraints, computed_field
@@ -12,28 +13,32 @@ from .utils.base import Base, duplicate_validator
 from .utils.item_group import Group, Item
 
 
-class DetectionComponent(Item, title="偵測元件"):
-
-    _pattern: ClassVar = Component._pattern
-
-
-class DetectionInformation(Group[DetectionComponent], title="偵測資訊"):
-
-    _items_info: ClassVar = dict(title="偵測元件", alias="components")
-
-
-class MitigationInformation(Item, title="緩解措施"):
-
-    _pattern: ClassVar = Mitigation._pattern
-
-
-class ToolInformation(Item, title="使用工具"):
+class ToolInformation(Item, title=_("tool information").title()):
 
     _pattern: ClassVar = Tool._pattern
 
 
-class Technique(Base, title="技術"):
-    """技術資料模型，用於紀錄對手「如何」透過執行特定行動或手段達成其戰術目標。"""
+class MitigationInformation(Item, title=_("mitigation").title()):
+
+    _pattern: ClassVar = Mitigation._pattern
+
+
+class DetectionComponent(Item, title=_("detection component").title()):
+
+    _pattern: ClassVar = Component._pattern
+
+
+class DetectionInformation(
+    Group[DetectionComponent], title=_("detection information").title()
+):
+    _items_field_options: ClassVar = {
+        "title": _("detection component").title(),
+        "alias": "components",
+    }
+
+
+class Technique(Base, title=_("technique").title()):
+    """Adversary action for achieving tactical objectives."""
 
     _pattern: ClassVar = r"^T[0-9]{4}(?:\.[0-9]{3})?$"
 
@@ -44,14 +49,15 @@ class Technique(Base, title="技術"):
             pattern=re.compile(Tactic._pattern, re.IGNORECASE),
         ),
         Field(
-            title="隸屬戰術編號",
+            title=_("tactic id").title(),
+            description=_("Tactic to which it belongs."),
             validation_alias=AliasChoices("tactic", "tactic_id"),
         ),
     ]
     permissions: Annotated[
         list[Permission],
         Field(
-            title="權限",
+            title=_("permission").title(),
             default_factory=list,
             max_length=100,
         ),
@@ -60,7 +66,7 @@ class Technique(Base, title="技術"):
     platforms: Annotated[
         list[Platform],
         Field(
-            title="平台",
+            title=_("platform").title(),
             default_factory=list,
             max_length=100,
         ),
@@ -69,8 +75,8 @@ class Technique(Base, title="技術"):
     tools: Annotated[
         list[ToolInformation],
         Field(
-            title="工具資訊",
-            description="利用的工具，包含軟體服務等。",
+            title=_("tool information").title(),
+            description=_("Tools used, including software services, etc."),
             default_factory=list,
             max_length=100,
         ),
@@ -79,7 +85,7 @@ class Technique(Base, title="技術"):
     mitigations: Annotated[
         list[MitigationInformation],
         Field(
-            title="緩解資訊",
+            title=_("mitigation").title(),
             default_factory=list,
             max_length=100,
         ),
@@ -88,7 +94,7 @@ class Technique(Base, title="技術"):
     detection: Annotated[
         DetectionInformation,
         Field(
-            title="偵測資訊",
+            title=_("detection information").title(),
             default_factory=DetectionInformation,
         ),
     ]
@@ -102,10 +108,19 @@ class Technique(Base, title="技術"):
     @override
     def auto_id(cls, table: list, *, parent_id: str | None = None, **kwargs):
         if not parent_id:
-            return super().auto_id(table)
-        elif _ := [_ for _ in table if isinstance(_, cls) and _.parent_id == parent_id]:
-            return super().auto_id(_, end=999)
-        elif any(isinstance(_, cls) and _.id == parent_id for _ in table):
+            return super().auto_id(
+                [e for e in table if isinstance(e, cls) and not e.parent_id],
+                **kwargs,
+            )
+        elif siblings := [
+            e for e in table if isinstance(e, cls) and e.parent_id == parent_id
+        ]:
+            return super().auto_id(siblings, end=999, **kwargs)
+        elif any(isinstance(e, cls) and e.id == parent_id for e in table):
             return f"{parent_id}.001"
         else:
-            raise RuntimeError(f"Missing parent {parent_id!r}, please create it first.")
+            raise ValueError(
+                _("Missing parent {parent!r}, please create it first.").format(
+                    parent=parent_id
+                )
+            )

@@ -1,0 +1,85 @@
+---
+layout: page
+---
+
+{%- assign newline = "
+" -%}
+{%- case page.scope -%}
+{%- when "contributors" -%}
+<div class="d-flex flex-wrap justify-content-center align-items-center">
+  {%- for item in page.source -%}
+    <a title="{{- item.name -}}" class="p-3" href="{{- page.dir | append: item.id | relative_url -}}">
+      <img src="{{- item.headshot -}}" alt="{{- item.name -}}" class="rounded-circle m-3" width="64" height="64">
+    </a>
+  {%- endfor -%}
+</div>
+{%- else -%}
+<table>
+  <caption class="text-right">
+  {{- "total" | translate | capitalize -}}:&nbsp;{{- page.source.size | default: 0 -}}
+  {%- assign with_parent = page.source | where_exp: "item", "item.parent_id" -%}
+  {%- if with_parent.size > 0 -%}
+    &nbsp;
+    {%- case page.scope -%}
+      {%- when "techniques" -%}
+        {%- assign parent_label = "top-level techniques" -%}
+        {%- assign child_label = "sub-techniques" -%}
+      {%- when "detections" -%}
+        {%- assign parent_label = "sources" -%}
+        {%- assign child_label = "components" -%}
+      {%- else -%}
+        {%- assign child_label = "top-level entries" -%}
+        {%- assign child_label = "child entries" -%}
+    {%- endcase -%}
+    <span>(</span>
+    {%- if parent_label -%}
+    {{- parent_label | translate | capitalize -}}:&nbsp;{{- page.source.size | minus: with_parent.size -}}
+    &nbsp;/&nbsp;
+    {%- endif -%}
+    {{- child_label | translate | capitalize -}}:&nbsp;{{- with_parent.size -}}
+    <span>)</span>
+  {%- endif -%}
+  </caption>
+  <thead>
+    <tr>
+      <th width="1%"  scope="colgroup" colspan="2">{{- "id" | translate | upcase -}}</th>
+      <th width="24%" scope="col">{{- "name" | translate | capitalize -}}</th>
+      <th width="75%" scope="col">{{- "summary" | translate | capitalize -}}</th>
+    </tr>
+  </thead>
+  {%- unless page.source == empty -%}
+  <tbody>
+    {%- for item in page.source -%}
+    <tr>
+      {%- if item.parent_id -%}
+      <th class="border-top-0 border-end-0"></th>
+      <th scope="row">
+        <a href="{{- page.dir | append: item.id | relative_url -}}">.{{- item.id | split: '.' | last -}}</a>
+      </th>
+      {%- elsif item.sub_techniques.first or item.components.first -%}
+      <th class="border-end-0" scope="row" colspan="2">
+        <a href="{{- page.dir | append: item.id | relative_url  -}}">{{- item.id -}}</a>
+      </th>
+      {%- else -%}
+      <th scope="row" colspan="2">
+        <a href="{{- page.dir | append: item.id | relative_url -}}">{{- item.id -}}</a>
+      </th>
+      {%- endif -%}
+      <td>{{- item.name -}}</td>
+      <td>{{- item.description | split: newline | first | markdownify -}}</td>
+    </tr>
+    {%- endfor -%}
+  </tbody>
+  {%- else -%}
+  <tfoot>
+    <tr>
+      <td scope="row" colspan="100%" class="text-center">
+        <p><i>{{- "no data found" | translate | capitalize -}}</i></p>
+      </td>
+    </tr>
+  </tfoot>
+  {%- endunless -%}
+</table>
+{%- endcase -%}
+
+{{- content -}}

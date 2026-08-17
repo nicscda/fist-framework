@@ -1,0 +1,182 @@
+# Internationalization data for Jekyll site
+# Keys are lowercase, values are formatted as needed
+
+# Internal settings (_*)
+"_site_title": "FIST 框架"
+"_site_description": "本框架涵蓋詐騙活動的完整生命週期，用以理解並分類各階段的攻擊與操作手法，支援威脅識別、風險評估與應變分析。"
+"_site_author": "國家資通安全研究院"
+"_native_name": "中文"
+"_separator": "、"
+"_license": |-
+  框架設計參考 [MITRE ATT&CK®](https://attack.mitre.org)
+"_reliability_A": "完全可靠"
+"_reliability_B": "通常可靠"
+"_reliability_C": "尚可信賴"
+"_reliability_D": "通常不可靠"
+"_reliability_E": "不可靠"
+"_reliability_F": "無法判斷"
+
+# Common terms
+"id": "編號"
+"name": "名稱"
+"summary": "簡介"
+"types": "類型"
+"version": "版本"
+"total": "總計"
+
+# Navigation and UI
+"home": "首頁"
+"contact us": "聯絡我們"
+"back to list": "返回列表"
+"copyright": "版權所有"
+"maintainers": "開發團隊"
+
+# Site content
+"current version": "當前版本"
+"Download SIX bundle": "下載 STIX 格式檔案"
+"matrix": "矩陣"
+"Tactics, Techniques, and Procedures": "戰術、技術與程序"
+"page not found": "找不到頁面"
+"the requested page could not be found.": "請求瀏覽路徑不存在。"
+"no data found": "沒有資料"
+"deprecation warning": "已棄用"
+"references": "參考資料"
+
+# Framework terms (scopes and singular forms)
+"phases": "階段"
+"phase": "階段"
+"tactics": "戰術"
+"tactic": "戰術"
+"techniques": "技術"
+"technique": "技術"
+"mitigations": "緩解措施"
+"mitigation": "緩解措施"
+"detections": "偵測策略"
+"detection": "偵測策略"
+"tools": "工具"
+"tool": "工具"
+"notes": "筆記"
+"note": "筆記"
+"contributors": "貢獻者"
+"contributor": "貢獻者"
+"sources": "偵測來源"
+"source": "偵測來源"
+"components": "偵測元件"
+"component": "偵測元件"
+
+# Record metadata
+"created": "建立日期"
+"last modified": "最近更新"
+
+# Hierarchical labels
+"top-level entries": "頂層條目"
+"child entries": "子條目"
+"top-level techniques": "頂層技術"
+"sub-techniques": "子技術"
+
+# Technique/record attributes
+"belongs to phase": "屬於"
+"parent technique": "上層技術"
+"platforms": "平台"
+"permissions": "權限"
+"collection layers": "收集層"
+"detection components": "偵測元件"
+"associated tactics": "附屬的戰術"
+"associated techniques": "附屬的技術"
+
+# Related sections
+"related phases": "相關階段"
+"related tactics": "相關戰術"
+"related techniques": "相關技術"
+"related mitigations": "相關緩解措施"
+"related detections": "相關偵測策略"
+"related tools": "相關工具"
+
+# Contributor attributes
+"identity class": "身分類型"
+"individual": "個人"
+"organization": "組織"
+"firstname": "名字"
+"lastname": "姓氏"
+"roles": "角色"
+"sectors": "產業"
+"reliability": "可信度"
+"contact information": "聯絡資訊"
+
+# Organization types (vocabulary)
+"constituent": "成員單位"
+"csirt": "資安事件應變團隊"
+"other": "其他"
+"partner": "合作夥伴"
+"vendor": "供應商"
+
+# Collection layers (vocabulary)
+"cloud-control-plane": "雲端控制平面"
+"container": "容器"
+"host": "主機"
+"network": "網路"
+"OSINT": "公開情報"
+
+# Note types (vocabulary)
+"analysis": "分析"
+"assessment": "評估"
+"external": "外部"
+"feedback": "回饋"
+"internal": "內部"
+
+# Platforms (vocabulary)
+"android": "Android"
+"linux": "Linux"
+"macos": "macOS"
+"windows": "Windows"
+
+# Permissions (vocabulary)
+"Administrator": "管理員"
+"root": "超級使用者"
+"User": "使用者"
+
+# Tool types (vocabulary)
+"denial-of-service": "阻斷服務"
+"exploitation": "漏洞利用"
+"information-gathering": "資訊蒐集"
+"network-capture": "網路擷取"
+"credential-exploitation": "憑證利用"
+"remote-access": "遠端存取"
+"vulnerability-scanning": "弱點掃描"
+"unknown": "未知"
+
+# Industry sectors (vocabulary)
+"agriculture": "農業"
+"aerospace": "航太"
+"automotive": "汽車"
+"chemical": "化學"
+"commercial": "商業"
+"communications": "通訊"
+"construction": "營建"
+"defense": "國防"
+"education": "教育"
+"energy": "能源"
+"entertainment": "娛樂"
+"financial-services": "金融服務"
+"government": "政府"
+"emergency-services": "緊急服務"
+"government-national": "中央政府"
+"government-regional": "地方政府"
+"government-local": "地方政府"
+"government-public-services": "政府公共服務"
+"healthcare": "醫療保健"
+"hospitality-leisure": "休閒觀光"
+"infrastructure": "基礎設施"
+"dams": "水壩"
+"nuclear": "核能"
+"water": "水資源"
+"insurance": "保險"
+"manufacturing": "製造業"
+"mining": "採礦業"
+"non-profit": "非營利組織"
+"pharmaceuticals": "製藥業"
+"retail": "零售業"
+"technology": "科技業"
+"telecommunications": "電信業"
+"transportation": "運輸業"
+"utilities": "公用事業"

@@ -1,30 +1,47 @@
 import re
-from operator import attrgetter
-from typing import Annotated, ClassVar, override
+from datetime import datetime
+from functools import cached_property
+from gettext import gettext as _
+from pathlib import Path
+from typing import Annotated, ClassVar
 
-from pydantic import Field, PrivateAttr, ValidationInfo, field_validator
-from pydantic_core import PydanticCustomError
+from pydantic import (
+    Field,
+    FieldSerializationInfo,
+    SerializerFunctionWrapHandler,
+    ValidationInfo,
+    field_serializer,
+    field_validator,
+    model_validator,
+)
+from pydantic_core import InitErrorDetails, PydanticCustomError, ValidationError
 
-from .config import Config
+from ...utils.config import get_settings
+from ...utils.functions import dump_yaml, get_unique_path
 from .external_reference import ExternalReference
 from .item_group import Item
 from .validator import duplicate_validator
 
 
-class Base(Item, title="基本資訊"):
-    """基礎資料模型，用於實現紀錄通用類別資料的欄位和方法"""
+class Base(Item, title=_("basic Information").title()):
+    """Base model for common data fields and methods."""
 
-    _config: Annotated[Config, PrivateAttr(default_factory=Config)]
-    """Custom configuration for setting basic properties and information."""
-    _folder: ClassVar[str]
-    """Folder name of data group, using the plural form of the category as default."""
+    _group: ClassVar[str]
+    """Data group folder name. Defaults to the plural form of the category."""
     _type: ClassVar[str]
-    """Category type, using the model class name as default."""
+    """Category type. Defaults to the model class name."""
 
+    revoked: Annotated[
+        bool,
+        Field(
+            title=_("revoked").title(),
+            default=False,
+        ),
+    ]
     name: Annotated[
         str,
         Field(
-            title="名稱",
+            title=_("name").title(),
             min_length=1,
             max_length=100,
         ),
@@ -32,7 +49,7 @@ class Base(Item, title="基本資訊"):
     external_references: Annotated[
         list[ExternalReference],
         Field(
-            title="外部參考",
+            title=_("external reference").title(),
             default_factory=list,
             max_length=100,
         ),
@@ -41,17 +58,52 @@ class Base(Item, title="基本資訊"):
     contributors: Annotated[
         list[str],
         Field(
-            title="貢獻者",
+            title=_("contributor").title(),
             default_factory=list,
             max_length=100,
         ),
         duplicate_validator,
     ]
+    created: Annotated[
+        datetime | None,
+        Field(
+            default=None,
+            description=_("Derived from git history; read-only for editors."),
+            json_schema_extra={"readOnly": True},
+        ),
+    ]
+    modified: Annotated[
+        datetime | None,
+        Field(
+            default=None,
+            description=_("Derived from git history; read-only for editors."),
+            json_schema_extra={"readOnly": True},
+        ),
+    ]
+
+    @cached_property
+    def order(self):
+        return int(re.sub(r"[^0-9]", "", self.id) or 0)
+
+    @cached_property
+    def url(self):
+        return get_settings().get_url_path(self._group, self.id, full=True)
+
+    @cached_property
+    def external_contributors(self):
+        """Get contributors excluding the default author."""
+        author = get_settings().author
+        author_info = (author.alias, author.name, author.email)
+        return [
+            contributor
+            for contributor in self.contributors
+            if contributor not in author_info
+        ]
 
     def __init_subclass__(cls, **kwargs):
         super().__init_subclass__(**kwargs)
         cls._type = re.sub(r"([a-z0-9])([A-Z])", r"\1_\2", cls.__name__).lower()
-        cls._folder = cls._type + "s"
+        cls._group = cls._type + "s"
 
     @classmethod
     def __pydantic_init_subclass__(cls, **kwargs):
@@ -71,96 +123,177 @@ class Base(Item, title="基本資訊"):
         :param kwargs: Any keyword arguments passed to the class definition that aren't used internally by pydantic.
         """
         super().__pydantic_init_subclass__(**kwargs)
-        fields = cls.model_fields.copy()
-        top = {_: fields.pop(_) for _ in ["id", "name"]}
-        bottem = {_: fields.pop(_) for _ in ["external_references", "contributors"]}
-        for _ in range(len(cls.model_fields)):
-            cls.model_fields.popitem()
+        top, middle, bottom = {}, {}, {}
+        for k, v in cls.model_fields.items():
+            if k in ("revoked", "id", "name") or k.endswith("_id"):
+                top[k] = v
+            elif k in ("external_references", "contributors"):
+                bottom[k] = v
+            else:
+                middle[k] = v
         else:
-            cls.model_fields.update(**(top | fields | bottem))
+            cls.model_fields.clear()
+            cls.model_fields.update(**top, **middle, **bottom)
             cls.model_rebuild(force=True)
-
-    @property
-    def filepath(self):
-        return self._config.subfolder_path.joinpath(f"{self._folder}/{self.id}.md")
-
-    @property
-    def url(self):
-        return f"{self._config.base_url}/{self._config.safe_subfolder(self._folder, self.id)}"
 
     @field_validator("id", "name")
     @classmethod
     def check_unique_keys(cls, value, info: ValidationInfo):
+        """Verify uniqueness constraints.
+
+        - ID must be unique across all entries (including revoked)
+        - Name must be unique among active (non-revoked) entries only
+        """
         if (
-            isinstance(info.context, dict)
+            not (info.data.get("revoked") and "name" == info.field_name)
+            and isinstance(info.context, dict)
             and isinstance(table := info.context.get("table"), list)
-            and any(_.__dict__[info.field_name] == value for _ in table)
+            and any(
+                _.__dict__[info.field_name] == value
+                and not ("name" == info.field_name and _.__dict__["revoked"])
+                for _ in table
+            )
         ):
             raise PydanticCustomError("duplicate_entry", "Duplicate entry not allowed")
 
         return value
 
-    @field_validator("external_references", mode="before")
-    @classmethod
-    def sanitize_relative_urls(cls, values: list[dict], info: ValidationInfo):
-        if isinstance(info.context, dict) and isinstance(
-            config := info.context.get("config"), Config
+    @model_validator(mode="after")
+    def resolve_url(self, info: ValidationInfo):
+        if not (
+            isinstance(info.context, dict) and info.context.get("skip_model_validation")
         ):
-            for value in values:
-                if (
-                    value.get("source_name") == config.source
-                    and isinstance(url := value.get("url"), str)
-                    and isinstance(external_id := value.get("external_id"), str)
-                    and (_ := re.match(rf"^\/[a-z_-]+\/{external_id}$", url))
+            _settings = get_settings()
+            for idx, external_reference in enumerate(self.external_references):
+                if self.url.split("//", 1)[-1] in str(external_reference.url or "") or (
+                    _settings.project_name == external_reference.source_name
+                    and self.id == external_reference.external_id
                 ):
-                    value.update(url=f"{config.base_url}/{config.safe_subfolder(url)}")
+                    raise ValidationError.from_exception_data(
+                        getattr(info.config, "title", type(self).__name__),
+                        [
+                            InitErrorDetails(
+                                type=PydanticCustomError(
+                                    "self_referral",
+                                    "Self-referral not allowed",
+                                ),
+                                loc=("external_references", idx),
+                                input=self.external_references,
+                            )
+                        ],
+                    )
+            else:
+                if isinstance(info.context, dict) and not info.context.get(
+                    "exclude_self"
+                ):
+                    self.external_references.insert(
+                        0,
+                        ExternalReference(
+                            source_name=_settings.project_name,
+                            description=None,
+                            url=self.url,
+                            external_id=self.id,
+                        ),
+                    )
 
-        return values
+        return self
+
+    @field_serializer("external_references", mode="wrap", when_used="json")
+    def serialize_external_references(
+        self,
+        external_references: list[ExternalReference],
+        handler: SerializerFunctionWrapHandler,
+        info: FieldSerializationInfo,
+    ):
+        _settings = get_settings()
+        return handler(
+            (
+                [
+                    external_reference
+                    for external_reference in external_references
+                    if not (
+                        self.url == external_reference.url
+                        or (
+                            _settings.project_name == external_reference.source_name
+                            and self.id == external_reference.external_id
+                        )
+                    )
+                ]
+                if isinstance(info.context, dict) and info.context.get("exclude_self")
+                else external_references
+            ),
+            info,  # type: ignore[arg-type]
+        )
 
     @classmethod
-    def auto_id(cls, table: list, *, start=1, end=9999):
-        if table := sorted(table, key=attrgetter("id")):
+    def auto_id(cls, table: list, *, start=1, end=9999, **kwargs):
+        if _ids := sorted({e.id for e in table if isinstance(e, cls)}):
             return re.sub(
                 r"^[0-9]+$|(?<=[^0-9])[0-9]+$",
-                lambda _: str(min(1 + int(_[0]), end)).zfill(len(_[0])),
-                getattr(table[-1], "id"),
+                lambda s: str(min(1 + int(s[0]), end)).zfill(len(s[0])),
+                _ids[-1],
             )
-
-        return (
-            re.sub(
+        elif re.search(r"\[0-9\]\{(?:[0-9]+,)?(?P<num>[0-9]+)\}", cls._pattern):
+            return re.sub(
                 r"(?P<dot>\\\.)|\[0-9\]\{(?:[0-9]+,)?(?P<num>[0-9]+)\}|[^A-Z]+",
-                lambda _: (
-                    str(start).zfill(int(__))
-                    if (__ := _.group("num"))
-                    else "." if _.group("dot") else ""
+                lambda s: (
+                    str(start).zfill(int(num))
+                    if (num := s.group("num"))
+                    else "." if s.group("dot") else ""
                 ),
                 cls._pattern,
             )
-            if re.search(r"\[0-9\]\{(?:[0-9]+,)?(?P<num>[0-9]+)\}", cls._pattern)
-            else cls._type[:2].upper() + str(start).zfill(len(str(end)))
-        )
+        else:
+            return cls._type[:2].upper() + str(start).zfill(len(str(end)))
 
-    @override
-    def model_post_init(self, __context):
-        super().model_post_init(__context)
-        if isinstance(__context, dict) and isinstance(
-            config := __context.get("config"), Config
-        ):
-            self._config = config
-            for idx, _ in enumerate(self.external_references):
-                if self.url == str(_.url) or (
-                    self._config.source == _.source_name and self.id == _.external_id
-                ):
-                    raise PydanticCustomError(
-                        "self_referral",
-                        f"Self-referral (external_references.{idx}) not allowed",
-                    )
-            else:
-                self.external_references.insert(
-                    0,
-                    ExternalReference(
-                        source_name=self._config.source,
-                        url=self.url,
-                        external_id=self.id,
+    def model_dump_yaml(self, directory: Path | None = None, overwrite=False):
+        """Dump the model as a YAML string, or write to file if directory is given.
+
+        .. note::
+            File naming pattern:
+
+            - Default: `{self.id}.yaml` (e.g., `TA01.yaml`)
+            - Keep both files: `{self.id} ({attempt}).yaml` (e.g., `TA01 (1).yaml`)
+
+        :param directory: Output directory to store file.
+        :param overwrite: Replace existing file, or auto-rename to avoid conflict (default: keep both files).
+        :returns: YAML string if no directory is provided, otherwise the file path if stored successfully.
+        """
+        s = (
+            "---\n"
+            + "\n".join(
+                dump_yaml(
+                    {"type": self._type}
+                    | self.model_dump(
+                        mode="json",
+                        by_alias=True,
+                        exclude={
+                            *self.__class__.model_computed_fields.keys(),
+                            "revoked",
+                        },
+                        exclude_none=False,
+                        exclude_unset=True,
+                        context={"as_relative_url": True, "exclude_self": True},
                     ),
+                    section_break_keys=["external_references"],
+                    plain_scalar_keys=["url"],
+                    block_scalar_keys=["contact_information", "description"],
                 )
+            )
+            + ("\nrevoked: true\n" if getattr(self, "revoked", False) else "\n")
+        )
+        if directory is None:
+            return s
+        else:
+            if not directory.exists():
+                directory.mkdir(parents=True, exist_ok=True)
+            with open(  # type: ignore[call-overload]
+                *(
+                    (directory / f"{self.id}.yaml", "w")
+                    if overwrite
+                    else (get_unique_path(directory / f"{self.id}.yaml"), "x")
+                ),
+                encoding="utf-8",
+            ) as f:
+                f.write(s)
+                return Path(f.name)

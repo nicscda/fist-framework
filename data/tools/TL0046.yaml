@@ -13,5 +13,3 @@ external_references:
   - source_name: SAS Fraud Management
     description: SAS. transaction-fraud-detection. 檢索日期 2025-03-12.
     url: https://www.sas.com/en_us/software/fraud-management.html
-contributors:
-  - NICS

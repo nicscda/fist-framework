@@ -1,193 +1,162 @@
-import os
-import shutil
-import time
 from datetime import datetime
+from gettext import gettext as _
+from gettext import ngettext
 from pathlib import Path
+from typing import cast
 
 import click
 
-from ..utils.common import VERSION, nget
+from ..models import LEGAL_FILE_EXTENSIONS, Manifest
+from ..utils.config import VERSION, Settings
+from ..utils.functions import clear_dir, get_display_path, timeit
 from ..utils.parsing import Parser
-from .utils import (
-    URL_STRING,
-    add_comment,
-    as_default,
-    as_subdir,
-    as_subfile,
-    as_uppercase,
-    combine_callbacks,
+from .utils import add_comment, as_subdir, as_subfile, combine_callbacks, safe_pass
+
+
+@click.command(
+    help=_(
+        "Generate custom framework documents\n\n"
+        "Import data files and export documentation with STIX bundle.\n"
+        "Supported formats: {extensions}."
+    ).format(extensions=", ".join(LEGAL_FILE_EXTENSIONS))
 )
-
-
-@click.command()
 @click.argument(
     "paths",
     nargs=-1,
     type=click.Path(exists=True, path_type=Path),
 )
 @click.option(
-    "--source",
-    envvar="SOURCE",
-    required=True,
-    type=str,
-    help="Source framework name.",
-    callback=as_uppercase,
-)
-@click.option(
-    "--base-url",
-    envvar="BASE_URL",
-    required=True,
-    type=URL_STRING,
-    help="Base URL of your site.",
-)
-@click.option(
     "-R",
     "-r",
     "--recursive",
     is_flag=True,
-    help="Search recursively in subdirectories.",
+    help=_("Search recursively in subdirectories"),
 )
 @click.option(
-    "--clean",
-    "auto_clean",
-    envvar="AUTO_CLEAN",
-    is_flag=True,
-    help="Remove existing outputs first.",
-)
-@click.option(
-    "-t",
-    "--target-directory",
-    type=click.Path(exists=True, file_okay=False, writable=True, path_type=Path),
-    default="out",
+    "--output-dir",
+    type=click.Path(file_okay=False, writable=True, path_type=Path),
+    default=Settings.model_fields.get("output_dir").get_default(),  # type: ignore[union-attr]
     show_default=True,
     is_eager=True,
-    help="Directory to save generated files.",
+    help=_("Directory to save outputs"),
+)
+@click.option(
+    "--clean/--no-clean",
+    "auto_clean",
+    is_flag=True,
+    default=False,
+    show_default=True,
+    help=_("Remove existing outputs first"),
 )
 @click.option(
     "-o",
     "--output",
-    envvar="OUTPUT",
+    "artifact",
     type=str,
-    show_default=True,
-    default="bundle.json",
-    help="Archive name of STIX bundle file.",
-    callback=combine_callbacks(as_default, as_subfile),
+    help=_("STIX bundle output filename"),
+    callback=combine_callbacks(
+        lambda ctx, param, value: (
+            Settings.model_fields.get("artifact").get_default()  # type: ignore[union-attr]
+            if not value and cast(click.Context, ctx).params.get("suffix", "")
+            else value
+        ),
+        as_subfile(".json"),
+    ),
 )
 @click.option(
     "--subfolder",
-    "subfolder",
-    envvar="SUBFOLDER",
     type=str,
-    show_default=True,
-    default="",
-    help="Subfolder path of web pages.",
-    callback=combine_callbacks(as_default, as_subdir),
+    help=_("Output subdirectory and URL subpath (empty for root)"),
+    callback=as_subdir,
 )
 @click.option(
     "--suffix",
-    envvar="SUFFIX",
     type=click.Choice(["date", "timestamp", "version"]),
     is_eager=True,
-    help="Automatically add suffixes to output root files and folders.",
-    callback=lambda ctx, param, value: str(
+    help=_("Add suffix to outputs"),
+    callback=lambda ctx, param, value: (
         datetime.today().strftime("--%Y-%m-%d")
         if "date" == value
         else (
             f"--{datetime.today().timestamp():.0f}"
             if "timestamp" == value
-            else f"--{VERSION}" if "version" == value else ""
+            else f"--{VERSION.replace("+", ".")}" if "version" == value else ""
         )
     ),
 )
+@safe_pass
 def build(
+    ctx: click.Context,
     paths: list[Path],
-    auto_clean: bool,
     recursive: bool,
-    target_directory: Path,
+    output_dir: Path,
+    auto_clean: bool,
     **kwargs,
 ):
-    """Generate custom framework documents
+    if not paths:
+        ctx.fail(_("At least one path must be provided."))
+    elif auto_clean:
+        clear_dir(output_dir)
+        click.secho(
+            _("All files and directories in {path!r} deleted successfully.").format(
+                path=get_display_path(output_dir)
+            ),
+            blink=True,
+            bold=True,
+        )
 
-    Import data with specified file extensions, then export documentation including bundle.
-    Supported formats: .json, .yaml.
-    """
-    try:
-        if not paths:
-            raise click.UsageError("At least one path must be provided.")
-        else:
-            if auto_clean:
-                with os.scandir(target_directory) as entries:
-                    for entry in entries:
-                        if entry.is_file():
-                            os.unlink(entry.path)
-                        else:
-                            shutil.rmtree(entry.path)
-                    else:
+    with timeit(click.echo):
+        click.secho(_("Loading data files..."), blink=True, bold=True)
+        parser = Parser(
+            Manifest(
+                paths,
+                recursive,
+                lambda path, e: ctx.fail(
+                    _("{value!r} is not a valid file.").format(value=path.as_posix())
+                    + add_comment(e)
+                ),
+                lambda total, field_name: (
+                    click.secho(
+                        ngettext(
+                            "Importing 1 {unit}...",
+                            "Importing {total:,} {unit}s...",
+                            total,
+                        ).format(
+                            total=total,
+                            unit=_(field_name.replace("_", " ").removesuffix("s")),
+                        ),
+                        fg="green",
+                    )
+                    if field_name
+                    else (
                         click.secho(
-                            f"All files and directories in '{target_directory.absolute()}' deleted successfully.",
+                            "\n"
+                            + ngettext(
+                                "Total: 1 imported entity",
+                                "Total: {total:,} imported entities",
+                                total,
+                            ).format(total=total)
+                            + "\n",
                             blink=True,
                             bold=True,
                         )
-
-            click.secho("Loading data files...", blink=True, bold=True)
-            parser = Parser(target_directory=target_directory, **kwargs)
-            parser.bundle.import_data_files(
-                paths,
-                recursive,
-                error_callback=_error_callback,
-                count_callback=_count_callback,
-            )
-            start_time = time.time()
-            click.secho(
-                f"Output saved to '{os.path.relpath(parser.to_stix(), os.getcwd())}' "
-                f"(Elapsed: {time.time() - start_time:,.2f} sec)",
-                blink=True,
-                bold=True,
-            )
-            for filepath, s in parser.to_markdown():
-                if filepath:
-                    filepath.parent.mkdir(exist_ok=True, parents=True)
-                    with open(filepath, "w", encoding="utf-8") as file:
-                        file.write(s)
-            else:
-                click.secho(
-                    f"Full documentation saved to '{os.path.relpath(parser.bundle.subpath().parent, os.getcwd())}'",
-                    blink=True,
-                    bold=True,
-                )
-
-    except (KeyboardInterrupt, SystemExit):
-        pass
-    except (
-        click.ClickException,
-        click.exceptions.Abort,
-        click.exceptions.Exit,
-    ) as e:
-        raise e
-    except Exception as e:
-        raise click.UsageError(
-            click.style("Unexpected error occurred.", fg="red") + add_comment(e)
+                        if total
+                        else ctx.fail(
+                            _(
+                                "No supported files found. Expected formats: {extensions}."
+                            ).format(extensions=", ".join(LEGAL_FILE_EXTENSIONS))
+                        )
+                    )
+                ),
+            ),
         )
-
-
-def _error_callback(filepath, e):
-    raise click.UsageError(
-        click.style(f"Invalid '{filepath}' file.", fg="red") + add_comment(e)
-    )
-
-
-def _count_callback(total: int, field_name: str | None = None):
-    if not field_name:
-        if total:
-            click.secho(
-                f"\nTotal: {nget(total, "imported entity", "imported entities", nformat=",")}\n",
-                blink=True,
-                bold=True,
+        click.echo(
+            _("STIX bundle saved to {path!r}").format(
+                path=get_display_path(parser.to_stix())
             )
-        else:
-            raise click.UsageError("No file with supported extension found.")
-    else:
-        click.secho(
-            f"Importing {nget(total, field_name.replace("_", " ").removesuffix("s"), nformat=",")} ...",
-            fg="green",
+        )
+        click.echo(
+            _("Full documentation exported to {path!r}").format(
+                path=get_display_path(parser.to_json())
+            )
         )

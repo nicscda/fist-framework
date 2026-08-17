@@ -13,5 +13,3 @@ external_references:
   - source_name: InVID-WeVerify
     description: InVID-WeVerify. video-verification-plugin. 檢索日期 2025-03-12.
     url: https://www.invid-project.eu/tools-and-services/invid-verification-plugin/
-contributors:
-  - NICS

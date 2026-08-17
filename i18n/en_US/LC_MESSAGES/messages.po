@@ -1,0 +1,705 @@
+# English translations for fist package.
+# Copyright (C) 2026 National Institute of Cyber Security
+# This file is distributed under the same license as the fist package.
+# Automatically generated, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: fist 0.0.13\n"
+"Report-Msgid-Bugs-To: nicscda@nics.nat.gov.tw\n"
+"POT-Creation-Date: 2026-07-31 15:56+0800\n"
+"PO-Revision-Date: 2026-07-31 15:56+0800\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#, python-format
+msgid "%(prog)s, version %(version)s"
+msgstr "%(prog)s, version %(version)s"
+
+#, python-brace-format
+msgid "(Deprecated) {text}"
+msgstr "(Deprecated) {text}"
+
+msgid "(dynamic)"
+msgstr "(dynamic)"
+
+msgid "Aborted!"
+msgstr "Aborted!"
+
+msgid "Argument {name!r} takes {nargs} values."
+msgstr "Argument {name!r} takes {nargs} values."
+
+#, python-brace-format
+msgid ""
+"Choose from:\n"
+"\t{choices}"
+msgstr ""
+"Choose from:\n"
+"\t{choices}"
+
+msgid "Commands"
+msgstr "Commands"
+
+msgid "Could not open file {filename!r}: {message}"
+msgstr "Could not open file {filename!r}: {message}"
+
+msgid "Couldn't detect Bash version, shell completion is not supported."
+msgstr "Couldn't detect Bash version, shell completion is not supported."
+
+msgid "DeprecationWarning: The command {name!r} is deprecated."
+msgstr "DeprecationWarning: The command {name!r} is deprecated."
+
+msgid "Did you mean {possibility}?"
+msgid_plural "(Possible options: {possibilities})"
+msgstr[0] "Did you mean {possibility}?"
+msgstr[1] "(Possible options: {possibilities})"
+
+msgid "Error: The two entered values do not match."
+msgstr "Error: The two entered values do not match."
+
+msgid "Error: The value you entered was invalid."
+msgstr "Error: The value you entered was invalid."
+
+msgid "Error: invalid input"
+msgstr "Error: invalid input"
+
+#, python-brace-format
+msgid "Error: {e.message}"
+msgstr "Error: {e.message}"
+
+#, python-brace-format
+msgid "Got unexpected extra argument ({args})"
+msgid_plural "Got unexpected extra arguments ({args})"
+msgstr[0] "Got unexpected extra argument ({args})"
+msgstr[1] "Got unexpected extra arguments ({args})"
+
+#, python-brace-format
+msgid "Invalid value for {param_hint}: {message}"
+msgstr "Invalid value for {param_hint}: {message}"
+
+#, python-brace-format
+msgid "Invalid value: {message}"
+msgstr "Invalid value: {message}"
+
+msgid "Local configuration saved: {path!r}."
+msgstr "Local configuration saved: {path!r}."
+
+msgid "Missing argument"
+msgstr "Missing argument"
+
+msgid "Missing command."
+msgstr "Missing command."
+
+msgid "Missing option"
+msgstr "Missing option"
+
+msgid "Missing parameter"
+msgstr "Missing parameter"
+
+#, python-brace-format
+msgid "Missing parameter: {param_name}"
+msgstr "Missing parameter: {param_name}"
+
+#, python-brace-format
+msgid "Missing {param_type}"
+msgstr "Missing {param_type}"
+
+msgid "No such command {name!r}."
+msgstr "No such command {name!r}."
+
+#, python-brace-format
+msgid "No such option: {name}"
+msgstr "No such option: {name}"
+
+msgid "Option {name!r} does not take a value."
+msgstr "Option {name!r} does not take a value."
+
+msgid "Option {name!r} requires an argument."
+msgid_plural "Option {name!r} requires {nargs} arguments."
+msgstr[0] "Option {name!r} requires an argument."
+msgstr[1] "Option {name!r} requires {nargs} arguments."
+
+msgid "Options"
+msgstr "Options"
+
+msgid "Press any key to continue..."
+msgstr "Press any key to continue..."
+
+msgid "Repeat for confirmation"
+msgstr "Repeat for confirmation"
+
+msgid "Shell completion is not supported for Bash versions older than 4.4."
+msgstr "Shell completion is not supported for Bash versions older than 4.4."
+
+msgid "Show the version and exit."
+msgstr "Show the version and exit."
+
+msgid "Show this message and exit."
+msgstr "Show this message and exit."
+
+msgid "Source file path for git timestamp tracking."
+msgstr "Source file path for git timestamp tracking."
+
+#, python-brace-format
+msgid "Takes {nargs} values but 1 was given."
+msgid_plural "Takes {nargs} values but {len} were given."
+msgstr[0] "Takes {nargs} values but 1 was given."
+msgstr[1] "Takes {nargs} values but {len} were given."
+
+#, python-brace-format
+msgid "Try '{command} {option}' for help."
+msgstr "Try '{command} {option}' for help."
+
+msgid "Usage:"
+msgstr "Usage:"
+
+msgid "Value must be an iterable."
+msgstr "Value must be an iterable."
+
+#, python-brace-format
+msgid "default: {default}"
+msgstr "default: {default}"
+
+#, python-brace-format
+msgid "env var: {var}"
+msgstr "env var: {var}"
+
+msgid "path"
+msgstr "path"
+
+msgid "required"
+msgstr "required"
+
+msgid "unknown error"
+msgstr "unknown error"
+
+#, python-brace-format
+msgid "{editor}: Editing failed"
+msgstr "{editor}: Editing failed"
+
+#, python-brace-format
+msgid "{editor}: Editing failed: {e}"
+msgstr "{editor}: Editing failed: {e}"
+
+#, python-brace-format
+msgid "{len_type} values are required, but {len_value} was given."
+msgid_plural "{len_type} values are required, but {len_value} were given."
+msgstr[0] "{len_type} values are required, but {len_value} was given."
+msgstr[1] "{len_type} values are required, but {len_value} were given."
+
+msgid "{name} {filename!r} does not exist."
+msgstr "{name} {filename!r} does not exist."
+
+msgid "{name} {filename!r} is not executable."
+msgstr "{name} {filename!r} is not executable."
+
+msgid "{name} {filename!r} is not readable."
+msgstr "{name} {filename!r} is not readable."
+
+msgid "{name} {filename!r} is not writable."
+msgstr "{name} {filename!r} is not writable."
+
+msgid "{value!r} does not match the format {format}."
+msgid_plural "{value!r} does not match the formats {formats}."
+msgstr[0] "{value!r} does not match the format {format}."
+msgstr[1] "{value!r} does not match the formats {formats}."
+
+msgid "{value!r} does not match the pattern {pattern!r}."
+msgstr "{value!r} does not match the pattern {pattern!r}."
+
+msgid "{value!r} is not a valid UUID."
+msgstr "{value!r} is not a valid UUID."
+
+msgid "{value!r} is not a valid boolean."
+msgstr "{value!r} is not a valid boolean."
+
+msgid "{value!r} is not a valid parent ID."
+msgstr "{value!r} is not a valid parent ID."
+
+msgid "{value!r} is not a valid {number_type}."
+msgstr "{value!r} is not a valid {number_type}."
+
+msgid "{value!r} is not {choice}."
+msgid_plural "{value!r} is not one of {choices}."
+msgstr[0] "{value!r} is not {choice}."
+msgstr[1] "{value!r} is not one of {choices}."
+
+#, python-brace-format
+msgid "{value} is not in the range {range}."
+msgstr "{value} is not in the range {range}."
+
+msgid ""
+"Create framework data file\n"
+"\n"
+"Interactive prompts guide you through the process."
+msgstr ""
+"Create framework data file\n"
+"\n"
+"Interactive prompts guide you through the process."
+
+msgid "Search recursively in subdirectories"
+msgstr "Search recursively in subdirectories"
+
+msgid "Directory to save outputs"
+msgstr "Directory to save outputs"
+
+msgid "Auto-generate a unique number on insert"
+msgstr "Auto-generate a unique number on insert"
+
+msgid "{value!r} is not a valid file."
+msgstr "{value!r} is not a valid file."
+
+msgid "Please select the type of data you want to create:"
+msgstr "Please select the type of data you want to create:"
+
+msgid "No model with supported type found."
+msgstr "No model with supported type found."
+
+msgid "Please select the type of {data!r} you want to create:"
+msgstr "Please select the type of {data!r} you want to create:"
+
+msgid "Please enter the detection source ID of it"
+msgstr "Please enter the detection source ID of it"
+
+msgid "Please enter the parent technical ID of it"
+msgstr "Please enter the parent technical ID of it"
+
+msgid "Is it a sub-technique?"
+msgstr "Is it a sub-technique?"
+
+msgid "of {data!r}"
+msgstr "of {data!r}"
+
+msgid ""
+"New {data!r} file has been created successfully.\n"
+"Please open {filename!r} to view the content and edit it further."
+msgstr ""
+"New {data!r} file has been created successfully.\n"
+"Please open {filename!r} to view the content and edit it further."
+
+msgid "{value!r} is not a valid choice."
+msgstr "{value!r} is not a valid choice."
+
+#, python-brace-format
+msgid "Enter the number corresponding to your choice ({start}-{end})"
+msgstr "Enter the number corresponding to your choice ({start}-{end})"
+
+msgid "{value!r} is not a valid value."
+msgstr "{value!r} is not a valid value."
+
+msgid "Want to add new data to {field!r}?"
+msgstr "Want to add new data to {field!r}?"
+
+msgid "{field!r} of the No. {num} {parent}"
+msgstr "{field!r} of the No. {num} {parent}"
+
+#, python-brace-format
+msgid "Error: {message}"
+msgstr "Error: {message}"
+
+msgid "Continue adding new data to {field!r}?"
+msgstr "Continue adding new data to {field!r}?"
+
+msgid "Please select {field!r} of the No. {num} {parent}"
+msgstr "Please select {field!r} of the No. {num} {parent}"
+
+msgid "Please enter {field!r} of the No. {num} {parent}"
+msgstr "Please enter {field!r} of the No. {num} {parent}"
+
+msgid "{field!r} of {parent}"
+msgstr "{field!r} of {parent}"
+
+msgid "Please select {field!r} of {parent}:"
+msgstr "Please select {field!r} of {parent}:"
+
+msgid "Please enter {field!r} of {parent}"
+msgstr "Please enter {field!r} of {parent}"
+
+msgid "Supports multi-line text. Press {key!r} to start editing."
+msgstr "Supports multi-line text. Press {key!r} to start editing."
+
+msgid "Multiline mode is enabled. Press [Enter] twice to submit your entry."
+msgstr "Multiline mode is enabled. Press [Enter] twice to submit your entry."
+
+msgid "{value!r} is not a valid format."
+msgstr "{value!r} is not a valid format."
+
+#, python-brace-format
+msgid ""
+"Generate custom framework documents\n"
+"\n"
+"Import data files and export documentation with STIX bundle.\n"
+"Supported formats: {extensions}."
+msgstr ""
+"Generate custom framework documents\n"
+"\n"
+"Import data files and export documentation with STIX bundle.\n"
+"Supported formats: {extensions}."
+
+msgid "Remove existing outputs first"
+msgstr "Remove existing outputs first"
+
+msgid "STIX bundle output filename"
+msgstr "STIX bundle output filename"
+
+msgid "Output subdirectory and URL subpath (empty for root)"
+msgstr "Output subdirectory and URL subpath (empty for root)"
+
+msgid "Add suffix to outputs"
+msgstr "Add suffix to outputs"
+
+msgid "At least one path must be provided."
+msgstr "At least one path must be provided."
+
+msgid "All files and directories in {path!r} deleted successfully."
+msgstr "All files and directories in {path!r} deleted successfully."
+
+msgid "Loading data files..."
+msgstr "Loading data files..."
+
+#, python-brace-format
+msgid "Importing 1 {unit}..."
+msgid_plural "Importing {total:,} {unit}s..."
+msgstr[0] "Importing 1 {unit}..."
+msgstr[1] "Importing {total:,} {unit}s..."
+
+msgid "Total: 1 imported entity"
+msgid_plural "Total: {total:,} imported entities"
+msgstr[0] "Total: 1 imported entity"
+msgstr[1] "Total: {total:,} imported entities"
+
+#, python-brace-format
+msgid "No supported files found. Expected formats: {extensions}."
+msgstr "No supported files found. Expected formats: {extensions}."
+
+msgid "STIX bundle saved to {path!r}"
+msgstr "STIX bundle saved to {path!r}"
+
+msgid "Full documentation exported to {path!r}"
+msgstr "Full documentation exported to {path!r}"
+
+msgid "Path to custom configuration file"
+msgstr "Path to custom configuration file"
+
+msgid ""
+"Manage configuration settings\n"
+"\n"
+"View, edit, and reset framework configuration files.\n"
+"Configuration can be customized via YAML files or environment variables."
+msgstr ""
+"Manage configuration settings\n"
+"\n"
+"View, edit, and reset framework configuration files.\n"
+"Configuration can be customized via YAML files or environment variables."
+
+msgid "List configuration settings"
+msgstr "List configuration settings"
+
+msgid "Show built-in default configuration"
+msgstr "Show built-in default configuration"
+
+msgid "Edit configuration file in an editor"
+msgstr "Edit configuration file in an editor"
+
+msgid "Reset configuration file to defaults"
+msgstr "Reset configuration file to defaults"
+
+msgid "Overwrite without confirmation"
+msgstr "Overwrite without confirmation"
+
+msgid "Replace existing configuration file?"
+msgstr "Replace existing configuration file?"
+
+msgid "No changes made: {path!r}."
+msgstr "No changes made: {path!r}."
+
+msgid "Path to environment variables file"
+msgstr "Path to environment variables file"
+
+msgid "Encoding used to read the environment file (e.g., 'utf-8')"
+msgstr "Encoding used to read the environment file (e.g., 'utf-8')"
+
+msgid "Encoding used to read the configuration file (e.g., 'utf-8')"
+msgstr "Encoding used to read the configuration file (e.g., 'utf-8')"
+
+msgid "Framework identifier"
+msgstr "Framework identifier"
+
+msgid "Base URL of your site"
+msgstr "Base URL of your site"
+
+msgid "Enable debug mode"
+msgstr "Enable debug mode"
+
+msgid ""
+"Manage translation files\n"
+"\n"
+"Generate and compile translation files using GNU gettext.\n"
+"Extracts translatable strings from source code and creates PO/MO files."
+msgstr ""
+"Manage translation files\n"
+"\n"
+"Generate and compile translation files using GNU gettext.\n"
+"Extracts translatable strings from source code and creates PO/MO files."
+
+msgid "Generate PO files from source code folder"
+msgstr "Generate PO files from source code folder"
+
+msgid "Convert PO to MO files"
+msgstr "Convert PO to MO files"
+
+#, python-brace-format
+msgid ""
+"Missing tools: {tools}\n"
+"Please install GNU gettext (e.g., `apt install gettext`, `brew install "
+"gettext`).\n"
+"See: {url}"
+msgstr ""
+"Missing tools: {tools}\n"
+"Please install GNU gettext (e.g., `apt install gettext`, `brew install "
+"gettext`).\n"
+"See: {url}"
+
+msgid "Updated {filename!r}."
+msgstr "Updated {filename!r}."
+
+msgid "All portable objects buildet!"
+msgstr "All portable objects buildet!"
+
+msgid ""
+"Please remember to update the translations in {filename!r} before compiling."
+msgstr ""
+"Please remember to update the translations in {filename!r} before compiling."
+
+msgid "All translations compiled!"
+msgstr "All translations compiled!"
+
+msgid ""
+"{filename!r} is not a supported file type. Expected formats: {extensions}."
+msgstr ""
+"{filename!r} is not a supported file type. Expected formats: {extensions}."
+
+msgid "{value!r} is not a valid url."
+msgstr "{value!r} is not a valid url."
+
+msgid "Scheme should be 'http' or 'https'."
+msgstr "Scheme should be 'http' or 'https'."
+
+msgid "Maximum length of the URL is 2048 characters."
+msgstr "Maximum length of the URL is 2048 characters."
+
+msgid ""
+"{name} name {filename!r} must be between {min_length} and {max_length} "
+"characters."
+msgstr ""
+"{name} name {filename!r} must be between {min_length} and {max_length} "
+"characters."
+
+msgid "file"
+msgstr "file"
+
+msgid "{name} name {filename!r} must be match pattern {pattern!r}."
+msgstr "{name} name {filename!r} must be match pattern {pattern!r}."
+
+msgid "{name} {filename!r} must be within the target directory {dirname!r}."
+msgstr "{name} {filename!r} must be within the target directory {dirname!r}."
+
+msgid "{name} {filename!r} is a directory."
+msgstr "{name} {filename!r} is a directory."
+
+msgid "directory"
+msgstr "directory"
+
+msgid "{name} {filename!r} is a file."
+msgstr "{name} {filename!r} is a file."
+
+msgid "Unexpected error occurred."
+msgstr "Unexpected error occurred."
+
+msgid "contributor"
+msgstr "contributor"
+
+msgid "role"
+msgstr "role"
+
+msgid "industry sector"
+msgstr "industry sector"
+
+msgid "contact information"
+msgstr "contact information"
+
+msgid "reliability"
+msgstr "reliability"
+
+msgid "headshot"
+msgstr "headshot"
+
+msgid "individual contributor"
+msgstr "individual contributor"
+
+msgid "firstname"
+msgstr "firstname"
+
+msgid "lastname"
+msgstr "lastname"
+
+msgid "organizational contributor"
+msgstr "organizational contributor"
+
+msgid "organization type"
+msgstr "organization type"
+
+msgid "detection"
+msgstr "detection"
+
+msgid "detection source"
+msgstr "detection source"
+
+msgid "platform"
+msgstr "platform"
+
+msgid "collection layer"
+msgstr "collection layer"
+
+msgid "detection component"
+msgstr "detection component"
+
+msgid "Parent is required, please select or create a new one."
+msgstr "Parent is required, please select or create a new one."
+
+msgid "Missing parent {parent!r}, please create it first."
+msgstr "Missing parent {parent!r}, please create it first."
+
+msgid ""
+"This framework covers the complete fraud lifecycle, classifying attack "
+"tactics and techniques at each stage to support threat identification, risk "
+"assessment, and incident response."
+msgstr ""
+"This framework covers the complete fraud lifecycle, classifying attack "
+"tactics and techniques at each stage to support threat identification, risk "
+"assessment, and incident response."
+
+msgid "source data"
+msgstr "source data"
+
+msgid "Missing any expected keyword argument."
+msgstr "Missing any expected keyword argument."
+
+msgid "mitigation"
+msgstr "mitigation"
+
+msgid "note"
+msgstr "note"
+
+msgid "note type"
+msgstr "note type"
+
+msgid "related data id"
+msgstr "related data id"
+
+msgid "phase"
+msgstr "phase"
+
+msgid "tactic"
+msgstr "tactic"
+
+msgid "phase id"
+msgstr "phase id"
+
+msgid "Phase to which it belongs."
+msgstr "Phase to which it belongs."
+
+msgid "tool information"
+msgstr "tool information"
+
+msgid "detection information"
+msgstr "detection information"
+
+msgid "technique"
+msgstr "technique"
+
+msgid "tactic id"
+msgstr "tactic id"
+
+msgid "Tactic to which it belongs."
+msgstr "Tactic to which it belongs."
+
+msgid "permission"
+msgstr "permission"
+
+msgid "Tools used, including software services, etc."
+msgstr "Tools used, including software services, etc."
+
+msgid "tool"
+msgstr "tool"
+
+msgid "tool type"
+msgstr "tool type"
+
+msgid "tool version"
+msgstr "tool version"
+
+msgid "basic Information"
+msgstr "basic Information"
+
+msgid "revoked"
+msgstr "revoked"
+
+msgid "name"
+msgstr "name"
+
+msgid "external reference"
+msgstr "external reference"
+
+msgid "Derived from git history; read-only for editors."
+msgstr "Derived from git history; read-only for editors."
+
+msgid "source name"
+msgstr "source name"
+
+msgid "description"
+msgstr "description"
+
+msgid "url"
+msgstr "url"
+
+msgid "external id"
+msgstr "external id"
+
+msgid "data item"
+msgstr "data item"
+
+msgid "id"
+msgstr "id"
+
+msgid "configuration"
+msgstr "configuration"
+
+msgid "Too many attempts to create {path!r}."
+msgstr "Too many attempts to create {path!r}."
+
+msgid "Elapsed: {duration:,.2f} sec"
+msgstr "Elapsed: {duration:,.2f} sec"
+
+msgid "completely reliable"
+msgstr "completely reliable"
+
+msgid "usually reliable"
+msgstr "usually reliable"
+
+msgid "fairly reliable"
+msgstr "fairly reliable"
+
+msgid "not usually reliable"
+msgstr "not usually reliable"
+
+msgid "unreliable"
+msgstr "unreliable"
+
+msgid "unjudge"
+msgstr "unjudge"

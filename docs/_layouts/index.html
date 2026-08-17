@@ -1,0 +1,96 @@
+---
+layout: page
+---
+<p>{{- "_site_description" | translate: site.description | escape -}}</p>
+{%- if page.source.version -%}
+  <div class="d-flex justify-content-between">
+    <p>{{- "current version" | translate | titleize -}}: <b>{{- page.source.version | escape -}}</b></p>
+    <a href="{{- page.base_dir | append: 'bundle.json' | relative_url -}}" download>
+      <button><kbd>{{- "Download SIX bundle" | translate -}}</kbd></button>
+    </a>
+  </div>
+{%- endif -%}
+
+{%- if page.source.max_techniques_index -%}
+  <div class="border-light text-center">
+    <div>
+      {{- site.title | escape -}}&nbsp;
+      {{- "matrix" | translate | capitalize -}}
+      &nbsp;-&nbsp;
+      {{- "Tactics, Techniques, and Procedures" | translate -}}
+    </div>
+    <div class="table-responsive">
+      <table class="site-matrix">
+        <thead>
+          <tr>
+            {%- for phase in page.source.phases -%}
+              <th scope="colgroup" colspan="{{- phase.tactics.size -}}">
+                <a title="{{- phase.id -}}" href="{{- page.dir | append: 'phases/' | append: phase.id | relative_url -}}">
+                  {{- phase.name -}}
+                </a>
+              </th>
+            {%- endfor -%}
+          </tr>
+          <tr>
+            {%- for phase in page.source.phases -%}
+              {%- for tactic in phase.tactics -%}
+                <th scope="col" width="1%">
+                  <a title="{{- tactic.id -}}" href="{{- page.dir | append: 'tactics/' | append: tactic.id | relative_url -}}">
+                    {{- tactic.id -}}:<br>{{- tactic.name -}}
+                  </a>
+                </th>
+              {%- endfor -%}
+            {%- endfor -%}
+          </tr>
+        </thead>
+        {%- if page.source.max_techniques_index >= 0 -%}
+          <tbody>
+            {%- for i in (0..page.source.max_techniques_index) -%}
+              <tr>
+                {%- for tactic in page.source.tactics -%}
+                  {%- assign technique = tactic.techniques[i] -%}
+                  <td>
+                    {%- if technique -%}
+                      {%- if technique.sub_techniques.size > 0 -%}
+                        <details>
+                          <summary>
+                            <a title="{{- technique.id -}}" href="{{- page.dir | append: 'techniques/' | append: technique.id | relative_url -}}">
+                              {{- technique.id -}}:<br>{{- technique.name -}}
+                            </a>
+                          </summary>
+                          <div>
+                            {%- for sub_technique in technique.sub_techniques -%}
+                              <div>
+                                <a title="{{- sub_technique.id -}}" href="{{- page.dir | append: 'techniques/' | append: sub_technique.id | relative_url -}}">
+                                  {{- sub_technique.id -}}:<br>{{- sub_technique.name -}}
+                                </a>
+                              </div>
+                            {%- endfor -%}
+                          </div>
+                        </details>
+                      {%- else -%}
+                        <a title="{{- technique.id -}}" href="{{- page.dir | append: 'techniques/' | append: technique.id | relative_url -}}">
+                          {{- technique.id -}}:<br>{{- technique.name -}}
+                        </a>
+                      {%- endif -%}
+                    {%- endif -%}
+                  </td>
+                {%- endfor -%}
+              </tr>
+            {%- endfor -%}
+          </tbody>
+        {%- else -%}
+          <tfoot>
+            <tr>
+              <td scope="row" colspan="100%" class="text-center">
+                <p><i>{{- "no data found" | translate | capitalize -}}</i></p>
+              </td>
+            </tr>
+          </tfoot>
+        {%- endif -%}
+      </table>
+    </div>
+  </div>
+{%- endif -%}
+
+{{- content -}}

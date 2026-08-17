@@ -1,0 +1,14 @@
+---
+# project_name: FIST
+base_url: http://localhost:4000
+# textdomain: messages
+# locale_dir: "./18n"
+# output_dir: "./out"
+# subfolder:
+# artifact: "bundle.json"
+author:
+  alias: NICS
+  name: "National Institute of Cyber Security"
+  email: nicscda@nics.nat.gov.tw
+# debug:
+# language:

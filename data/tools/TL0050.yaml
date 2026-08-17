@@ -13,5 +13,3 @@ external_references:
   - source_name: MaxMind GeoIP
     description: MaxMind. ip-geolocation-database. 檢索日期 2025-03-12.
     url: https://www.maxmind.com/
-contributors:
-  - NICS

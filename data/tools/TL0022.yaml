@@ -13,5 +13,3 @@ external_references:
   - source_name: NLTK
     description: NLTK. language-processing-toolkit. 檢索日期 2025-03-12.
     url: https://www.nltk.org/
-contributors:
-  - NICS

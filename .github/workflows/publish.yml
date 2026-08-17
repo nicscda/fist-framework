@@ -1,0 +1,49 @@
+---
+name: PyPI Publish
+
+#
+# This workflow for building and publishing to PyPI/TestPyPI.
+#
+# Inspired by:
+# https://docs.astral.sh/uv/guides/integration/github/
+#
+
+on:
+  release:
+    types: [published]
+
+permissions: {}
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: "${{ github.workflow }}"
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    environment:
+      name: pypi
+      url: ${{ steps.pypi.outputs.pkg_url }}
+
+    permissions:
+      id-token: write
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.release.tag_name }}
+          persist-credentials: false
+
+      - name: Setup UV
+        uses: astral-sh/setup-uv@v7
+
+      - name: Build and Publish
+        id: pypi
+        run: bash ./.github/scripts/publish.sh
+        env:
+          UV_PUBLISH_URL: ${{ vars.UV_PUBLISH_URL }}
+          UV_PUBLISH_TOKEN: ${{ secrets.UV_PUBLISH_TOKEN }}

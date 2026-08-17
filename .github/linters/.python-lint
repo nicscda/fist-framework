@@ -11,5 +11,6 @@ max-line-length=120
 
 # Ignoring Import Errors is desired as super-linter
 # does not support installing dependencies as it runs
-disable=C,R,W
+# E0402: pylint doesn't understand hatch src-layout
+disable=C,R,W,E0402
 ignored-classes=Exception

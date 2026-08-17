@@ -13,7 +13,25 @@
                         "id": {
                             "pattern": "^[A-Z0-9_]{1,100}$"
                         },
-                        "contact": {
+                        "roles": {
+                            "description": "角色",
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            },
+                            "maxItems": 100,
+                            "uniqueItems": true
+                        },
+                        "sectors": {
+                            "description": "產業",
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            },
+                            "maxItems": 100,
+                            "uniqueItems": true
+                        },
+                        "contact_information": {
                             "description": "聯絡資訊",
                             "type": [
                                 "string",
@@ -24,15 +42,6 @@
                         "reliability": {
                             "description": "可信度",
                             "$ref": "#/definitions/vocabularies/reliability_ov"
-                        },
-                        "sectors": {
-                            "description": "產業",
-                            "type": "array",
-                            "items": {
-                                "type": "string"
-                            },
-                            "maxItems": 100,
-                            "uniqueItems": true
                         }
                     }
                 },
@@ -159,6 +168,15 @@
                 },
                 "id": {
                     "pattern": "^N[0-9]{4}$"
+                },
+                "note_types": {
+                    "description": "筆記類型",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/vocabularies/node_types_ov"
+                    },
+                    "maxItems": 100,
+                    "uniqueItems": true
                 }
             }
         },
@@ -347,6 +365,16 @@
                     "OSINT"
                 ]
             },
+            "node_types_ov": {
+                "type": "string",
+                "enum": [
+                    "analysis",
+                    "assessment",
+                    "external",
+                    "feedback",
+                    "internal"
+                ]
+            },
             "organization_types_ov": {
                 "type": "string",
                 "enum": [
@@ -374,6 +402,17 @@
                     "windows"
                 ]
             },
+            "reliability_ov": {
+                "type": "string",
+                "enum": [
+                    "A",
+                    "B",
+                    "C",
+                    "D",
+                    "E",
+                    "F"
+                ]
+            },
             "tool_types_ov": {
                 "type": "string",
                 "enum": [
@@ -385,17 +424,6 @@
                     "remote-access",
                     "vulnerability-scanning",
                     "unknown"
-                ]
-            },
-            "reliability_ov": {
-                "type": "string",
-                "enum": [
-                    "A",
-                    "B",
-                    "C",
-                    "D",
-                    "E",
-                    "F"
                 ]
             }
         },
@@ -445,6 +473,11 @@
                         },
                         "maxItems": 100,
                         "uniqueItems": true
+                    },
+                    "revoked": {
+                        "description": "撤銷標記",
+                        "type": "boolean",
+                        "default": false
                     }
                 },
                 "required": [

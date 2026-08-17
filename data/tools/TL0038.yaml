@@ -13,5 +13,3 @@ external_references:
   - source_name: AbuseIPDB
     description: AbuseIPDB. ip-reputation-database. 檢索日期 2025-03-12.
     url: https://www.abuseipdb.com/
-contributors:
-  - NICS

@@ -34,10 +34,12 @@ jobs:
 
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
 
       - name: Get App Token
-        id: my-app
+        id: app
         run: bash ./.github/scripts/token.sh
         env:
           APP_ID: ${{ secrets.APP_ID }}
@@ -60,7 +62,7 @@ jobs:
               --jq '.[] | select(.permissions.triage) | .url | split("github.com/")[-1] + "/members"'
           )
         env:
-          GH_TOKEN: ${{ steps.my-app.outputs.token }}
+          GH_TOKEN: ${{ steps.app.outputs.token }}
 
   pr:
     name: Assign PR

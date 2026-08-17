@@ -1,5 +1,71 @@
-# Created by https://www.toptal.com/developers/gitignore/api/jekyll,jekyll,jetbrains+all,linux,macos,python,ruby,test,ruby,visualstudiocode,windows
-# Edit at https://www.toptal.com/developers/gitignore?templates=jekyll,jekyll,jetbrains+all,linux,macos,python,ruby,test,ruby,visualstudiocode,windows
+# Created by https://www.toptal.com/developers/gitignore/api/eclipse,jekyll,jetbrains+all,linux,macos,python,ruby,visualstudiocode,windows
+# Edit at https://www.toptal.com/developers/gitignore?templates=eclipse,jekyll,jetbrains+all,linux,macos,python,ruby,visualstudiocode,windows
+
+### Eclipse ###
+.metadata
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.settings/
+.loadpath
+.recommenders
+
+# External tool builders
+.externalToolBuilders/
+
+# Locally stored "Eclipse launch configurations"
+*.launch
+
+# PyDev specific (Python IDE for Eclipse)
+*.pydevproject
+
+# CDT-specific (C/C++ Development Tooling)
+.cproject
+
+# CDT- autotools
+.autotools
+
+# Java annotation processor (APT)
+.factorypath
+
+# PDT-specific (PHP Development Tools)
+.buildpath
+
+# sbteclipse plugin
+.target
+
+# Tern plugin
+.tern-project
+
+# TeXlipse plugin
+.texlipse
+
+# STS (Spring Tool Suite)
+.springBeans
+
+# Code Recommenders
+.recommenders/
+
+# Annotation Processing
+.apt_generated/
+.apt_generated_test/
+
+# Scala IDE specific (Scala & Java development for Eclipse)
+.cache-main
+.scala_dependencies
+.worksheet
+
+# Uncomment this line if you wish to ignore the project description file.
+# Typically, this file would be tracked if it contains build/dependency configurations:
+#.project
+
+### Eclipse Patch ###
+# Spring Boot Tooling
+.sts4-cache/
 
 ### Jekyll ###
 _site/
@@ -303,7 +369,7 @@ cython_debug/
 
 # PyCharm
 #  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
-#  be found at https://github.com/github/gitignore/blob/main/Global/JetBrains.gitignore
+#  be found at https://github.com/github/gitignore/blob/HEAD/Global/JetBrains.gitignore
 #  and can be added to the global gitignore or merged into this file.  For a more nuclear
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
@@ -364,7 +430,7 @@ build-iPhoneSimulator/
 
 # for a library or gem, you might want to ignore these files since the code is
 # intended to run in multiple environments; otherwise, check them in:
-Gemfile.lock
+# Gemfile.lock
 # .ruby-version
 # .ruby-gemset
 
@@ -373,86 +439,6 @@ Gemfile.lock
 
 # Used by RuboCop. Remote config files pulled in from inherit_from directive.
 # .rubocop-https?--*
-
-### Test ###
-### Ignore all files that could be used to test your code and
-### you wouldn't want to push
-
-# Reference https://en.wikipedia.org/wiki/Metasyntactic_variable
-
-# Most common
-*foo
-*bar
-*fubar
-*foobar
-*baz
-
-# Less common
-*qux
-*quux
-*bongo
-*bazola
-*ztesch
-
-# UK, Australia
-*wibble
-*wobble
-*wubble
-*flob
-*blep
-*blah
-*boop
-*beep
-
-# Japanese
-*hoge
-*piyo
-*fuga
-*hogera
-*hogehoge
-
-# Portugal, Spain
-*fulano
-*sicrano
-*beltrano
-*mengano
-*perengano
-*zutano
-
-# France, Italy, the Netherlands
-*toto
-*titi
-*tata
-*tutu
-*pipppo
-*pluto
-*paperino
-*aap
-*noot
-*mies
-
-# Other names that would make sense
-*tests
-*testsdir
-*testsfile
-*testsfiles
-*test
-*testdir
-*testfile
-*testfiles
-*testing
-*testingdir
-*testingfile
-*testingfiles
-*temp
-*tempdir
-*tempfile
-*tempfiles
-*tmp
-*tmpdir
-*tmpfile
-*tmpfiles
-*lol
 
 ### VisualStudioCode ###
 .vscode/*
@@ -499,4 +485,4 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-# End of https://www.toptal.com/developers/gitignore/api/jekyll,jekyll,jetbrains+all,linux,macos,python,ruby,test,ruby,visualstudiocode,windows
+# End of https://www.toptal.com/developers/gitignore/api/eclipse,jekyll,jetbrains+all,linux,macos,python,ruby,visualstudiocode,windows

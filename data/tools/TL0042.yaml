@@ -13,5 +13,3 @@ external_references:
   - source_name: Twilio
     description: Twilio. cloud-communication-platform. 檢索日期 2025-03-12.
     url: https://www.twilio.com/
-contributors:
-  - NICS

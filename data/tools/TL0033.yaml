@@ -13,5 +13,3 @@ external_references:
   - source_name: Akismet
     description: Akismet. spam-filtering-service. 檢索日期 2025-03-12.
     url: https://akismet.com/
-contributors:
-  - NICS

@@ -13,5 +13,3 @@ external_references:
   - source_name: IBM Watson Tone Analyzer
     description: IBM. sentiment-tone-analysis. 檢索日期 2025-03-12.
     url: https://www.ibm.com/watson/services/tone-analyzer/
-contributors:
-  - NICS

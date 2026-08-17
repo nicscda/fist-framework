@@ -1,0 +1,44 @@
+---
+# Topic: Tactic Template
+# Author: NICS
+#
+# Refer to MITRE ATT&CK® and OpenCTI data model:
+# - [MITRE ATT&CK®](https://attack.mitre.org/)
+# - [OpenCTI Data Model](https://docs.opencti.io/latest/usage/data-model/)
+#
+# Note:
+# Field values are transformed based on actual use (data exchange or web display).
+#
+# YAML syntax assistance:
+# - https://learntheweb.courses/topics/yaml/
+# - https://learnxinyminutes.com/docs/yaml/
+#
+# yaml-language-server: $schema=
+
+# Basic Information (Required)
+# Core identifiers and names essential for data processing.
+type: tactic # Fixed, immutable field
+id: "changeme" # Recommended to match the file name
+name: "changeme" # Human-readable, no wrap
+phase_id: "changeme" # Belongs to which phase by ID
+
+# Supplementary Information (Optional)
+# Additional context for documentation purposes.
+#
+# Note:
+# Please remove unused fields and use `[]` for empty arrays.
+description: |
+  changeme
+
+external_references:
+  # Add references using the following format:
+  - source_name: "changeme"
+    description: |
+      changeme
+    url: "https://changeme"
+    external_id: "changeme"
+contributors:
+  # Content contributors; only the first will be treated as the author.
+  - changeme
+# Uncomment to mark as deprecated
+# revoked: true

@@ -13,5 +13,3 @@ external_references:
   - source_name: ASVspoof
     description: ASVspoof. voice-spoofing-detection. 檢索日期 2025-03-12.
     url: https://www.asvspoof.org/
-contributors:
-  - NICS

@@ -24,40 +24,38 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    environment:
+      name: github-pages
+
     permissions:
       contents: write
       pages: write
 
-    environment:
-      name: github-pages
-
-    env:
-      TARGET_DIRECTORY: docs
-
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           ref: ${{ github.event.release.tag_name }}
+          persist-credentials: false
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: 3.12
-          cache: pip
+      - name: Setup UV
+        uses: astral-sh/setup-uv@v7
 
       - name: Build and Run
         run: |
           bash ./.github/scripts/build.sh
+          echo "artifact=${FIST_OUTPUT_DIR}/${FIST_ARTIFACT}#STIX Bundle" >> "$GITHUB_ENV"
+          echo "source=${FIST_OUTPUT_DIR%%/*}" >> "$GITHUB_ENV"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TAG_NAME: ${{ github.event.release.tag_name }}
-          SOURCE: ${{ vars.SOURCE }}
-          BASE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}
-          # TARGET_DIRECTORY: ${{ env.TARGET_DIRECTORY }}
+          FIST_BASE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}
+          FIST_OUTPUT_DIR: docs/_data/pages
+          FIST_ARTIFACT: ${{ vars.FIST_ARTIFACT }}
+          LANGUAGE: ${{ vars.LANGUAGE }}
 
       - name: Upload Release Artifact
-        run: gh release upload "${{ github.event.release.tag_name }}" "${{ env.TARGET_DIRECTORY }}/bundle.json" --clobber
+        run: gh release upload "${{ github.event.release.tag_name }}" "$artifact" --clobber
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -68,21 +66,23 @@ jobs:
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: "3.3"
           bundler-cache: true
 
       - name: Build with Jekyll
-        run: bundle exec jekyll build --baseurl "${{ env.BASE_URL }}" --source "${{ env.TARGET_DIRECTORY }}"
+        run: |
+          sed -i "s|^url:.*|url: \"${{ steps.pages.outputs.base_url }}\"|" "$source/_config.yml"
+          bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}" --source "$source"
         env:
           JEKYLL_ENV: production
-          BASE_URL: ${{ github.event.repository.private == false && format('/{0}', github.event.repository.name) || steps.pages.outputs.base_path }}
+          FIST_ARTIFACT: ${{ vars.FIST_ARTIFACT }}
+          LANGUAGE: ${{ vars.LANGUAGE }}
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
 
   deploy:
-    runs-on: ubuntu-latest
     needs: [build]
+    runs-on: ubuntu-latest
     if: ${{ needs.build.result == 'success' }}
 
     environment:

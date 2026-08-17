@@ -1,0 +1,70 @@
+---
+# 主題：技術範本
+# 作者：NICS
+#
+# 參考 MITRE ATT&CK® 與 OpenCTI 資料模型：
+# - [MITRE ATT&CK®](https://attack.mitre.org/)
+# - [OpenCTI Data Model](https://docs.opencti.io/latest/usage/data-model/)
+#
+# 注意：
+# 欄位內容會依實際用途（資料交換或網頁顯示）自動轉換。
+#
+# YAML 語法參考：
+# - https://learntheweb.courses/topics/yaml/
+# - https://learnxinyminutes.com/docs/yaml/
+#
+# yaml-language-server: $schema=
+
+# 基本資訊（必填）
+# 資料處理所需的核心識別資訊
+type: technique # 固定欄位，不可變更
+id: "changeme" # 子技術需與根 ID 對齊，例如 T0001.001
+name: "changeme" # 人類可讀名稱，不換行
+tactic_id: "changeme" # 所屬戰術 ID
+
+# 補充資訊（選填）
+# 提供更多背景資訊和說明
+#
+# 注意：
+# 不需要的欄位請直接刪除；保留的陣列欄位若無內容請使用 `[]`。
+description: |
+  changeme
+
+permissions:
+  # 權限標籤：
+  - changeme
+platforms:
+  # 平台標籤：
+  - changeme
+tools:
+  # 工具的 ID 與說明：
+  - id: changeme
+    description: |
+      changeme
+mitigations:
+  # 緩解措施的 ID 與說明：
+  - id: changeme
+    description: |
+      changeme
+detection:
+  # 偵測方式說明
+  description: |
+    changeme
+  components:
+    # 偵測元件的 ID 與說明：
+    - id: changeme
+      description: |
+        changeme
+
+external_references:
+  # 請使用以下格式新增參考文獻：
+  - source_name: "changeme"
+    description: |
+      changeme
+    url: "https://changeme"
+    external_id: "changeme"
+contributors:
+  # 內容貢獻者清單，首位將視為作者。
+  - changeme
+# 如要撤銷請取消下方註解
+# revoked: true

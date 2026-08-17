@@ -13,5 +13,3 @@ external_references:
   - source_name: Hugging Face Transformers - Text Classification Example
     description: Hugging Face. text-classification-models. 檢索日期 2025-03-12.
     url: https://huggingface.co/docs/transformers/tasks/sequence_classification
-contributors:
-  - NICS

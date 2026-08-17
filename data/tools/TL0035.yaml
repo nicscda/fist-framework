@@ -13,5 +13,3 @@ external_references:
   - source_name: Google Maps Street View
     description: Google. street-view-imagery. 檢索日期 2025-03-12.
     url: https://www.google.com/maps
-contributors:
-  - NICS

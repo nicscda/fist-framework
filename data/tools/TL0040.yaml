@@ -13,5 +13,3 @@ external_references:
   - source_name: Zeek Network Security Monitor
     description: Zeek. network-traffic-analysis. 檢索日期 2025-03-12.
     url: https://zeek.org/
-contributors:
-  - NICS

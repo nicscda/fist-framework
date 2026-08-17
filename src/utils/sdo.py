@@ -48,10 +48,7 @@ class MitreTactic(object):
         ("description", StringProperty(required=True)),
         (
             "tactic_refs",
-            ListProperty(
-                ReferenceProperty(valid_types=["x-mitre-tactic"]),
-                default=[],
-            ),
+            ListProperty(ReferenceProperty(valid_types=["x-mitre-tactic"])),
         ),
     ],
 )

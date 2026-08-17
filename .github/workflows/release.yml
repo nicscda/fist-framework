@@ -29,10 +29,12 @@ jobs:
 
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
 
       - name: Get App Token
-        id: my-app
+        id: app
         run: bash ./.github/scripts/token.sh
         env:
           APP_ID: ${{ secrets.APP_ID }}
@@ -45,7 +47,7 @@ jobs:
         with:
           config-file: .github/release-please/release-please-config.json
           manifest-file: .github/release-please/.release-please-manifest.json
-          token: ${{ steps.my-app.outputs.token }}
+          token: ${{ steps.app.outputs.token }}
 
       - name: Retag major/minor
         if: ${{ steps.release.outputs.release_created }}
@@ -71,4 +73,4 @@ jobs:
             fi
           done
         env:
-          GH_TOKEN: ${{ steps.my-app.outputs.token }}
+          GH_TOKEN: ${{ steps.app.outputs.token }}

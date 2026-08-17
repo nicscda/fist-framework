@@ -19,14 +19,29 @@ jobs:
     runs-on: ubuntu-latest
 
     permissions:
+      actions: write
       contents: write # Only for delete-branch option
       issues: write
       pull-requests: write
 
     steps:
-      - name: Check for Stale
-        uses: actions/stale@v9
+      - name: Checkout Code
+        uses: actions/checkout@v6
         with:
+          persist-credentials: false
+
+      - name: Get App Token
+        id: app
+        run: bash ./.github/scripts/token.sh
+        env:
+          APP_ID: ${{ secrets.APP_ID }}
+          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Check for Stale
+        uses: actions/stale@v10
+        with:
+          repo-token: ${{ steps.app.outputs.token }}
           days-before-stale: 60
           days-before-close: 7
           stale-issue-label: stale

@@ -1,18 +1,19 @@
-import html
+import json
 import re
 import uuid
 from collections import defaultdict
+from datetime import datetime
 from functools import cache, cached_property
-from operator import attrgetter
+from operator import itemgetter
 from typing import TypeVar, cast
 
 from stix2 import (
     TLP_WHITE,
     AttackPattern,
+    Bundle,
     CourseOfAction,
     Identity,
     MarkingDefinition,
-    MemoryStore,
     Note,
     Relationship,
     StatementMarking,
@@ -21,40 +22,67 @@ from stix2 import (
 from stix2.base import SCO_DET_ID_NAMESPACE, _STIXBase
 from stix2.canonicalization.Canonicalize import canonicalize
 
-from ..models import Base, Bundle
-from .common import VERSION
+from ..models import Individual, Manifest, Organization
+from .config import VERSION, get_settings
+from .functions import to_kebab_case, to_snake_case
 from .sdo import MitreDataComponent, MitreDataSource, MitreMatrix, MitreTactic
+from .vocabularies import IDENTITY_CLASS_ORGANIZATION
 
 T = TypeVar("T", bound=_STIXBase, covariant=True)
-
-_BLANK = "(空白)"
-"""The default display string for blank fields."""
 
 
 class Stix:
 
-    def __init__(self, bundle: Bundle):
-        self.bundle = bundle
-        self.X_SOURCE_ID = f"x_{self.bundle.source.lower()}_id"
+    def __init__(self, manifest: Manifest):
+        self.manifest = manifest
+        self.X_SOURCE_ID = to_snake_case(f"x_{get_settings().project_name}_id")
         self.DEFAULT_AUTHOR = Identity(
             id=self.generate_id(
                 Identity,
-                **{self.X_SOURCE_ID: "NICS"},
+                name=get_settings().author.name,
+                **{self.X_SOURCE_ID: get_settings().author.alias},
             ),
-            name="National Institute of Cyber Security",
-            identity_class="organization",
+            name=get_settings().author.name,
+            contact_information=get_settings().author.email,
+            identity_class=IDENTITY_CLASS_ORGANIZATION,
             confidence=100,
+            created=self.manifest.created,
+            modified=self.manifest.modified,
         )
 
     @staticmethod
-    def generate_id(t: type[T], *, name: str | None = None, **kwargs):
+    def generate_id(tp: type[T], *, name: str | None = None, **kwargs):
+        """Generates an ID based on the given type and key attributes."""
         if name:
             kwargs.setdefault("name", name.lower().strip())
-        return f"{t._type}--{uuid.uuid5(SCO_DET_ID_NAMESPACE, canonicalize(kwargs, utf8=False))}"
+        return f"{tp._type}--{uuid.uuid5(SCO_DET_ID_NAMESPACE, canonicalize(kwargs, utf8=False))}"
 
     @cached_property
     def marking_definitions(self):
         """Custom Marking references, including TLP and our Copyright."""
+        now_year = datetime.now().year
+        start_year = min(
+            (
+                ts.year
+                for ts in {
+                    self.manifest.created,
+                    self.manifest.modified,
+                }
+                if ts
+            ),
+            default=now_year,
+        )
+        end_year = max(
+            (
+                ts.year
+                for ts in {
+                    self.manifest.created,
+                    self.manifest.modified,
+                }
+                if ts
+            ),
+            default=now_year,
+        )
         return [
             # [TRAFFIC LIGHT PROTOCOL (TLP)](https://www.first.org/tlp)
             TLP_WHITE,
@@ -63,17 +91,21 @@ class Stix:
                 id=self.generate_id(
                     MarkingDefinition,
                     definition=(
+                        # Contain the complete legal language
                         definition := StatementMarking(
-                            statement="Copyright © 2024 NICS"
+                            statement=(
+                                f"Copyright © {start_year if start_year == end_year else f"{start_year}-{end_year}"}"
+                                f" {self.DEFAULT_AUTHOR["name"]}"
+                            )
                         )
                     ).serialize(),
                     definition_type=(definition_type := "statement"),
                 ),
+                definition=definition,
                 definition_type=definition_type,
                 # Do not use `self._get_created_by_ref` which will cause an infinite loop.
                 created_by_ref=self.DEFAULT_AUTHOR["id"],
-                name="NICS",
-                definition=definition,
+                created=self.manifest.created,
             ),
         ]
 
@@ -84,36 +116,48 @@ class Stix:
             Identity(
                 id=self.generate_id(
                     Identity,
+                    name=contributor.name,
                     **{self.X_SOURCE_ID: contributor.id},
                 ),
                 name=contributor.name,
                 description=contributor.description,
                 external_references=contributor.model_dump(
-                    mode="json", include=(_ := "external_references")
-                )[_],
-                identity_class=contributor.type,
-                contact_information=contributor.contact,
+                    mode="json", include=(field := "external_references")
+                )[field],
+                identity_class=contributor.identity_class,
+                roles=contributor.roles,
                 sectors=contributor.sectors,
+                contact_information=contributor.contact_information,
                 object_marking_refs=self.marking_definitions,
                 # Do not use `self._get_created_by_ref` which will cause an infinite loop.
                 created_by_ref=self.DEFAULT_AUTHOR["id"],
+                created=contributor.created,
+                modified=contributor.modified,
+                revoked=contributor.revoked,
                 confidence=100,
                 custom_properties={
                     "x_opencti_aliases": [contributor.id],
-                    "x_opencti_firstname": contributor.firstname,
-                    "x_opencti_lastname": contributor.lastname,
-                    "x_opencti_organization_type": contributor.organization_type,
+                    **(
+                        {
+                            "x_opencti_firstname": contributor.firstname,
+                            "x_opencti_lastname": contributor.lastname,
+                        }
+                        if isinstance(contributor, Individual)
+                        else {"x_opencti_reliability": contributor.organization_type}
+                    ),
                     "x_opencti_reliability": contributor.reliability,
                     self.X_SOURCE_ID: contributor.id,
                 },
             )
-            for contributor in self.bundle.contributors
+            for contributor in self.manifest.contributors
         ]
 
     @cached_property
     def attack_patterns(self):
+        kill_chain_name = to_kebab_case(get_settings().project_name)
         return [
             AttackPattern(
+                allow_custom=True,
                 id=self.generate_id(
                     AttackPattern,
                     **{self.X_SOURCE_ID: technique.id},
@@ -121,27 +165,31 @@ class Stix:
                 name=technique.name,
                 description=technique.description,
                 external_references=technique.model_dump(
-                    mode="json", include=(_ := "external_references")
-                )[_],
+                    mode="json", include=(field := "external_references")
+                )[field],
                 aliases=[technique.id],
                 object_marking_refs=self.marking_definitions,
                 created_by_ref=self._get_created_by_ref(*technique.contributors),
+                created=technique.created,
+                modified=technique.modified,
                 confidence=100,
                 kill_chain_phases=[
                     {
-                        "kill_chain_name": self.bundle.source,
+                        "kill_chain_name": kill_chain_name,
                         "phase_name": (
                             tactic.name
-                            if (tactic := self.bundle.get_tactic(technique.tactic_id))
+                            if (tactic := self.manifest.get_tactic(technique.tactic_id))
                             else technique.tactic_id
                         ),
+                        "x_opencti_order": tactic.order,
                     }
                 ],
+                revoked=technique.revoked,
                 custom_properties={
                     "x_mitre_contributors": list(
                         set(
                             self._get_contributor_name(contributor)
-                            for contributor in technique.contributors
+                            for contributor in technique.external_contributors
                         )
                     ),
                     "x_mitre_detection": technique.detection.description,
@@ -152,7 +200,7 @@ class Stix:
                     self.X_SOURCE_ID: technique.id,
                 },
             )
-            for technique in self.bundle.techniques
+            for technique in self.manifest.techniques
         ]
 
     @cached_property
@@ -166,28 +214,33 @@ class Stix:
                 name=mitigation.name,
                 description=mitigation.description,
                 external_references=mitigation.model_dump(
-                    mode="json", include=(_ := "external_references")
-                )[_],
+                    mode="json", include=(field := "external_references")
+                )[field],
                 object_marking_refs=self.marking_definitions,
                 confidence=100,
                 created_by_ref=self._get_created_by_ref(*mitigation.contributors),
+                created=mitigation.created,
+                modified=mitigation.modified,
+                revoked=mitigation.revoked,
                 custom_properties={
                     "x_mitre_contributors": list(
                         set(
                             self._get_contributor_name(contributor)
-                            for contributor in mitigation.contributors
+                            for contributor in mitigation.external_contributors
                         )
                     ),
                     self.X_SOURCE_ID: mitigation.id,
                 },
             )
-            for mitigation in self.bundle.mitigations
+            for mitigation in self.manifest.mitigations
         ]
 
     @cached_property
     def tools(self):
+        kill_chain_name = to_kebab_case(get_settings().project_name)
         return [
             Tool(
+                allow_custom=True,
                 id=self.generate_id(
                     Tool,
                     **{self.X_SOURCE_ID: tool.id},
@@ -195,36 +248,42 @@ class Stix:
                 name=tool.name,
                 description=tool.description,
                 external_references=tool.model_dump(
-                    mode="json", include=(_ := "external_references")
-                )[_],
+                    mode="json", include=(field := "external_references")
+                )[field],
                 object_marking_refs=self.marking_definitions,
                 confidence=100,
                 created_by_ref=self._get_created_by_ref(*tool.contributors),
+                created=tool.created,
+                modified=tool.modified,
                 tool_types=tool.tool_types,
                 tool_version=tool.tool_version,
                 kill_chain_phases=[
                     {
-                        "kill_chain_name": self.bundle.source,
+                        "kill_chain_name": kill_chain_name,
                         "phase_name": (
                             tactic.name
-                            if (tactic := self.bundle.get_tactic(technique.tactic_id))
+                            if (tactic := self.manifest.get_tactic(technique.tactic_id))
                             else technique.tactic_id
                         ),
+                        "x_opencti_order": tactic.order,
                     }
-                    for technique, _ in self.bundle.get_techniques(tool_id=tool.id)
+                    for technique in self.manifest.get_techniques(
+                        tool_id=tool.id, include_meta=False
+                    )
                 ],
+                revoked=tool.revoked,
                 custom_properties={
                     "x_mitre_contributors": list(
                         set(
                             self._get_contributor_name(contributor)
-                            for contributor in tool.contributors
+                            for contributor in tool.external_contributors
                         )
                     ),
                     "x_mitre_platforms": tool.platforms,
                     self.X_SOURCE_ID: tool.id,
                 },
             )
-            for tool in self.bundle.tools
+            for tool in self.manifest.tools
         ]
 
     @cached_property
@@ -242,7 +301,7 @@ class Stix:
                 authors=[
                     author_ref
                     for contributor in note.contributors
-                    if (author_ref := self._get_identity_by_ref(contributor))
+                    if (author_ref := self._get_contributor_ref(contributor))
                 ],
                 object_refs=[
                     object_ref
@@ -250,22 +309,25 @@ class Stix:
                     if (object_ref := self._get_object_ref(related_id))
                 ],
                 external_references=note.model_dump(
-                    mode="json", include=(_ := "external_references")
-                )[_],
+                    mode="json", include=(field := "external_references")
+                )[field],
                 object_marking_refs=self.marking_definitions,
                 confidence=100,
                 created_by_ref=self._get_created_by_ref(*note.contributors),
+                created=note.created,
+                modified=note.modified,
+                revoked=note.revoked,
                 custom_properties={
                     "x_mitre_contributors": list(
                         set(
                             self._get_contributor_name(contributor)
-                            for contributor in note.contributors
+                            for contributor in note.external_contributors
                         )
                     ),
                     self.X_SOURCE_ID: note.id,
                 },
             )
-            for note in self.bundle.notes
+            for note in self.manifest.notes
         ]
 
     @cached_property
@@ -279,25 +341,28 @@ class Stix:
                 name=component.name,
                 description=component.description,
                 external_references=component.model_dump(
-                    mode="json", include=(_ := "external_references")
-                )[_],
+                    mode="json", include=(field := "external_references")
+                )[field],
                 object_marking_refs=self.marking_definitions,
                 confidence=100,
                 created_by_ref=self._get_created_by_ref(*component.contributors),
+                created=component.created,
+                modified=component.modified,
+                revoked=component.revoked,
                 custom_properties={
                     "x_mitre_contributors": list(
                         set(
                             self._get_contributor_name(contributor)
-                            for contributor in component.contributors
+                            for contributor in component.external_contributors
                         )
                     ),
-                    "x_mitre_data_source_ref": self._get_data_source_ref(
+                    "x_mitre_data_source_ref": self._get_source_ref(
                         component.parent_id
                     ),
                     self.X_SOURCE_ID: component.id,
                 },
             )
-            for component in self.bundle.detection_components
+            for component in self.manifest.detection_components
         ]
 
     @cached_property
@@ -311,24 +376,27 @@ class Stix:
                 name=source.name,
                 description=source.description,
                 external_references=source.model_dump(
-                    mode="json", include=(_ := "external_references")
-                )[_],
+                    mode="json", include=(field := "external_references")
+                )[field],
                 object_marking_refs=self.marking_definitions,
                 confidence=100,
                 created_by_ref=self._get_created_by_ref(*source.contributors),
+                created=source.created,
+                modified=source.modified,
+                revoked=source.revoked,
                 custom_properties={
                     "x_mitre_collection_layers": source.collection_layers,
                     "x_mitre_contributors": list(
                         set(
                             self._get_contributor_name(contributor)
-                            for contributor in source.contributors
+                            for contributor in source.external_contributors
                         )
                     ),
                     "x_mitre_platforms": source.platforms,
                     self.X_SOURCE_ID: source.id,
                 },
             )
-            for source in self.bundle.detection_sources
+            for source in self.manifest.detection_sources
         ]
 
     @cached_property
@@ -342,86 +410,134 @@ class Stix:
                 name=tactic.name,
                 description=tactic.description,
                 external_references=tactic.model_dump(
-                    mode="json", include=(_ := "external_references")
-                )[_],
+                    mode="json", include=(field := "external_references")
+                )[field],
                 object_marking_refs=self.marking_definitions,
                 confidence=100,
                 created_by_ref=self._get_created_by_ref(*tactic.contributors),
+                created=tactic.created,
+                modified=tactic.modified,
+                revoked=tactic.revoked,
                 custom_properties={
                     "x_mitre_contributors": list(
                         set(
                             self._get_contributor_name(contributor)
-                            for contributor in tactic.contributors
+                            for contributor in tactic.external_contributors
                         )
                     ),
                     "x_mitre_shortname": tactic.name,
                     self.X_SOURCE_ID: tactic.id,
                 },
             )
-            for tactic in self.bundle.tactics
+            for tactic in self.manifest.tactics
         ]
 
     @cached_property
     def mitre_matrix(self):
-        return MitreMatrix(
-            allow_custom=True,
-            id=self.generate_id(
-                MitreMatrix,
-                **{self.X_SOURCE_ID: self.bundle.source},
-            ),
-            name=self.bundle.name,
-            description=self.bundle.description,
-            tactic_refs=self.mitre_tactics,
-            object_marking_refs=self.marking_definitions,
-            confidence=100,
-            # Do not use `self._get_created_by_ref` which will cause an infinite loop.
-            created_by_ref=self.DEFAULT_AUTHOR["id"],
-        )
+        kill_chain_name = to_kebab_case(get_settings().project_name)
+        return [
+            MitreMatrix(
+                allow_custom=True,
+                id=self.generate_id(
+                    MitreMatrix,
+                    **{self.X_SOURCE_ID: kill_chain_name},
+                ),
+                name=get_settings().project_name,
+                description=self.manifest.description,
+                tactic_refs=self.mitre_tactics,
+                object_marking_refs=self.marking_definitions,
+                confidence=100,
+                # Do not use `self._get_created_by_ref` which will cause an infinite loop.
+                created_by_ref=self.DEFAULT_AUTHOR["id"],
+                created=self.manifest.created,
+                modified=self.manifest.modified,
+                custom_properties={
+                    to_snake_case(f"x_{get_settings().project_name}_version"): VERSION,
+                    self.X_SOURCE_ID: kill_chain_name,
+                },
+            )
+        ] + [
+            MitreMatrix(
+                allow_custom=True,
+                id=self.generate_id(
+                    MitreMatrix,
+                    **{self.X_SOURCE_ID: phase.id},
+                ),
+                name=phase.name,
+                description=phase.description,
+                tactic_refs=[
+                    tactic_ref
+                    for tactic in self.manifest.get_tactics(phase.id)
+                    if (tactic_ref := self._get_tactic_ref(tactic.id))
+                ],
+                object_marking_refs=self.marking_definitions,
+                confidence=100,
+                created_by_ref=self._get_created_by_ref(*phase.contributors),
+                created=phase.created,
+                modified=phase.modified,
+                custom_properties={
+                    "x_mitre_contributors": list(
+                        set(
+                            self._get_contributor_name(contributor)
+                            for contributor in phase.external_contributors
+                        )
+                    ),
+                    self.X_SOURCE_ID: phase.id,
+                },
+            )
+            for phase in self.manifest.phases
+        ]
 
     @cached_property
     def relationships(self):
         relationships: list[Relationship] = []  # type: ignore[annotation-unchecked]
-        for technique in self.bundle.techniques:
-            if attack_pattern_id := self._get_attacked_by_ref(technique.id):
+        for technique in self.manifest.techniques:
+            if attack_pattern_ref := self._get_technique_ref(technique.id):
                 relationships.extend(
                     Relationship(
                         id=self.generate_id(
                             Relationship,
                             relationship_type=(relationship_type := "uses"),
                             source_ref=tool_id,
-                            target_ref=attack_pattern_id,
+                            target_ref=attack_pattern_ref,
                         ),
                         source_ref=tool_id,
-                        target_ref=attack_pattern_id,
-                        description=_.description,
+                        target_ref=attack_pattern_ref,
+                        description=e.description,
                         relationship_type=relationship_type,
                         created_by_ref=self._get_created_by_ref(
                             *technique.contributors
                         ),
+                        created=technique.created,
+                        modified=technique.modified,
+                        revoked=technique.revoked,
                         object_marking_refs=self.marking_definitions,
                     )
-                    for _ in technique.tools
-                    if (tool_id := self._get_tool_by_ref(_.id))
+                    for e in technique.tools
+                    if (tool_id := self._get_tool_ref(e.id))
                 )
                 relationships.extend(
                     Relationship(
                         id=self.generate_id(
                             Relationship,
                             relationship_type=(relationship_type := "mitigates"),
-                            source_ref=course_of_action_id,
-                            target_ref=attack_pattern_id,
+                            source_ref=course_of_action_ref,
+                            target_ref=attack_pattern_ref,
                         ),
-                        source_ref=course_of_action_id,
-                        target_ref=attack_pattern_id,
-                        description=_.description,
+                        source_ref=course_of_action_ref,
+                        target_ref=attack_pattern_ref,
+                        description=e.description,
                         relationship_type=relationship_type,
                         created_by_ref=self._get_created_by_ref(
                             *technique.contributors
                         ),
+                        created=technique.created,
+                        modified=technique.modified,
+                        revoked=technique.revoked,
                         object_marking_refs=self.marking_definitions,
                     )
-                    for _ in technique.mitigations
-                    if (course_of_action_id := self._get_mitigated_by_ref(_.id))
+                    for e in technique.mitigations
+                    if (course_of_action_ref := self._get_mitigation_ref(e.id))
                 )
                 if technique.detection:
                     relationships.extend(
@@ -430,23 +546,28 @@ class Stix:
                             id=self.generate_id(
                                 Relationship,
                                 relationship_type=(relationship_type := "detects"),
-                                source_ref=data_component_id,
-                                target_ref=attack_pattern_id,
+                                source_ref=data_component_ref,
+                                target_ref=attack_pattern_ref,
                             ),
-                            source_ref=data_component_id,
-                            target_ref=attack_pattern_id,
+                            source_ref=data_component_ref,
+                            target_ref=attack_pattern_ref,
                             relationship_type=relationship_type,
-                            description=_.description,
+                            description=e.description,
                             created_by_ref=self._get_created_by_ref(
                                 *technique.contributors
                             ),
+                            created=technique.created,
+                            modified=technique.modified,
+                            revoked=technique.revoked,
                             object_marking_refs=self.marking_definitions,
                         )
-                        for _ in technique.detection.items
-                        if (data_component_id := self._get_data_component_ref(_.id))
+                        for e in technique.detection.items
+                        if (data_component_ref := self._get_component_ref(e.id))
                     )
                 if technique.parent_id and (
-                    parent_id := self._get_attacked_by_ref(technique.parent_id)
+                    parent_attack_pattern_ref := self._get_technique_ref(
+                        technique.parent_id
+                    )
                 ):
                     relationships.append(
                         Relationship(
@@ -455,15 +576,18 @@ class Stix:
                                 relationship_type=(
                                     relationship_type := "subtechnique-of"
                                 ),
-                                source_ref=attack_pattern_id,
-                                target_ref=parent_id,
+                                source_ref=attack_pattern_ref,
+                                target_ref=parent_attack_pattern_ref,
                             ),
-                            source_ref=attack_pattern_id,
-                            target_ref=parent_id,
+                            source_ref=attack_pattern_ref,
+                            target_ref=parent_attack_pattern_ref,
                             relationship_type=relationship_type,
                             created_by_ref=self._get_created_by_ref(
                                 *technique.contributors
                             ),
+                            created=technique.created,
+                            modified=technique.modified,
+                            revoked=technique.revoked,
                             object_marking_refs=self.marking_definitions,
                         )
                     )
@@ -471,26 +595,15 @@ class Stix:
         return relationships
 
     @cache
-    def _get_attacked_by_ref(self, technique_id: str):
-        for attack_pattern in self.attack_patterns:
-            if technique_id == attack_pattern[self.X_SOURCE_ID]:
-                return cast(str, attack_pattern["id"])
-
-    @cache
-    def _get_created_by_ref(self, *contributors: str):
-        """Returns the first matching contributors as the author.
-
-        If not found return the default value.
-        """
-        for identity in self.identities:
-            if any(
-                contributor == identity[self.X_SOURCE_ID]
-                or contributor == identity["name"]
-                for contributor in contributors
-            ):
-                return cast(str, identity["id"])
-        else:
-            return cast(str, self.DEFAULT_AUTHOR["id"])
+    def _get_component_ref(self, object_id: str):
+        return next(
+            (
+                data_component["id"]
+                for data_component in self.mitre_data_components
+                if object_id == data_component[self.X_SOURCE_ID]
+            ),
+            None,
+        )
 
     @cache
     def _get_contributor_name(self, contributor: str):
@@ -498,995 +611,191 @@ class Stix:
 
         If not found return the original input.
         """
-        for identity in self.identities:
-            if (
-                contributor == identity[self.X_SOURCE_ID]
+        return next(
+            (
+                cast(str, identity["name"])
+                for identity in self.identities
+                if contributor == identity[self.X_SOURCE_ID]
                 or contributor == identity["name"]
-            ):
-                return cast(str, identity["name"])
-        else:
-            return contributor
+            ),
+            contributor,
+        )
 
     @cache
-    def _get_data_component_ref(self, component_id: str):
-        for data_component in self.mitre_data_components:
-            if component_id == data_component[self.X_SOURCE_ID]:
-                return cast(str, data_component["id"])
+    def _get_contributor_ref(self, object_id: str):
+        return next(
+            (
+                identity["id"]
+                for identity in self.identities
+                if object_id == identity[self.X_SOURCE_ID]
+            ),
+            None,
+        )
 
     @cache
-    def _get_data_source_ref(self, source_id: str):
-        for data_source in self.mitre_data_sources:
-            if source_id == data_source[self.X_SOURCE_ID]:
-                return cast(str, data_source["id"])
+    def _get_created_by_ref(self, *contributors: str):
+        """Returns the first matching contributors as the author.
+
+        If not found return the default value.
+        """
+        return next(
+            (
+                identity["id"]
+                for contributor in contributors
+                for identity in self.identities
+                if contributor == identity[self.X_SOURCE_ID]
+                or contributor == identity["name"]
+            ),
+            self.DEFAULT_AUTHOR["id"],
+        )
 
     @cache
-    def _get_identity_by_ref(self, identity_id: str):
-        for identity in self.identities:
-            if identity_id == identity[self.X_SOURCE_ID]:
-                return cast(str, identity["id"])
-
-    @cache
-    def _get_mitigated_by_ref(self, mitigation_id: str):
-        for course_of_action in self.course_of_actions:
-            if mitigation_id == course_of_action[self.X_SOURCE_ID]:
-                return cast(str, course_of_action["id"])
+    def _get_mitigation_ref(self, object_id: str):
+        return next(
+            (
+                course_of_action["id"]
+                for course_of_action in self.course_of_actions
+                if object_id == course_of_action[self.X_SOURCE_ID]
+            ),
+            None,
+        )
 
     @cache
     def _get_object_ref(self, object_id: str):
-        match ((__ := re.match(r"[A-Z]+", object_id)) and __.group()):
-            case "D":
-                if "." in object_id:
-                    return self._get_data_component_ref(object_id)
-                else:
-                    return self._get_data_source_ref(object_id)
-            case "M":
-                return self._get_mitigated_by_ref(object_id)
-            case "T":
-                return self._get_attacked_by_ref(object_id)
-            case "TL":
-                return self._get_tool_by_ref(object_id)
-            case _:
-                return None
+        patterns, funcs = [], {}
+        for t in self.manifest.mapping().values():
+            if callable(func := getattr(self, f"_get_{t._type}_ref", None)):
+                patterns.append(rf"(?P<{t._type}>{t._pattern})")
+                funcs[t._type] = func
+        else:
+            return (
+                next(
+                    (funcs[k](object_id) for k, v in m.groupdict().items() if v),
+                    None,
+                )
+                if patterns and (m := re.search("|".join(patterns), object_id))
+                else None
+            )
 
     @cache
-    def _get_tool_by_ref(self, tool_id: str):
-        for tool in self.tools:
-            if tool_id == tool[self.X_SOURCE_ID]:
-                return cast(str, tool["id"])
-
-
-class Markdown:
-
-    def __init__(self, bundle: Bundle):
-        self.bundle = bundle
-
-    @property
-    def home_page(self):
-        groups, subgroups = defaultdict(list[dict]), defaultdict(list[dict])
-        for technique in self.bundle.techniques:
-            if not technique.parent_id:
-                groups[technique.tactic_id].append(technique.model_dump())
-            else:
-                subgroups[technique.parent_id].append(technique.model_dump())
-        else:
-            _phases_row, _tactics_row = "", ""
-            _techniques_rows = [""] * max(0, 0, *(len(_) for _ in groups.values()))
-        for phase in self.bundle.phases:
-            _tactics_cells = []
-            for tactic in self.bundle.tactics:
-                if tactic.phase_id == phase.id:
-                    for idx in range(len(_techniques_rows)):
-                        _techniques_rows[idx] += "\n" + " " * 20
-                        if idx < len(_ := groups.get(tactic.id)) and (
-                            technique := _[idx]
-                        ):
-                            if subtechniques := subgroups.get(technique.get("id")):
-                                _techniques_rows[idx] += self._format(
-                                    "<td>"
-                                    f"\n{(" " * 24)}<details>"
-                                    f"\n{(" " * 24)}<summary>"
-                                    '<a title="{id}" href="{{% link {techniques_folder}/{id}.md %}}">'
-                                    "{id}:<br>{name}"
-                                    "</a></summary>"
-                                    f"\n{(" " * 24)}<div>\n{(" " * 28)}"
-                                    + f"\n{(" " * 28)}".join(
-                                        "<div>"
-                                        f'<a title="{{subtechniques[{__}][id]}}" '
-                                        f'href="{{{{% link {{techniques_folder}}/{{subtechniques[{__}][id]}}.md %}}}}">'
-                                        f"{{subtechniques[{__}][id]}}:<br>{{subtechniques[{__}][name]}}"
-                                        "</a>"
-                                        "</div>"
-                                        for __ in range(len(subtechniques))
-                                    )
-                                    + f"\n{(" " * 24)}</div>"
-                                    f"\n{(" " * 24)}</details>"
-                                    "</td>",
-                                    technique,
-                                    subtechniques=subtechniques,
-                                )
-                            else:
-                                _techniques_rows[idx] += self._format(
-                                    "<td>"
-                                    '<a title="{id}" href="{{% link {techniques_folder}/{id}.md %}}">'
-                                    "{id}:<br>{name}"
-                                    "</a>"
-                                    "</td>",
-                                    technique,
-                                )
-                        else:
-                            _techniques_rows[idx] += "<td></td>"
-                    else:
-                        _tactics_cells.append(
-                            self._format(
-                                "<th>"
-                                '<a title="{id}" href="{{% link {tactics_folder}/{id}.md %}}">'
-                                "{id}:<br>{name}"
-                                "</a>"
-                                "</th>",
-                                tactic.model_dump(),
-                            )
-                        )
-                else:
-                    continue
-            else:
-                _phases_row += (
-                    "\n"
-                    + " " * 20
-                    + self._format(
-                        '<th colspan="{colspan}">'
-                        '<a title="{id}" href="{{% link {phases_folder}/{id}.md %}}">{name}</a>'
-                        "</th>",
-                        phase.model_dump(),
-                        colspan=(len(_tactics_cells)) or 1,
-                    )
-                )
-                _tactics_row += (
-                    "\n"
-                    + " " * 20
-                    + (("\n" + " " * 20).join(_tactics_cells) or "<th></th>")
-                )
-                if not _tactics_cells:
-                    for idx in range(len(_techniques_rows)):
-                        _techniques_rows[idx] += "\n" + " " * 20 + "<td></td>"
-
-        yield (
-            self.bundle.subpath(),
-            f"""---
-title: {"攻擊矩陣" if self.bundle.is_root else "📥"}
-order: 100
----
-
-{self.bundle.description}
-
-當前版本: **{VERSION}**
-
-<a href="{{% link {self.bundle.filename} %}}" download>
-    <button><kbd>下載 STIX 格式檔案</kbd></button>
-</a>
-<div class="border-light text-center">
-    <div>
-        {self.bundle.source} 矩陣 -
-        <span title="Tactics, Techniques, and Procedures (TTPs)">
-            戰術、技術與程序
-        </span>
-    </div>
-    <div class="table-responsive">
-        <table>
-            <thead>
-                <tr>{_phases_row}
-                </tr>
-                <tr>{_tactics_row}
-                </tr>
-            </thead>
-            <tbody>
-                {"\n" + " " * 16 if _techniques_rows else ""}{
-                ("\n" + " " * 16).join(f"<tr>{_}\n{(" " * 16)}</tr>" for _ in _techniques_rows)}
-            </tbody>
-        </table>
-    </div>
-</div>
-""",
-        )
-
-    @property
-    def contributors_pages(self):
-        if not len(self.bundle.contributors):
-            return
-
-        index_lines = [
-            "---",
-            "title: 貢獻者",
-            "order: 8",
-            "---",
-            "",
-            "| 編號 | 名稱 | 簡介 |",
-            "| - | - | - |",
-        ]
-        for contributor in self.bundle.contributors:
-            index_lines.append(
-                self._format(
-                    "| [{id}]({id}) | {name} | {description} |",
-                    contributor.model_dump(),
-                    truncate=True,
-                )
-            )
-            yield (
-                contributor.filepath,
-                self._format(
-                    """---
-title: "{name}"
----
-
-{lables}
-
-### 摘要
-
-{description}
-
-### 聯絡資訊
-
-{contact}
-"""
-                    + self._table_of_contents_references(contributor),
-                    contributor.model_dump(),
-                    lables=" ".join(
-                        f"`{_}`"
-                        for _ in [
-                            contributor.id.upper(),
-                            contributor.type.displayname,
-                            (contributor.firstname or "")
-                            + (contributor.lastname or ""),
-                            (
-                                contributor.organization_type.value.upper()
-                                if contributor.organization_type
-                                else ""
-                            ),
-                        ]
-                        + [_.value.upper() for _ in contributor.sectors]
-                        if _
-                    ),
-                ),
-            )
-        else:
-            index_lines.append("")
-            yield (self.bundle.subpath("contributors"), "\n".join(index_lines))
-
-    @property
-    def detections_pages(self):
-        if not len(self.bundle.detection_sources):
-            return
-
-        index_lines = [
-            "---",
-            "title: 偵測資源",
-            "order: 4",
-            "---",
-            "",
-            "| 編號 | 名稱 | 簡介 |",
-            "| - | - | - |",
-        ]
-        for source in self.bundle.detection_sources:
-            index_lines.append(
-                self._format(
-                    "| [{id}]({id}) | {name} | {description} |",
-                    source.model_dump(),
-                    truncate=True,
-                )
-            )
-            component_lines = [
-                f"| [{component.name}]({{{{% link {{detection_components_folder}}/{component.id}.md %}}}}) "
-                f"| {html.escape(component.description or _BLANK).split("\n", 1)[0].strip()} |"
-                for component in self.bundle.detection_components
-                if component.parent_id == source.id
-            ]
-            if component_lines:
-                component_lines = [
-                    "| 項目 | 描述 |",
-                    "| - | - |",
-                ] + component_lines
-
-            yield (
-                source.filepath,
-                self._format(
-                    """---
-title: "偵測來源 {id}: {name}"
----
-"""
-                    + (
-                        "\n* **平台**:\n"
-                        + "、".join(f"`{_.value.upper()}`" for _ in source.platforms)
-                        + "\n"
-                        if source.platforms
-                        else ""
-                    )
-                    + (
-                        "\n* **收集層**:\n"
-                        + "、".join(
-                            f"`{_.value.upper()}`" for _ in source.collection_layers
-                        )
-                        + "\n"
-                        if source.collection_layers
-                        else ""
-                    )
-                    + """
-### 摘要
-
-{description}
-"""
-                    + (
-                        "\n### 資料元件\n\n" + "\n".join(component_lines) + "\n"
-                        if component_lines
-                        else ""
-                    )
-                    + self._table_of_contents_references(source),
-                    source.model_dump(),
-                ),
-            )
-        else:
-            index_lines.append("")
-            yield (self.bundle.subpath("detection_sources"), "\n".join(index_lines))
-
-        # Data sources also include data components
-        for component in self.bundle.detection_components:
-            technique_lines = [
-                f"| [{technique.name}]({{{{% link {{techniques_folder}}/{technique.id}.md %}}}}) "
-                f"| {html.escape(_ or _BLANK).split("\n", 1)[0].strip()} |"
-                for technique, _ in self.bundle.get_techniques(
-                    component_id=component.id
-                )
-            ]
-            if technique_lines:
-                technique_lines = [
-                    "| 技術 | 偵測到 |",
-                    "| - | - |",
-                ] + technique_lines
-
-            yield (
-                component.filepath,
-                self._format(
-                    """---
-title: "偵測元件 {id}: {name}"
----
-
-* **資料來源**:
-[{parent_id}]({{% link {detection_sources_folder}/{parent_id}.md %}})
-
-### 摘要
-
-{description}
-"""
-                    + (
-                        "\n### 發現的技術\n\n" + "\n".join(technique_lines) + "\n"
-                        if technique_lines
-                        else ""
-                    )
-                    + self._table_of_contents_references(component),
-                    component.model_dump(),
-                ),
-            )
-
-    @property
-    def mitigations_pages(self):
-        if not len(self.bundle.mitigations):
-            return
-
-        index_lines = [
-            "---",
-            "title: 緩解措施",
-            "order: 5",
-            "---",
-            "",
-            "| 編號 | 名稱 | 簡介 |",
-            "| - | - | - |",
-        ]
-        for mitigation in self.bundle.mitigations:
-            index_lines.append(
-                self._format(
-                    "| [{id}]({id}) | {name} | {description} |",
-                    mitigation.model_dump(),
-                    truncate=True,
-                )
-            )
-
-            technique_lines = [
-                f"| [{technique.name}]({{{{% link {{techniques_folder}}/{technique.id}.md %}}}}) "
-                f"| {html.escape(_ or _BLANK).split("\n", 1)[0].strip()} |"
-                for technique, _ in self.bundle.get_techniques(
-                    mitigation_id=mitigation.id
-                )
-            ]
-            if technique_lines:
-                technique_lines = [
-                    "| 技術 | 用例 |",
-                    "| - | - |",
-                ] + technique_lines
-
-            yield (
-                mitigation.filepath,
-                self._format(
-                    """---
-title: "緩解措施 {id}: {name}"
----
-
-### 摘要
-
-{description}
-"""
-                    + (
-                        "\n### 解決的技術\n\n" + "\n".join(technique_lines) + "\n"
-                        if technique_lines
-                        else ""
-                    )
-                    + self._table_of_contents_references(mitigation),
-                    mitigation.model_dump(),
-                ),
-            )
-        else:
-            index_lines.append("")
-            yield (self.bundle.subpath("mitigations"), "\n".join(index_lines))
-
-    @property
-    def notes_pages(self):
-        if not len(self.bundle.notes):
-            return
-
-        index_lines = [
-            "---",
-            "title: 筆記",
-            "order: 7",
-            "---",
-            "",
-            "| 編號 | 標題 | 內容 |",
-            "| - | - | - |",
-        ]
-        for note in self.bundle.notes:
-            index_lines.append(
-                self._format(
-                    "| [{id}]({id}) | {name} | {description} |",
-                    note.model_dump(),
-                    truncate=True,
-                )
-            )
-
-            technique_lines = [
-                f"| [{_.name}]({{{{% link {{techniques_folder}}/{_.id}.md %}}}}) "
-                f"| {html.escape(_.description or _BLANK).split("\n", 1)[0].strip()} |"
-                for _ in self.bundle.techniques
-                if _.id in note.related_ids
-            ]
-            if technique_lines:
-                technique_lines = [
-                    "| 項目 | 描述 |",
-                    "| - | - |",
-                ] + technique_lines
-
-            mitigation_lines = [
-                f"| [{_.name}]({{{{% link {{mitigations_folder}}/{_.id}.md %}}}}) "
-                f"| {html.escape(_.description or _BLANK).split("\n", 1)[0].strip()} |"
-                for _ in self.bundle.mitigations
-                if _.id in note.related_ids
-            ]
-            if mitigation_lines:
-                mitigation_lines = [
-                    "| 項目 | 描述 |",
-                    "| - | - |",
-                ] + mitigation_lines
-
-            detection_lines = [
-                f"| [{_.name}]({{{{% link {{detection_sources_folder}}/{_.id}.md %}}}}) "
-                f"| {html.escape(_.description or _BLANK).split("\n", 1)[0].strip()} |"
-                for _ in sorted(
-                    self.bundle.detection_sources + self.bundle.detection_components,
-                    key=attrgetter("id"),
-                )
-                if _.id in note.related_ids
-            ]
-            if detection_lines:
-                detection_lines = [
-                    "| 項目 | 描述 |",
-                    "| - | - |",
-                ] + detection_lines
-
-            tool_lines = [
-                f"| [{_.name}]({{{{% link {{techniques_folder}}/{_.id}.md %}}}}) "
-                f"| {html.escape(_.description or _BLANK).split("\n", 1)[0].strip()} |"
-                for _ in self.bundle.tools
-                if _.id in note.related_ids
-            ]
-            if tool_lines:
-                tool_lines = [
-                    "| 項目 | 描述 |",
-                    "| - | - |",
-                ] + tool_lines
-
-            yield (
-                note.filepath,
-                self._format(
-                    """---
-title: "筆記 {id}: {name}"
----
-"""
-                    + (
-                        "\n* **筆記類型**:\n"
-                        + "、".join(f"`{_.value.upper()}`" for _ in note.note_types)
-                        + "\n"
-                        if note.note_types
-                        else ""
-                    )
-                    + """
-### 內容
-
-{description}
-"""
-                    + (
-                        "\n### 被應用的技術\n\n" + "\n".join(technique_lines) + "\n"
-                        if technique_lines
-                        else ""
-                    )
-                    + (
-                        "\n### 關聯的緩解措施\n\n" + "\n".join(mitigation_lines) + "\n"
-                        if mitigation_lines
-                        else ""
-                    )
-                    + (
-                        "\n### 關聯的偵測資源\n\n" + "\n".join(detection_lines) + "\n"
-                        if detection_lines
-                        else ""
-                    )
-                    + (
-                        "\n### 被應用的工具\n\n" + "\n".join(tool_lines) + "\n"
-                        if tool_lines
-                        else ""
-                    )
-                    + self._table_of_contents_references(note),
-                    note.model_dump(),
-                ),
-            )
-        else:
-            index_lines.append("")
-            yield (self.bundle.subpath("notes"), "\n".join(index_lines))
-
-    @property
-    def phases_pages(self):
-        if not len(self.bundle.phases):
-            return
-
-        index_lines = [
-            "---",
-            "title: 階段",
-            "order: 1",
-            "---",
-            "",
-            "| 編號 | 名稱 | 簡介 |",
-            "| - | - | - |",
-        ]
-        for phase in self.bundle.phases:
-            index_lines.append(
-                self._format(
-                    "| [{id}]({id}) | {name} | {description} |",
-                    phase.model_dump(),
-                    truncate=True,
-                )
-            )
-
-            tactic_lines = [
-                f"| [{tactic.name}]({{{{% link {{tactics_folder}}/{tactic.id}.md %}}}}) "
-                f"| {html.escape(tactic.description or _BLANK).split("\n", 1)[0].strip()} |"
-                for tactic in self.bundle.get_tactics(phase_id=phase.id)
-            ]
-            if tactic_lines:
-                tactic_lines = [
-                    "| 戰術 | 說明 |",
-                    "| - | - |",
-                ] + tactic_lines
-
-            yield (
-                phase.filepath,
-                self._format(
-                    """---
-title: "階段 {id}: {name}"
----
-
-### 摘要
-
-{description}
-"""
-                    + (
-                        "\n### 附屬的戰術\n\n" + "\n".join(tactic_lines) + "\n"
-                        if tactic_lines
-                        else ""
-                    )
-                    + self._table_of_contents_references(phase),
-                    phase.model_dump(),
-                ),
-            )
-        else:
-            index_lines.append("")
-            yield (self.bundle.subpath("phases"), "\n".join(index_lines))
-
-    @property
-    def tactics_pages(self):
-        if not len(self.bundle.tactics):
-            return
-
-        index_lines = [
-            "---",
-            "title: 戰術",
-            "order: 2",
-            "---",
-            "",
-            "| 編號 | 名稱 | 簡介 | 階段編號 |",
-            "| - | - | - | - |",
-        ]
-        for tactic in self.bundle.tactics:
-            index_lines.append(
-                self._format(
-                    "| [{id}]({id}) | {name} | {description} | "
-                    "[{phase_id}]({{% link {phases_folder}/{phase_id}.md %}}) |",
-                    tactic.model_dump(),
-                    truncate=True,
-                )
-            )
-
-            technique_lines = [
-                f"| [{technique.name}]({{{{% link {{techniques_folder}}/{technique.id}.md %}}}}) "
-                f"| {html.escape(technique.description or _BLANK).split("\n", 1)[0].strip()} |"
-                for technique in self.bundle.get_techniques(tactic_id=tactic.id)
-            ]
-            if technique_lines:
-                technique_lines = [
-                    "| 技術 | 說明 |",
-                    "| - | - |",
-                ] + technique_lines
-
-            yield (
-                tactic.filepath,
-                self._format(
-                    """---
-title: "戰術 {id}: {name}"
----
-
-* **屬於**:
-[{phase_name}]({{% link {phases_folder}/{phase_id}.md %}})
-
-### 摘要
-
-{description}
-"""
-                    + (
-                        "\n### 附屬的技術\n\n" + "\n".join(technique_lines) + "\n"
-                        if technique_lines
-                        else ""
-                    )
-                    + self._table_of_contents_references(tactic),
-                    tactic.model_dump(),
-                    phase_name=(
-                        _.name
-                        if (_ := self.bundle.get_phase(tactic.phase_id))
-                        else tactic.phase_id
-                    ),
-                ),
-            )
-        else:
-            index_lines.append("")
-            yield (self.bundle.subpath("tactics"), "\n".join(index_lines))
-
-    @property
-    def techniques_pages(self):
-        if not len(self.bundle.techniques):
-            return
-
-        index_lines = [
-            "---",
-            "title: 技術",
-            "order: 3",
-            "---",
-            "",
-            "| 編號 | 名稱 | 簡介 | 戰術編號 |",
-            "| - | - | - | - |",
-        ]
-        for technique in self.bundle.techniques:
-            index_lines.append(
-                self._format(
-                    "| [{id}]({id}) | {name} | {description} | "
-                    "[{tactic_id}]({{% link {tactics_folder}/{tactic_id}.md %}}) |",
-                    technique.model_dump(),
-                    truncate=True,
-                )
-            )
-
-            tool_lines = [
-                f"| [{tool.name}]({{{{% link {{tools_folder}}/{tool.id}.md %}}}}) "
-                f"| {html.escape(_.description or tool.description or _BLANK).split("\n", 1)[0].strip()} |"
-                for _ in technique.tools
-                if (tool := self.bundle.get_tool(_.id))
-            ]
-            if tool_lines:
-                tool_lines = [
-                    "| 項目 | 描述 |",
-                    "| - | - |",
-                ] + tool_lines
-
-            mitigation_lines = [
-                f"| [{mitigation.name}]({{{{% link {{mitigations_folder}}/{mitigation.id}.md %}}}}) "
-                f"| {html.escape(_.description or mitigation.description or _BLANK).split("\n", 1)[0].strip()} |"
-                for _ in technique.mitigations
-                if (mitigation := self.bundle.get_mitigation(_.id))
-            ]
-            if mitigation_lines:
-                mitigation_lines = [
-                    "| 項目 | 描述 |",
-                    "| - | - |",
-                ] + mitigation_lines
-
-            component_lines = [
-                f"| [{source.name}]({{{{% link {{detection_sources_folder}}/{source.id}.md %}}}}) "
-                f"| [{component.name}]({{{{% link {{detection_components_folder}}/{component.id}.md %}}}}) "
-                f"| {html.escape(_.description or component.description or _BLANK).split("\n", 1)[0].strip()} |"
-                for _ in technique.detection.items
-                if (component := self.bundle.get_detection_component(_.id))
-                and (source := self.bundle.get_detection_source(component.parent_id))
-            ]
-            if component_lines:
-                component_lines = [
-                    "| 資料來源 | 資料元件 | 偵測到 |",
-                    "| - | - | - |",
-                ] + component_lines
-
-            subtechnique_lines = [
-                "  <details><summary>"
-                f'<a title="{subtechnique.id}" href="{{{{% link {{techniques_folder}}/{subtechnique.id}.md %}}}}">'
-                f"{subtechnique.name}</a></summary>"
-                f"<p>&emsp;&emsp;{html.escape(subtechnique.description or _BLANK).split("\n", 1)[0].strip()}</p>"
-                "</details>"
-                for subtechnique in self.bundle.get_techniques(parent_id=technique.id)
-            ]
-
-            yield (
-                technique.filepath,
-                self._format(
-                    """---
-title: "技術 {id}: {name}"
----
-
-* **戰術階段**:
-[{tactic_name}]({{% link {tactics_folder}/{tactic_id}.md %}})
-"""
-                    + (
-                        "\n* **上層技術**:\n[{parent_name}]({parent_id})\n"
-                        if technique.parent_id
-                        else ""
-                    )
-                    + (
-                        "\n* **子技術**:\n\n" + "\n".join(subtechnique_lines) + "\n"
-                        if subtechnique_lines
-                        else ""
-                    )
-                    + (
-                        "\n* **平台**:\n"
-                        + "、".join(f"`{_.value.upper()}`" for _ in technique.platforms)
-                        + "\n"
-                        if technique.platforms
-                        else ""
-                    )
-                    + (
-                        "\n* **所需權限**:\n"
-                        + "、".join(
-                            f"`{_.value.upper()}`" for _ in technique.permissions
-                        )
-                        + "\n"
-                        if technique.permissions
-                        else ""
-                    )
-                    + """
-### 摘要
-
-{description}
-"""
-                    + (
-                        "\n### 工具\n\n" + "\n".join(tool_lines) + "\n"
-                        if tool_lines
-                        else ""
-                    )
-                    + (
-                        "\n### 緩解措施\n\n" + "\n".join(mitigation_lines) + "\n"
-                        if mitigation_lines
-                        else ""
-                    )
-                    + (
-                        "\n### 偵測資訊\n\n"
-                        + (
-                            "{detection[description]}\n\n"
-                            if technique.detection.description
-                            else ""
-                        )
-                        + "\n".join(component_lines)
-                        + "\n"
-                        if technique.detection.description or component_lines
-                        else ""
-                    )
-                    + self._table_of_contents_references(technique),
-                    technique.model_dump(),
-                    parent_name=(
-                        _.name
-                        if (_ := self.bundle.get_technique(technique.parent_id))
-                        else technique.parent_id
-                    ),
-                    tactic_name=(
-                        _.name
-                        if (_ := self.bundle.get_tactic(technique.tactic_id))
-                        else technique.tactic_id
-                    ),
-                ),
-            )
-        else:
-            index_lines.append("")
-            yield (self.bundle.subpath("techniques"), "\n".join(index_lines))
-
-    def _format(self, template: str, data: dict = {}, *, truncate=False, **kwargs):
-        data.update(self.bundle.subfolder_mapping, **kwargs)
-        return template.format_map(
-            defaultdict(
-                lambda: _BLANK,
-                **{
-                    k: (
-                        html.escape(
-                            v.split("\n", 1)[0].strip() or _BLANK if truncate else v
-                        )
-                        if isinstance(v, str)
-                        else v
-                    )
-                    for k, v in data.items()
-                    if v not in ("", None)
-                },
-            )
-        )
-
-    def _table_of_contents_references(self, data: Base):
-        return (
+    def _get_source_ref(self, object_id: str):
+        return next(
             (
-                "\n### 參考資料\n\n"
-                + "\n".join(
-                    idx_str
-                    + (
-                        f"[{title}]({external_reference.url})"
-                        if external_reference.url
-                        else title
-                    )
-                    for idx, external_reference in enumerate(
-                        data.external_references[1:], start=1
-                    )
-                    if (
-                        title := html.escape(
-                            external_reference.description
-                            or (
-                                f"{external_reference.source_name} ({external_reference.external_id})"
-                                if external_reference.external_id
-                                else external_reference.source_name
-                            )
-                        ).replace("\n", f"\n{" " * len(idx_str := f"{idx}. ")}")
-                    )
-                )
-                + "\n"
-            )
-            if 1 < len(data.external_references)
-            else ""
+                data_source["id"]
+                for data_source in self.mitre_data_sources
+                if object_id == data_source[self.X_SOURCE_ID]
+            ),
+            None,
         )
 
-    @property
-    def tools_pages(self):
-        if not len(self.bundle.tools):
-            return
+    @cache
+    def _get_phase_ref(self, object_id: str):
+        return next(
+            (
+                tactic["id"]
+                for tactic in self.mitre_matrix
+                if object_id == tactic[self.X_SOURCE_ID]
+            ),
+            None,
+        )
 
-        index_lines = [
-            "---",
-            "title: 工具",
-            "order: 6",
-            "---",
-            "",
-            "| 編號 | 名稱 | 簡介 |",
-            "| - | - | - |",
-        ]
-        for tool in self.bundle.tools:
-            index_lines.append(
-                self._format(
-                    "| [{id}]({id}) | {name} | {description} |",
-                    tool.model_dump(),
-                    truncate=True,
-                )
-            )
+    @cache
+    def _get_tactic_ref(self, object_id: str):
+        return next(
+            (
+                tactic["id"]
+                for tactic in self.mitre_tactics
+                if object_id == tactic[self.X_SOURCE_ID]
+            ),
+            None,
+        )
 
-            technique_lines = [
-                f"| [{technique.name}]({{{{% link {{techniques_folder}}/{technique.id}.md %}}}}) "
-                f"| {html.escape(_ or _BLANK).split("\n", 1)[0].strip()} |"
-                for technique, _ in self.bundle.get_techniques(tool_id=tool.id)
-            ]
-            if technique_lines:
-                technique_lines = [
-                    "| 技術 | 用例 |",
-                    "| - | - |",
-                ] + technique_lines
+    @cache
+    def _get_technique_ref(self, object_id: str):
+        return next(
+            (
+                attack_pattern["id"]
+                for attack_pattern in self.attack_patterns
+                if object_id == attack_pattern[self.X_SOURCE_ID]
+            ),
+            None,
+        )
 
-            yield (
-                tool.filepath,
-                self._format(
-                    """---
-title: "工具 {id}: {name}"
----
-"""
-                    + (
-                        "\n* **平台**:\n"
-                        + "、".join(f"`{_.value.upper()}`" for _ in tool.platforms)
-                        + "\n"
-                        if tool.platforms
-                        else ""
-                    )
-                    + (
-                        "\n* **工具類型**:\n"
-                        + "、".join(f"`{_.value.upper()}`" for _ in tool.tool_types)
-                        + "\n"
-                        if tool.tool_types
-                        else ""
-                    )
-                    + ("\n* **工具版本**:{tool_version}\n" if tool.tool_version else "")
-                    + """
-### 摘要
-
-{description}
-"""
-                    + (
-                        "\n### 使用的技術\n\n" + "\n".join(technique_lines) + "\n"
-                        if technique_lines
-                        else ""
-                    )
-                    + self._table_of_contents_references(tool),
-                    tool.model_dump(),
-                ),
-            )
-        else:
-            index_lines.append("")
-            yield (self.bundle.subpath("tools"), "\n".join(index_lines))
+    @cache
+    def _get_tool_ref(self, object_id: str):
+        return next(
+            (tool["id"] for tool in self.tools if object_id == tool[self.X_SOURCE_ID]),
+            None,
+        )
 
 
 class Parser:
 
-    def __init__(self, **kwargs):
-        self.bundle = Bundle(kwargs)
-        self.stix = Stix(self.bundle)
-        self.markdown = Markdown(self.bundle)
+    def __init__(self, manifest: Manifest):
+        self.manifest = manifest
+        self.stix = Stix(self.manifest)
 
     def to_stix(self) -> str:
         """Fetch JSON-formatted SITX bundle objects file.
 
-        .. seealso::
-            :py:meth:`stix2.MemoryStore.save_to_file` - Write SITX objects to JSON file, as a STIX Bundle.
-
-        :return: Path of bundle file
+        :returns: Path of bundle file.
         """
-        memory_store = MemoryStore()
-        memory_store.add(self.stix.marking_definitions)
-        memory_store.add(self.stix.identities)
-        memory_store.add(self.stix.attack_patterns)
-        memory_store.add(self.stix.course_of_actions)
-        memory_store.add(self.stix.tools)
-        memory_store.add(self.stix.notes)
-        memory_store.add(self.stix.relationships)
-        memory_store.add(self.stix.mitre_data_components)
-        memory_store.add(self.stix.mitre_data_sources)
-        memory_store.add(self.stix.mitre_tactics)
-        memory_store.add(self.stix.mitre_matrix)
-        return memory_store.save_to_file(self.bundle.filepath)
+        bundle = Bundle(
+            *self.stix.marking_definitions,
+            *self.stix.identities,
+            *self.stix.attack_patterns,
+            *self.stix.course_of_actions,
+            *self.stix.tools,
+            *self.stix.notes,
+            *self.stix.relationships,
+            *self.stix.mitre_data_components,
+            *self.stix.mitre_data_sources,
+            *self.stix.mitre_tactics,
+            *self.stix.mitre_matrix,
+            *(
+                []
+                if any(
+                    identity["id"] == self.stix.DEFAULT_AUTHOR["id"]
+                    for identity in self.stix.identities
+                )
+                else [self.stix.DEFAULT_AUTHOR]
+            ),
+            allow_custom=True,
+        )
 
-    def to_markdown(self):
+        filepath = get_settings().artifact_path
+        filepath.parent.mkdir(parents=True, exist_ok=True)
+        with open(filepath, "w", encoding="utf-8") as f:
+            f.write(bundle.serialize(pretty=False, ensure_ascii=False, indent=4))
+
+        return filepath
+
+    def to_json(self):  # type: ignore[annotation-unchecked]
         """Fetch Markdown-formatted documents of the framework according to the bundle data.
 
-        :return: Storage path and content of each file"""
-        yield from self.markdown.home_page
-        # yield from self.markdown.contributors_pages
-        yield from self.markdown.detections_pages
-        yield from self.markdown.mitigations_pages
-        yield from self.markdown.notes_pages
-        yield from self.markdown.phases_pages
-        yield from self.markdown.tactics_pages
-        yield from self.markdown.techniques_pages
-        yield from self.markdown.tools_pages
+        :returns: Storage path and content of each file.
+        """
+        grouped: defaultdict[str, list] = defaultdict(list)
+        for k, v in Manifest.mapping().items():
+            is_identity = v._group in (Individual._group, Organization._group)
+            grouped[v._group].extend(
+                {"type": v._type}
+                | e.model_dump(
+                    mode="json",
+                    by_alias=True,
+                    context={"as_relative_url": True, "exclude_self": True},
+                )
+                for e in cast(list, getattr(self.manifest, k))
+                if isinstance(e, v)
+                and (e.id != get_settings().author.alias if is_identity else True)
+            )
+
+        for group, items in grouped.items():
+            filepath = get_settings().get_file_path(f"{group}.json")
+            filepath.parent.mkdir(parents=True, exist_ok=True)
+            with open(filepath, "w", encoding="utf-8") as f:
+                json.dump(
+                    sorted(items, key=itemgetter("id")), f, ensure_ascii=False, indent=4
+                )
+
+        return get_settings().get_file_path()

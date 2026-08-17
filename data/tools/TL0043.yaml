@@ -13,5 +13,3 @@ external_references:
   - source_name: Coturn
     description: Coturn. webrtc-turn-server. 檢索日期 2025-03-12.
     url: https://github.com/coturn/coturn
-contributors:
-  - NICS

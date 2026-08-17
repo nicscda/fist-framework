@@ -13,5 +13,3 @@ external_references:
   - source_name: FaceForensics
     description: FaceForensics. facial-manipulation-detection. 檢索日期 2025-03-12.
     url: https://github.com/ondyari/FaceForensics
-contributors:
-  - NICS

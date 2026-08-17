@@ -15,16 +15,8 @@ fn() {
 
 	case "$command" in
 		title)
-			if [[ "$GITHUB_HEAD_REF" =~ ^(release-please|dependabot).* ]]; then
-				echo "mode=squash" >> "${GITHUB_OUTPUT:-/dev/null}"
-				if [[ "$GITHUB_ACTOR" != *'[bot]' ]]; then
-					gh pr edit "${args[pr-number]}" \
-						--title "$(gh pr view "${args[pr-number]}" \
-						--json commits --jq '.commits | first | .messageHeadline')"
-					echo "::warning::Do not change the title of PRs created by a bot."
-				fi
-			elif ! pattern=$(
-				gh api "repos/${args[repository]}/rules/branches/$GITHUB_HEAD_REF" \
+			if ! pattern=$(
+				gh api "repos/${args[repo]}/rules/branches/$GITHUB_HEAD_REF" \
 					--jq 'first(.[] | select(.type == "commit_message_pattern")) | .parameters.pattern'
 			); then
 				echo "::warning::Cannot get commit message pattern."
@@ -36,23 +28,12 @@ fn() {
 			else
 				echo "mode=squash" >> "${GITHUB_OUTPUT:-/dev/null}"
 			fi
-			# Re-enable to trigger auto-merge with new inputs
-			if enabled_at=$(
-				gh pr view "${args[pr-number]}" \
-					--repo "${args[repository]}" \
-					--json 'autoMergeRequest' \
-					--jq '.autoMergeRequest.enabledAt // empty'
-			) && [[ -n "$enabled_at" ]]; then
-				gh pr merge "${args[pr-number]}" \
-					--repo "${args[repository]}" \
-					--disable-auto
-			fi
 			;;
 		body)
 			# 0. Fetch current PR body
-			local -r body="$(gh api "repos/${args[repository]}/pulls/${args[pr-number]}" --jq '.body')"
+			local -r body="$(gh api "repos/${args[repo]}/pulls/${args[pr-number]}" --jq '.body')"
 
-			# 1. Fetch language code from template comment
+			# 1. Set locale messages by language code from template
 			local -r lang="$(
 				awk '/<!--/,/-->/ {
 					block = block $0 "\n"
@@ -64,36 +45,41 @@ fn() {
 					}
 				}' <<< "${body:?}"
 			)"
-			local -A messages=(
-				[title]="Section Review"
-				[col1]="Section"
-				[col2]="Status"
-				[col3]="Note"
-				[success]="Passed"
-				[error-type-missing]="Missing"
-				[error-type-missing-all]="Missing all required sections"
-				[error-type-missing-item]="Missing items"
-				[error-type-missing-option]="Missing options"
-				[error-type-required]="Cannot be empty"
-				[error-type-any]="At least one must be selected"
-				[error-type-all]="%s item(s) remaining"
-			)
-			if [[ "$lang" == zh_TW ]]; then
-				messages=(
-					[title]="驗證結果"
-					[col1]="區塊"
-					[col2]="狀態"
-					[col3]="備註"
-					[success]="通過"
-					[error-type-missing]="缺少此區塊"
-					[error-type-missing-all]="缺少所有必要區塊"
-					[error-type-missing-item]="項目遺失"
-					[error-type-missing-option]="選項遺失"
-					[error-type-required]="不可空白"
-					[error-type-any]="至少需選擇 1 項"
-					[error-type-all]="尚有 %s 項未完成"
-				)
-			fi
+			local -A messages
+			case "$lang" in
+				zh_TW)
+					messages=(
+						[title]="驗證結果"
+						[col1]="區塊"
+						[col2]="狀態"
+						[col3]="備註"
+						[success]="通過"
+						[error-type-missing]="缺少此區塊"
+						[error-type-missing-all]="缺少所有必要區塊"
+						[error-type-missing-item]="項目遺失"
+						[error-type-missing-option]="選項遺失"
+						[error-type-required]="不可空白"
+						[error-type-any]="至少需選擇 1 項"
+						[error-type-all]="尚有 %s 項未完成"
+					)
+					;;
+				*)
+					messages=(
+						[title]="Section Review"
+						[col1]="Section"
+						[col2]="Status"
+						[col3]="Note"
+						[success]="Passed"
+						[error-type-missing]="Missing"
+						[error-type-missing-all]="Missing all required sections"
+						[error-type-missing-item]="Missing items"
+						[error-type-missing-option]="Missing options"
+						[error-type-required]="Cannot be empty"
+						[error-type-any]="At least one must be selected"
+						[error-type-all]="%s item(s) remaining"
+					)
+					;;
+			esac
 
 			# 2. Run a cycle checking
 			local -A matrix=(
@@ -182,10 +168,10 @@ fn() {
 					status="failure"
 				fi
 				# 2-4. Map job status
-				gh api "repos/${args[repository]}/statuses/${args[sha]}" \
+				gh api "repos/${args[repo]}/statuses/${args[sha]}" \
 					--method POST \
 					--field state="${status}" \
-					--field target_url="https://github.com/${args[repository]}/actions/runs/${args[run-id]}" \
+					--field target_url="https://github.com/${args[repo]}/actions/runs/${args[run-id]}" \
 					--field description="${section}: ${error_msg:-"${messages[success]}"}" \
 					--field context="--> Checked: SECTION-${i}" \
 					--template "$template"

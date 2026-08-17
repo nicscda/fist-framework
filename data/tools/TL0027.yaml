@@ -13,5 +13,3 @@ external_references:
   - source_name: Graph Neural Networks for Financial Fraud Detection
     description: arXiv. financial-fraud-detection-research. 檢索日期 2025-03-12.
     url: https://arxiv.org/abs/2411.05815
-contributors:
-  - NICS

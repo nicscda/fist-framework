@@ -1,0 +1,19 @@
+---
+type: technique
+id: T0062.002
+name: 製作假電話號碼（偽基地台、貓池）
+tactic_id: TA0002
+description: |
+  詐騙者會使用可匿名、可替換或難以回溯的電話號碼與受害者建立聯繫，或用於註冊各式線上服務與通訊帳號，藉由簡訊與語音帶來的「看似可追溯」假象提升可信度，同時降低真實身份暴露與被追查的風險。
+
+  常見作法包含使用 VoIP/虛擬門號、預付卡與貓池（SIM farm）進行批量控號與輪替，以及來電顯示偽造等手段；在部分情境下亦可能搭配偽基地台等設備進行通訊誘導或資料蒐集。詐騙者可將此類門號用於假客服來電、釣魚簡訊、帳號驗證流程與二次驗證繞過等鏈路，強化整體詐騙的可行性。
+
+permissions: []
+platforms: []
+tools: []
+mitigations: []
+detection:
+  description:
+  components: []
+
+external_references: []

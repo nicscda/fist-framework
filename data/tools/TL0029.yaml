@@ -13,5 +13,3 @@ external_references:
   - source_name: FANDC
     description: Scientific Reports. fake-news-detection-classification. 檢索日期 2025-03-12.
     url: https://doi.org/10.1038/s41598-024-76102-9
-contributors:
-  - NICS

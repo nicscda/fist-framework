@@ -1,30 +1,84 @@
 [build-system]
-requires = ["hatchling>=1.14", "hatch-requirements-txt"]
+requires = ["hatchling>=1.14", "hatch-requirements-txt", "hatch-fancy-pypi-readme"]
 build-backend = "hatchling.build"
 
 [project]
 name = "fist"
-description = "STIX2 bundle & WIKI documentation Generator"
-dynamic = ["dependencies"]
+version = "0.0.13"  # x-release-please-version
+description = "FIST framework tool for generating STIX2 bundle and customizable documentation"
+authors = [
+    {name = "FIST team", email = "nicscda@nics.nat.gov.tw"},
+]
+license = "MIT"
+license-files = ["LICENSE"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Topic :: Security",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+]
+dynamic = ["dependencies", "readme"]
 requires-python = ">= 3.12"
-version = "1.0.0"  # x-release-please-version
+keywords = ["cti", "stix", "threat-intelligence"]
+
+[project.urls]
+Homepage = "https://nicscda.github.io/fist-framework"
+Source = "https://github.com/nicscda/fist-framework"
+Changelog = "https://github.com/nicscda/fist-framework/releases"
 
 [project.scripts]
 fist = "fist.cli.__main__:main"
 
+[dependency-groups]
+dev = ["black", "flake8", "isort", "mypy", "ruff"]
+
 [tool.hatch.metadata.hooks.requirements_txt]
 files = ["src/requirements.txt"]
 
-[tool.hatch.build.targets.wheel]
-only-include = ["src"]
-only-packages = true
-
-[tool.hatch.build.targets.wheel.sources]
-"src" = "fist"
+[tool.hatch.metadata.hooks.fancy-pypi-readme]
+content-type = "text/markdown"
+fragments = [{path = "i18n/zh_TW/src/README.md"}]
+substitutions = [{pattern = '\n?\[\!\[.*\]\(.*\)\]\(.*\)\n', replacement = ''}]
 
 [tool.hatch.build]
 dev-mode-dirs = ["."]
-dev-mode-exact = true
+only-packages = true
+only-include = ["/src", "/i18n"]
+artifacts = [
+    "config.yml",
+    "/**/*.po",
+]
+
+[tool.hatch.build.targets.wheel.sources]
+"src" = "fist"
+"i18n" = "fist/i18n"
 
 [tool.hatch.envs.default.scripts]
 fist = "python -m src.cli {args}"
+
+[tool.black]
+target-version = ["py312"]
+
+[tool.isort]
+profile = "black"
+src_paths = ["src"]
+known_first_party = ["src"]
+
+[tool.mypy]
+ignore_missing_imports = true
+namespace_packages = true
+explicit_package_bases = true
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F"]
+ignore = ["E203"]
+
+[tool.uv]
+required-version = "==0.12.1"

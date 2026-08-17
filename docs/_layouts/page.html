@@ -1,0 +1,17 @@
+---
+layout: default
+---
+<article class="post">
+
+  <header class="post-header d-flex align-items-center">
+    {%- if page.source.headshot -%}
+    <img src="{{- page.source.headshot -}}" alt="{{- page.source.name -}}" class="rounded-circle me-3" width="48" height="48">
+    {%- endif -%}
+    <h1 class="post-title mb-1">{{ page.title | escape }}</h1>
+  </header>
+
+  <div class="post-content">
+    {{- content -}}
+  </div>
+
+</article>

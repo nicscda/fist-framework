@@ -1,0 +1,182 @@
+# Internationalization data for Jekyll site
+# Keys are lowercase, values are formatted as needed
+
+# Internal settings (_*)
+"_site_title": "FIST Framework"
+"_site_description": "Framework for categorizing TTPs across the fraud lifecycle, supporting threat identification and risk assessment."
+"_site_author": "National Institute of Cyber Security"
+"_native_name": "English"
+"_separator": ", "
+"_license": |-
+  Inspired by [MITRE ATT&CK®](https://attack.mitre.org)
+"_reliability_A": "completely reliable"
+"_reliability_B": "usually reliable"
+"_reliability_C": "fairly reliable"
+"_reliability_D": "not usually reliable"
+"_reliability_E": "unreliable"
+"_reliability_F": "reliability cannot be judged"
+
+# Common terms
+"id":
+"name":
+"summary":
+"types":
+"version":
+"total":
+
+# Navigation and UI
+"home":
+"contact us":
+"back to list":
+"copyright":
+"maintainers":
+
+# Site content
+"current version":
+"Download SIX bundle":
+"matrix":
+"Tactics, Techniques, and Procedures":
+"page not found":
+"the requested page could not be found.":
+"no data found":
+"deprecation warning":
+"references":
+
+# Framework terms (scopes and singular forms)
+"phases":
+"phase":
+"tactics":
+"tactic":
+"techniques":
+"technique":
+"mitigations":
+"mitigation":
+"detections":
+"detection":
+"tools":
+"tool":
+"notes":
+"note":
+"contributors":
+"contributor":
+"sources":
+"source":
+"components":
+"component":
+
+# Record metadata
+"created":
+"last modified":
+
+# Hierarchical labels
+"top-level entries":
+"child entries":
+"top-level techniques":
+"sub-techniques":
+
+# Technique/record attributes
+"belongs to phase":
+"parent technique":
+"platforms":
+"permissions":
+"collection layers":
+"detection components":
+"associated tactics":
+"associated techniques":
+
+# Related sections
+"related phases":
+"related tactics":
+"related techniques":
+"related mitigations":
+"related detections":
+"related tools":
+
+# Contributor attributes
+"identity class":
+"individual":
+"organization":
+"firstname":
+"lastname":
+"roles":
+"sectors":
+"reliability":
+"contact information":
+
+# Organization types (vocabulary)
+"constituent":
+"csirt":
+"other":
+"partner":
+"vendor":
+
+# Collection layers (vocabulary)
+"cloud-control-plane":
+"container":
+"host":
+"network":
+"OSINT":
+
+# Note types (vocabulary)
+"analysis":
+"assessment":
+"external":
+"feedback":
+"internal":
+
+# Platforms (vocabulary)
+"android":
+"linux":
+"macos":
+"windows":
+
+# Permissions (vocabulary)
+"Administrator":
+"root":
+"User":
+
+# Tool types (vocabulary)
+"denial-of-service":
+"exploitation":
+"information-gathering":
+"network-capture":
+"credential-exploitation":
+"remote-access":
+"vulnerability-scanning":
+"unknown":
+
+# Industry sectors (vocabulary)
+"agriculture":
+"aerospace":
+"automotive":
+"chemical":
+"commercial":
+"communications":
+"construction":
+"defense":
+"education":
+"energy":
+"entertainment":
+"financial-services":
+"government":
+"emergency-services":
+"government-national":
+"government-regional":
+"government-local":
+"government-public-services":
+"healthcare":
+"hospitality-leisure":
+"infrastructure":
+"dams":
+"nuclear":
+"water":
+"insurance":
+"manufacturing":
+"mining":
+"non-profit":
+"pharmaceuticals":
+"retail":
+"technology":
+"telecommunications":
+"transportation":
+"utilities":

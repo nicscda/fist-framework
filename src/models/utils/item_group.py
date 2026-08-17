@@ -1,5 +1,6 @@
 import re
-from typing import Annotated, ClassVar, Generic, Mapping, TypeVar
+from gettext import gettext as _
+from typing import Annotated, ClassVar, Generic, TypeVar
 
 from pydantic import BaseModel, ConfigDict, Field, StringConstraints
 from pydantic.fields import FieldInfo
@@ -8,13 +9,13 @@ from .validator import duplicate_validator
 
 
 class Item(BaseModel):
-    """資料項目模型，用於統一結構生成。"""
+    """Data Item for structured data generation."""
 
     _pattern: ClassVar[str] = ""
     """ID format, keep empty if no restrictions."""
 
     model_config = ConfigDict(
-        title="資料項",
+        title=_("data item").title(),
         extra="ignore",
         str_strip_whitespace=True,
         str_max_length=1000,
@@ -26,7 +27,7 @@ class Item(BaseModel):
     id: Annotated[
         str,
         Field(
-            title="編號",
+            title=_("id").title(),
             min_length=1,
             max_length=100,
         ),
@@ -34,9 +35,9 @@ class Item(BaseModel):
     description: Annotated[
         str | None,
         Field(
-            title="說明",
+            title=_("description").title(),
             default=None,
-            allow_multiple_lines=True,
+            json_schema_extra={"multiline": True},
         ),
     ]
 
@@ -59,33 +60,34 @@ class Item(BaseModel):
         """
         super().__pydantic_init_subclass__(**kwargs)
         cls.model_fields.update(
-            id=FieldInfo.merge_field_infos(
-                cls.model_fields.get("id"),
-                FieldInfo.from_annotation(
-                    Annotated[
-                        str,
-                        StringConstraints(
-                            to_upper=True,
-                            pattern=(
-                                re.compile(cls._pattern, re.IGNORECASE)
-                                if cls._pattern
-                                else None
-                            ),
+            id=FieldInfo.from_annotation(
+                Annotated[
+                    str,
+                    cls.model_fields.get("id"),
+                    StringConstraints(
+                        to_upper=True,
+                        pattern=(
+                            re.compile(cls._pattern, re.IGNORECASE)
+                            if cls._pattern
+                            else None
                         ),
-                    ]
-                ),
+                    ),
+                ]
             )
         )
         cls.model_rebuild(force=True)
+
+    def __hash__(self):
+        return self.id.__hash__()
 
 
 T = TypeVar("T", bound=Item, covariant=True)
 
 
 class Group(BaseModel, Generic[T]):
-    """資料群組模型，用於統一結構生成。"""
+    """Data collection for structured data collections"""
 
-    _items_info: ClassVar[Mapping] = {}
+    _items_field_options: ClassVar[dict] = {}
     """Additional information about `items` field (e.g., alias)"""
 
     model_config = ConfigDict(
@@ -102,9 +104,9 @@ class Group(BaseModel, Generic[T]):
     description: Annotated[
         str | None,
         Field(
-            title="說明",
+            title=_("description").title(),
             default=None,
-            allow_multiple_lines=True,
+            json_schema_extra={"multiline": True},
         ),
     ]
     items: Annotated[
@@ -137,11 +139,14 @@ class Group(BaseModel, Generic[T]):
         :param kwargs: Any keyword arguments passed to the class definition that aren't used internally by pydantic.
         """
         super().__pydantic_init_subclass__(**kwargs)
-        if cls._items_info:
+        if cls._items_field_options:
             cls.model_fields.update(
-                items=FieldInfo.merge_field_infos(
-                    cls.model_fields.get("items"),
-                    **cls._items_info,
+                items=FieldInfo.from_annotation(
+                    Annotated[
+                        (field_info := cls.model_fields.get("items")).annotation,
+                        field_info,
+                        Field(**cls._items_field_options),
+                    ]
                 )
             )
             cls.model_rebuild(force=True)

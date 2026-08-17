@@ -1,0 +1,699 @@
+# Chinese translations for fist package
+# fist 套件的正體中文翻譯.
+# Copyright (C) 2026 National Institute of Cyber Security
+# This file is distributed under the same license as the fist package.
+# Automatically generated, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: fist 0.0.13\n"
+"Report-Msgid-Bugs-To: nicscda@nics.nat.gov.tw\n"
+"POT-Creation-Date: 2026-07-31 15:56+0800\n"
+"PO-Revision-Date: 2026-07-31 15:56+0800\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#, python-format
+msgid "%(prog)s, version %(version)s"
+msgstr "%(prog)s, 版本 %(version)s"
+
+#, python-brace-format
+msgid "(Deprecated) {text}"
+msgstr "(已棄用) {text}"
+
+msgid "(dynamic)"
+msgstr "(動態)"
+
+msgid "Aborted!"
+msgstr "已中止!"
+
+msgid "Argument {name!r} takes {nargs} values."
+msgstr "引數 {name!r} 需要 {nargs} 個值。"
+
+#, python-brace-format
+msgid ""
+"Choose from:\n"
+"\t{choices}"
+msgstr ""
+"選擇:\n"
+"\t{choices}"
+
+msgid "Commands"
+msgstr "指令"
+
+msgid "Could not open file {filename!r}: {message}"
+msgstr "無法開啟檔案 {filename!r}: {message}"
+
+msgid "Couldn't detect Bash version, shell completion is not supported."
+msgstr "無法偵測 Bash 版本，不支援 Shell 自動補齊功能。"
+
+msgid "DeprecationWarning: The command {name!r} is deprecated."
+msgstr "棄用警告: 指令 {name!r} 已被棄用。"
+
+msgid "Did you mean {possibility}?"
+msgid_plural "(Possible options: {possibilities})"
+msgstr[0] "您可能指 {possibility} 嗎?"
+msgstr[1] "(可能的選項: {possibilities})"
+
+msgid "Error: The two entered values do not match."
+msgstr "錯誤: 兩次輸入的值不符。"
+
+msgid "Error: The value you entered was invalid."
+msgstr "錯誤: 您輸入的值無效。"
+
+msgid "Error: invalid input"
+msgstr "錯誤: 無效輸入"
+
+#, python-brace-format
+msgid "Error: {e.message}"
+msgstr "錯誤: {e.message}"
+
+#, python-brace-format
+msgid "Got unexpected extra argument ({args})"
+msgid_plural "Got unexpected extra arguments ({args})"
+msgstr[0] "收到未預期額外的參數 ({args})"
+msgstr[1] "收到未預期額外的參數 ({args})"
+
+#, python-brace-format
+msgid "Invalid value for {param_hint}: {message}"
+msgstr "{param_hint} 的值無效: {message}"
+
+#, python-brace-format
+msgid "Invalid value: {message}"
+msgstr "無效的值: {message}"
+
+msgid "Local configuration saved: {path!r}."
+msgstr "本地設定檔儲存在: {path!r}."
+
+msgid "Missing argument"
+msgstr "缺少引數"
+
+msgid "Missing command."
+msgstr "缺少指令。"
+
+msgid "Missing option"
+msgstr "缺少選項"
+
+msgid "Missing parameter"
+msgstr "缺少參數"
+
+#, python-brace-format
+msgid "Missing parameter: {param_name}"
+msgstr "缺少參數: {param_name}"
+
+#, python-brace-format
+msgid "Missing {param_type}"
+msgstr "缺少 {param_type}"
+
+msgid "No such command {name!r}."
+msgstr "沒有 {name!r} 這樣的指令。"
+
+#, python-brace-format
+msgid "No such option: {name}"
+msgstr "沒有這樣的選項: {name}"
+
+msgid "Option {name!r} does not take a value."
+msgstr "選項 {name!r} 缺少輸入值。"
+
+msgid "Option {name!r} requires an argument."
+msgid_plural "Option {name!r} requires {nargs} arguments."
+msgstr[0] "選項 {name!r} 需要一個參數。"
+msgstr[1] "選項 {name!r} 需要 {nargs} 個參數。"
+
+msgid "Options"
+msgstr "選項"
+
+msgid "Press any key to continue..."
+msgstr "請輸入任意鍵繼續..."
+
+msgid "Repeat for confirmation"
+msgstr "重複確認"
+
+msgid "Shell completion is not supported for Bash versions older than 4.4."
+msgstr "Bash 4.4 之前的版本不支援 Shell 自動補齊功能。"
+
+msgid "Show the version and exit."
+msgstr "顯示版本資訊並退出。"
+
+msgid "Show this message and exit."
+msgstr "顯示幫助訊息並退出。"
+
+msgid "Source file path for git timestamp tracking."
+msgstr "用於 git 時間戳記追蹤的來源檔案路徑。"
+
+#, python-brace-format
+msgid "Takes {nargs} values but 1 was given."
+msgid_plural "Takes {nargs} values but {len} were given."
+msgstr[0] "需要 {nargs} 個值，但只提供了 1 個。"
+msgstr[1] "需要 {nargs} 個值，但只提供了 {len} 個。"
+
+#, python-brace-format
+msgid "Try '{command} {option}' for help."
+msgstr "嘗試 '{command} {option}' 以取得幫助訊息。"
+
+msgid "Usage:"
+msgstr "用法:"
+
+msgid "Value must be an iterable."
+msgstr "值必須是可迭代的。"
+
+#, python-brace-format
+msgid "default: {default}"
+msgstr "預設: {default}"
+
+#, python-brace-format
+msgid "env var: {var}"
+msgstr "環境變數: {var}"
+
+msgid "path"
+msgstr "路徑"
+
+msgid "required"
+msgstr "必要"
+
+msgid "unknown error"
+msgstr "未知錯誤"
+
+#, python-brace-format
+msgid "{editor}: Editing failed"
+msgstr "{editor}: 編輯失敗"
+
+#, python-brace-format
+msgid "{editor}: Editing failed: {e}"
+msgstr "{editor}: 編輯失敗: {e}"
+
+#, python-brace-format
+msgid "{len_type} values are required, but {len_value} was given."
+msgid_plural "{len_type} values are required, but {len_value} were given."
+msgstr[0] "需要符合 {len_type} 的值，但給了 {len_value}。"
+msgstr[1] "需要符合 {len_type} 的值，但給了 {len_value}。"
+
+msgid "{name} {filename!r} does not exist."
+msgstr "{name} {filename!r} 不存在。"
+
+msgid "{name} {filename!r} is not executable."
+msgstr "{name} {filename!r} 不可執行。"
+
+msgid "{name} {filename!r} is not readable."
+msgstr "{name} {filename!r} 不可讀取。"
+
+msgid "{name} {filename!r} is not writable."
+msgstr "{name} {filename!r} 不可寫入。"
+
+msgid "{value!r} does not match the format {format}."
+msgid_plural "{value!r} does not match the formats {formats}."
+msgstr[0] "{value!r} 不符合 {format} 樣式。"
+msgstr[1] "{value!r} 不符合 {formats} 任何樣式。"
+
+msgid "{value!r} does not match the pattern {pattern!r}."
+msgstr "{value!r} 不符合 {pattern!r} 格式。"
+
+msgid "{value!r} is not a valid UUID."
+msgstr "{value!r} 不是有效的 UUID。"
+
+msgid "{value!r} is not a valid boolean."
+msgstr "{value!r} 不是有效的布林值。"
+
+msgid "{value!r} is not a valid parent ID."
+msgstr "{value!r} 不是有效的父代資料編號。"
+
+msgid "{value!r} is not a valid {number_type}."
+msgstr "{value!r} 不是有效的 {number_type}。"
+
+msgid "{value!r} is not {choice}."
+msgid_plural "{value!r} is not one of {choices}."
+msgstr[0] "{value!r} 不匹配 {choice} 選項。"
+msgstr[1] "{value!r} 不符合 {choices} 中任一選項。"
+
+#, python-brace-format
+msgid "{value} is not in the range {range}."
+msgstr "{value} 不在範圍 {range} 內。"
+
+msgid ""
+"Create framework data file\n"
+"\n"
+"Interactive prompts guide you through the process."
+msgstr ""
+"建立框架資料檔\n"
+"\n"
+"透過互動式提示引導您完成流程。"
+
+msgid "Search recursively in subdirectories"
+msgstr "以遞歸方式搜尋來源目錄"
+
+msgid "Directory to save outputs"
+msgstr "保存輸出的目錄"
+
+msgid "Auto-generate a unique number on insert"
+msgstr "新增時自動產生唯一編號"
+
+msgid "{value!r} is not a valid file."
+msgstr "{value!r} 不是有效文件。"
+
+msgid "Please select the type of data you want to create:"
+msgstr "請選擇想創建的資料類型？"
+
+msgid "No model with supported type found."
+msgstr "不存在支援該類型的模組。"
+
+msgid "Please select the type of {data!r} you want to create:"
+msgstr "請選擇想創建的「{data}」類型？"
+
+msgid "Please enter the detection source ID of it"
+msgstr "請輸入偵測來源編號"
+
+msgid "Please enter the parent technical ID of it"
+msgstr "請輸入其父技術編號"
+
+msgid "Is it a sub-technique?"
+msgstr "請問是子技術嗎？"
+
+msgid "of {data!r}"
+msgstr "「{data}」的"
+
+msgid ""
+"New {data!r} file has been created successfully.\n"
+"Please open {filename!r} to view the content and edit it further."
+msgstr ""
+"成功建立新的「{data}」資料，請打開 {filename!r} 查看檔案內容與進一步編輯。"
+
+msgid "{value!r} is not a valid choice."
+msgstr "{value!r} 不是有效的選項。"
+
+#, python-brace-format
+msgid "Enter the number corresponding to your choice ({start}-{end})"
+msgstr "請輸入對應的數字({start} 到 {end})"
+
+msgid "{value!r} is not a valid value."
+msgstr "{value!r} 不是有效的內容。"
+
+msgid "Want to add new data to {field!r}?"
+msgstr "是否要添加「{field}」列表項目？"
+
+msgid "{field!r} of the No. {num} {parent}"
+msgstr "{parent}第 {num:,} 筆「{field}」的"
+
+#, python-brace-format
+msgid "Error: {message}"
+msgstr "錯誤: {message}"
+
+msgid "Continue adding new data to {field!r}?"
+msgstr "是否繼續添加「{field}」列表項目？"
+
+msgid "Please select {field!r} of the No. {num} {parent}"
+msgstr "請選擇{parent}第 {num:,} 筆「{field}」？"
+
+msgid "Please enter {field!r} of the No. {num} {parent}"
+msgstr "請輸入{parent}第 {num:,} 筆「{field}」"
+
+msgid "{field!r} of {parent}"
+msgstr "{parent}「{field}」的"
+
+msgid "Please select {field!r} of {parent}:"
+msgstr "請選擇{parent}「{field}」？"
+
+msgid "Please enter {field!r} of {parent}"
+msgstr "請輸入{parent}「{field}」"
+
+msgid "Supports multi-line text. Press {key!r} to start editing."
+msgstr "支援多行文字，請按【{key}】以開始編輯。"
+
+msgid "Multiline mode is enabled. Press [Enter] twice to submit your entry."
+msgstr "多行文字編輯模式已啟用，完成後請連按兩次【Enter】提交您的輸入。"
+
+msgid "{value!r} is not a valid format."
+msgstr "{value!r} 不是有效的格式。"
+
+#, python-brace-format
+msgid ""
+"Generate custom framework documents\n"
+"\n"
+"Import data files and export documentation with STIX bundle.\n"
+"Supported formats: {extensions}."
+msgstr ""
+"生成自訂框架文件\n"
+"\n"
+"匯入資料檔並匯出包含 STIX bundle 等資源檔。\n"
+"支援格式：{extensions}。"
+
+msgid "Remove existing outputs first"
+msgstr "清除先前的檔案輸出。"
+
+msgid "STIX bundle output filename"
+msgstr "輸出的 STIX bundle 檔名"
+
+msgid "Output subdirectory and URL subpath (empty for root)"
+msgstr "輸出子目錄與網站子路徑（留空表示根目錄）"
+
+msgid "Add suffix to outputs"
+msgstr "輸出加上後綴文字"
+
+msgid "At least one path must be provided."
+msgstr "必須提供至少一個來源目錄或檔案路徑。"
+
+msgid "All files and directories in {path!r} deleted successfully."
+msgstr "所有 {path!r} 中的檔案和目錄均已成功刪除。"
+
+msgid "Loading data files..."
+msgstr "檔案匯入中..."
+
+#, python-brace-format
+msgid "Importing 1 {unit}..."
+msgid_plural "Importing {total:,} {unit}s..."
+msgstr[0] "載入 {total:,} 筆 {unit}資料..."
+
+msgid "Total: 1 imported entity"
+msgid_plural "Total: {total:,} imported entities"
+msgstr[0] "總計 {total:,} 筆資料成功匯入"
+
+#, python-brace-format
+msgid "No supported files found. Expected formats: {extensions}."
+msgstr "找不到支援的檔案格式，預期格式: {extensions}。"
+
+msgid "STIX bundle saved to {path!r}"
+msgstr "STIX bundle 儲存至 {path!r}"
+
+msgid "Full documentation exported to {path!r}"
+msgstr "所有生成文件已成功匯出至 {path!r}"
+
+msgid "Path to custom configuration file"
+msgstr "自訂設定檔的路徑"
+
+msgid ""
+"Manage configuration settings\n"
+"\n"
+"View, edit, and reset framework configuration files.\n"
+"Configuration can be customized via YAML files or environment variables."
+msgstr ""
+"管理設定\n"
+"\n"
+"檢視、編輯與重設框架設定檔。\n"
+"設定可透過 YAML 檔案或環境變數自訂。"
+
+msgid "List configuration settings"
+msgstr "列出設定項目"
+
+msgid "Show built-in default configuration"
+msgstr "顯示內建預設設定"
+
+msgid "Edit configuration file in an editor"
+msgstr "在編輯器中編輯設定檔"
+
+msgid "Reset configuration file to defaults"
+msgstr "將設定檔重設為預設值"
+
+msgid "Overwrite without confirmation"
+msgstr "強制覆寫無須再確認"
+
+msgid "Replace existing configuration file?"
+msgstr "是否取代現有的設定檔？"
+
+msgid "No changes made: {path!r}."
+msgstr "沒有新的變更: {path!r}."
+
+msgid "Path to environment variables file"
+msgstr "環境變數檔的路徑。"
+
+msgid "Encoding used to read the environment file (e.g., 'utf-8')"
+msgstr "環境變數檔的編碼（例如: 'utf-8'）"
+
+msgid "Encoding used to read the configuration file (e.g., 'utf-8')"
+msgstr "設定檔的編碼（例如: 'utf-8'）"
+
+msgid "Framework identifier"
+msgstr "自訂專案名與框架識別碼"
+
+msgid "Base URL of your site"
+msgstr "網站基礎網址"
+
+msgid "Enable debug mode"
+msgstr "啟用偵錯模式"
+
+msgid ""
+"Manage translation files\n"
+"\n"
+"Generate and compile translation files using GNU gettext.\n"
+"Extracts translatable strings from source code and creates PO/MO files."
+msgstr ""
+"管理翻譯檔案\n"
+"\n"
+"使用 GNU gettext 生成與編譯翻譯檔案。\n"
+"從原始碼中提取可翻譯字串，並建立 PO/MO 檔案。"
+
+msgid "Generate PO files from source code folder"
+msgstr "從專案原始碼產生 PO 檔案"
+
+msgid "Convert PO to MO files"
+msgstr "將 PO 轉換為 MO 檔案"
+
+#, python-brace-format
+msgid ""
+"Missing tools: {tools}\n"
+"Please install GNU gettext (e.g., `apt install gettext`, `brew install "
+"gettext`).\n"
+"See: {url}"
+msgstr ""
+"缺少工具: {tools}\n"
+"請安裝 GNU gettext (指令如: `apt install gettext`, `brew install "
+"gettext`)。\n"
+"參見: {url}"
+
+msgid "Updated {filename!r}."
+msgstr "已更新 {filename!r}。"
+
+msgid "All portable objects buildet!"
+msgstr "所有可移植文檔(*.PO)已完成建置！"
+
+msgid ""
+"Please remember to update the translations in {filename!r} before compiling."
+msgstr "請記得在編譯前，完成更新 {filename!r} 文件中的翻譯內容。"
+
+msgid "All translations compiled!"
+msgstr "所有翻譯語言檔(*.MO)均完成編譯！"
+
+msgid ""
+"{filename!r} is not a supported file type. Expected formats: {extensions}."
+msgstr "{filename!r} 不是受支援格式({extensions})的檔案。"
+
+msgid "{value!r} is not a valid url."
+msgstr "{value!r} 不是有效的網址。"
+
+msgid "Scheme should be 'http' or 'https'."
+msgstr "通訊協定必須是 'http' 或 'https'。"
+
+msgid "Maximum length of the URL is 2048 characters."
+msgstr "網址最大長度為 2,048 個字元。"
+
+msgid ""
+"{name} name {filename!r} must be between {min_length} and {max_length} "
+"characters."
+msgstr ""
+"{name} {filename!r} 的名稱必須介於 {min_length} 到 {max_length} 個字之間。"
+
+msgid "file"
+msgstr "檔案"
+
+msgid "{name} name {filename!r} must be match pattern {pattern!r}."
+msgstr "{name} {filename!r} 的名稱必須符合 {pattern!r} 格式。"
+
+msgid "{name} {filename!r} must be within the target directory {dirname!r}."
+msgstr "{name} {filename!r} 必須位於目標目錄 {dirname!r} 內。"
+
+msgid "{name} {filename!r} is a directory."
+msgstr "{name} {filename!r} 是一個目錄。"
+
+msgid "directory"
+msgstr "目錄"
+
+msgid "{name} {filename!r} is a file."
+msgstr "{name} {filename!r} 是一個檔案。"
+
+msgid "Unexpected error occurred."
+msgstr "發生未預期的錯誤。"
+
+msgid "contributor"
+msgstr "貢獻者"
+
+msgid "role"
+msgstr "角色"
+
+msgid "industry sector"
+msgstr "產業別"
+
+msgid "contact information"
+msgstr "聯絡資訊"
+
+msgid "reliability"
+msgstr "可靠性"
+
+msgid "headshot"
+msgstr "大頭貼"
+
+msgid "individual contributor"
+msgstr "個人貢獻者"
+
+msgid "firstname"
+msgstr "名字"
+
+msgid "lastname"
+msgstr "姓氏"
+
+msgid "organizational contributor"
+msgstr "組織貢獻者"
+
+msgid "organization type"
+msgstr "組織類型"
+
+msgid "detection"
+msgstr "偵測"
+
+msgid "detection source"
+msgstr "偵測來源"
+
+msgid "platform"
+msgstr "平台"
+
+msgid "collection layer"
+msgstr "收集層"
+
+msgid "detection component"
+msgstr "偵測元件"
+
+msgid "Parent is required, please select or create a new one."
+msgstr "請先選擇或新增父級資料。"
+
+msgid "Missing parent {parent!r}, please create it first."
+msgstr "請先建立父級 {parent!r}。"
+
+msgid ""
+"This framework covers the complete fraud lifecycle, classifying attack "
+"tactics and techniques at each stage to support threat identification, risk "
+"assessment, and incident response."
+msgstr ""
+"本框架涵蓋詐騙活動的完整生命週期，用以分類各階段的攻擊戰術與技術，支援威脅識"
+"別、風險評估與應變處理。"
+
+msgid "source data"
+msgstr "來源資料"
+
+msgid "Missing any expected keyword argument."
+msgstr "缺少預期的可用參數。"
+
+msgid "mitigation"
+msgstr "緩解措施"
+
+msgid "note"
+msgstr "筆記"
+
+msgid "note type"
+msgstr "筆記類型"
+
+msgid "related data id"
+msgstr "相關資料編號"
+
+msgid "phase"
+msgstr "階段"
+
+msgid "tactic"
+msgstr "戰術"
+
+msgid "phase id"
+msgstr "階段編號"
+
+msgid "Phase to which it belongs."
+msgstr "隸屬的階段。"
+
+msgid "tool information"
+msgstr "工具資訊"
+
+msgid "detection information"
+msgstr "偵測資訊"
+
+msgid "technique"
+msgstr "技術"
+
+msgid "tactic id"
+msgstr "戰術編號"
+
+msgid "Tactic to which it belongs."
+msgstr "隸屬的戰術"
+
+msgid "permission"
+msgstr "權限"
+
+msgid "Tools used, including software services, etc."
+msgstr "利用的工具，包含軟體服務等。"
+
+msgid "tool"
+msgstr "工具"
+
+msgid "tool type"
+msgstr "工具類型"
+
+msgid "tool version"
+msgstr "工具版本"
+
+msgid "basic Information"
+msgstr "基本資料"
+
+msgid "revoked"
+msgstr "已撤銷"
+
+msgid "name"
+msgstr "名稱"
+
+msgid "external reference"
+msgstr "外部參考"
+
+msgid "Derived from git history; read-only for editors."
+msgstr "由 git 歷史紀錄衍生，編輯時唯讀。"
+
+msgid "source name"
+msgstr "來源名稱"
+
+msgid "description"
+msgstr "說明"
+
+msgid "url"
+msgstr "網址"
+
+msgid "external id"
+msgstr "外部編號"
+
+msgid "data item"
+msgstr "資料項"
+
+msgid "id"
+msgstr "編號"
+
+msgid "configuration"
+msgstr "組態"
+
+msgid "Too many attempts to create {path!r}."
+msgstr "嘗試建立特定檔名的次數超過上限。"
+
+msgid "Elapsed: {duration:,.2f} sec"
+msgstr "花費時間: {duration:,.2f} 秒"
+
+msgid "completely reliable"
+msgstr "完全可靠"
+
+msgid "usually reliable"
+msgstr "通常可靠"
+
+msgid "fairly reliable"
+msgstr "相當可靠"
+
+msgid "not usually reliable"
+msgstr "不太可靠"
+
+msgid "unreliable"
+msgstr "完全不可靠"
+
+msgid "unjudge"
+msgstr "無法判斷"

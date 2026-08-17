@@ -13,5 +13,3 @@ external_references:
   - source_name: Rasa
     description: Rasa. conversational-ai-framework. 檢索日期 2025-03-12.
     url: https://github.com/RasaHQ/rasa
-contributors:
-  - NICS
